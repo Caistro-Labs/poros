@@ -20,8 +20,8 @@ Pass, all of:
      kit's control arm): its update 1 loss and grad norm equal the new run's (the same engine,
      the optimizer alone differs), and its .kit_arm says it is the control
 The control's and the old run's figures are reported, not judged: at 2e-5 they are expected to
-fall short. The old run (a checkout from before ExpertAdamW) is not the release engine: what is published
-is the control's.
+fall short. The old run (a checkout from before ExpertAdamW) is not the release engine: what is
+published is the control's.
 Prints one JSON object; exit 0 on pass, 1 on fail.
 """
 

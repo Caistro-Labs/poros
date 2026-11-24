@@ -1,6 +1,7 @@
 """Absolute GPU gate for poros.moe: bitwise parity, speed, and eval CE.
 
-Checks streamed-vs-resident bitwise parity, step speed and eval CE; default model Qwen/Qwen3-30B-A3B-Instruct-2507.
+Checks streamed-vs-resident bitwise parity, step speed and eval CE; default model
+Qwen/Qwen3-30B-A3B-Instruct-2507.
 
 Usage on a CUDA machine:
     python scripts/moe_absolute_gate.py --out moe_absolute.json

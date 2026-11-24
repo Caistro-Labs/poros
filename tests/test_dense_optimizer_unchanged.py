@@ -12,8 +12,9 @@ What it does not prove: that the rest of the dense path computes as it did befor
 monkeypatch keeps everything else of HEAD in both runs), nor anything across torch versions.
 The whole-tree comparison was made once, by hand: the same run on the earlier tree and on this
 file's commit gave the digest da3ade45be5494984ef44cfe4733ea7a9ca3c32e1c30fc3890528599e42dfe12
-(recorded in the message of the commit that added this file). A pinned digest is not a guard worth keeping in the suite: CPU matmul
-and attention kernels differ across torch releases and CPU instruction sets, so it would fail
+(recorded in the message of the commit that added this file). A pinned digest is not a guard
+worth keeping in the suite: CPU matmul and attention kernels differ across torch releases and
+CPU instruction sets, so it would fail
 on numerics this change never touched. The guard of the dense path's results is the hardware
 certification of the dense recipes at the release commit.
 """

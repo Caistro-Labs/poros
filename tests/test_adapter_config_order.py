@@ -46,7 +46,8 @@ def _save(tmp_path, seed, how):
 def test_two_saves_under_other_hash_seeds_write_the_same_adapter_config(tmp_path):
     import json
 
-    from peft import LoraConfig
+    # a light install has no peft: skip here, before the name is needed
+    LoraConfig = pytest.importorskip("peft").LoraConfig
 
     written = {_save(tmp_path, seed, "sorted") for seed in (1, 2, 3, 4)}
     assert len(written) == 1

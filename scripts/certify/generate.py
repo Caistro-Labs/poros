@@ -87,7 +87,8 @@ def moe(r: presets.Recipe) -> bool:
 
 def expected(r: presets.Recipe) -> Dict[str, Any]:
     """The fit settings a run of ``r`` resolves to: its own words, else its loop's preset on its
-    platform (a recipe that says as little as the earliest recipes did); path and store's defaults."""
+    platform (a recipe that says as little as the earliest recipes did); path and store's
+    defaults."""
     preset = preset_of(r)
     missing = [k for k in SAID if k not in r.settings and k not in preset]
     if missing:

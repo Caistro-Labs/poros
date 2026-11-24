@@ -516,8 +516,8 @@ def test_the_disk_estimate_of_a_moe_checkpoint_is_its_real_state(checkpoint, tmp
 
 
 def _round_v1(x, bits):
-    """``stochastic_round_bf16`` as the optimizer's first rounding had it (int64 on the whole bit pattern): the int32
-    version must give the same bf16 for every input and every 16 bits."""
+    """``stochastic_round_bf16`` as the optimizer's first rounding had it (int64 on the whole bit
+    pattern): the int32 version must give the same bf16 for every input and every 16 bits."""
     x = x.contiguous()
     i = x.view(torch.int32).to(torch.int64) & 0xFFFFFFFF
     out = ((i + bits.reshape(x.shape).to(torch.int64)) & 0xFFFF0000) >> 16
@@ -568,7 +568,7 @@ def test_each_element_s_bits_are_uniform_over_updates():
     assert bool(((draws >= 0x8000).float().mean(0) - 0.5).abs().max() < 0.03)
 
 
-# ---- the rounding: every stored value an unbiased keyed rounding -----------------------------------
+# ---- the rounding: every stored value an unbiased keyed rounding ---------------------------------
 
 
 def _weights_near_every_exponent(n, seed):

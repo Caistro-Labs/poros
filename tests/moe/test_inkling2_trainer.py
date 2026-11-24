@@ -323,8 +323,8 @@ def test_a_partly_quantized_checkpoint_is_refused(validated, tmp_path, monkeypat
 def test_other_families_are_refused_the_field_and_record_nothing_new(kind, tmp_path):
     """moe_expert_format given for a model with no such choice is refused in words before
     anything loads; and a run of any other family writes poros_config.json, and its adapter's
-    manifest, without the field (as before it existed: byte for byte against the engine before the field, checked
-    by hand for a dense and a MoE run's config when this was written)."""
+    manifest, without the field (as before it existed: byte for byte against the engine before
+    the field, checked by hand for a dense and a MoE run's config when this was written)."""
     import json
 
     import transformers
@@ -539,8 +539,8 @@ def _unreadable_names(monkeypatch, files=True):
 
 def test_a_quantized_checkpoint_with_only_hf_quant_config_is_sized_released(tmp_path, monkeypatch):
     """Some quantized checkpoints carry no quantization_config in config.json, only an
-    hf_quant_config.json beside it (the tiny checkpoint, a slice of the released one). With the names
-    unreadable, the checks that read no weights still size the experts as released."""
+    hf_quant_config.json beside it (the tiny checkpoint, a slice of the released one). With the
+    names unreadable, the checks that read no weights still size the experts as released."""
     import json
     from types import SimpleNamespace
 
