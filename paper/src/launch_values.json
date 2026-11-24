@@ -1,0 +1,2678 @@
+{
+ "field": {
+  "card.gib": "card_gib",
+  "code.commit": "commit",
+  "code.version": "poros",
+  "dense.adapter.dtype": "dtypes",
+  "dense.commit": "commit",
+  "dense.date": "runs[].launch_utc",
+  "dense.layers": "runs[].unsloth.decoder_layers",
+  "dense.poros.alloc": "median over runs[].vram_alloc_gb",
+  "dense.poros.host": "median over runs[].host_ram_gb",
+  "dense.poros.host.best": "min over runs[].host_ram_gb",
+  "dense.poros.host.train": "median over runs[].host_ram_train_gb",
+  "dense.poros.host.train.best": "min over runs[].host_ram_train_gb",
+  "dense.poros.load.res": "median.load_vram_reserved_gb",
+  "dense.poros.load.s": "median.load_s",
+  "dense.poros.res": "median over runs[].vram_reserved_gb",
+  "dense.poros.res.best": "min over runs[].vram_reserved_gb",
+  "dense.poros.supd": "median over runs[].s_per_step_s",
+  "dense.poros.supd.best": "min over runs[].s_per_step_s",
+  "dense.poros.version": "poros",
+  "dense.poros.vs.host_ram": "median.host_ram_gb against min over Unsloth's runs[].host_ram_gb",
+  "dense.poros.vs.host_ram_train": "median.host_ram_train_gb against min over Unsloth's runs[].host_ram_train_gb",
+  "dense.poros.vs.s_per_step": "median.s_per_step_s against min over Unsloth's runs[].s_per_step_s",
+  "dense.poros.vs.s_per_step.ratio": "larger / smaller, to one decimal, rounded against Poros",
+  "dense.poros.vs.vram_reserved": "median.vram_reserved_gb against min over Unsloth's runs[].vram_reserved_gb",
+  "dense.unsloth.adapter.dtype": "trainable_dtypes",
+  "dense.unsloth.alloc": "median over runs[].vram_alloc_gb",
+  "dense.unsloth.embed": "runs[].unsloth.input_embedding_device",
+  "dense.unsloth.host": "median over runs[].host_ram_gb",
+  "dense.unsloth.host.best": "min over runs[].host_ram_gb",
+  "dense.unsloth.host.train": "median over runs[].host_ram_train_gb",
+  "dense.unsloth.host.train.best": "min over runs[].host_ram_train_gb",
+  "dense.unsloth.offloaded": "runs[].unsloth.swapped_layers",
+  "dense.unsloth.res": "median over runs[].vram_reserved_gb",
+  "dense.unsloth.res.best": "min over runs[].vram_reserved_gb",
+  "dense.unsloth.supd": "median over runs[].s_per_step_s",
+  "dense.unsloth.supd.best": "min over runs[].s_per_step_s",
+  "do.32b.model": "model_name_or_path",
+  "do.32b.steps": "steps (or the length of steps_compared)",
+  "do.32b.tensors": "adapter_tensors",
+  "do.7b.model": "model_name_or_path",
+  "do.7b.steps": "steps (or the length of steps_compared)",
+  "do.7b.tensors": "adapter_tensors",
+  "do.dropout": "lora_dropout",
+  "do.olmoe.steps": "steps (or the length of steps_compared)",
+  "do.olmoe.tensors": "adapter_tensors",
+  "env.bnb": "poros stack.bitsandbytes",
+  "env.cpu": "cpu",
+  "env.cuda": "poros stack cuda",
+  "env.driver": "driver",
+  "env.gpu": "gpu",
+  "env.gpu.mib": "gpu_mib",
+  "env.host.gib": "ram_gib",
+  "env.os": "os",
+  "env.peft": "poros stack.peft",
+  "env.sampler.s": "host_sampler.interval_s",
+  "env.tf.req": "Poros's pyproject requirement for transformers",
+  "env.torch": "poros stack.torch",
+  "env.transformers": "poros stack.transformers",
+  "env.unsloth": "unsloth stack.unsloth",
+  "env.unsloth.date": "the date the Unsloth version was the newest on PyPI",
+  "env.unsloth.peft": "unsloth stack.peft",
+  "env.unsloth.tf.cap": "unsloth's Requires-Dist line for transformers",
+  "env.unsloth.transformers": "unsloth stack.transformers",
+  "fg.checks": "PASS <family>:<check> lines, the downloads (:fetch) and the Inkling row left out",
+  "fg.moe.families": "MoE rows (scripts/family_gate/families.tsv at 1a8d7e91: entry moe) with a PASS paths line",
+  "fg.n": "the '--- family (model @' lines, Inkling rows left out",
+  "fg.resume.models": "PASS <family>:resume lines",
+  "lap.after": "eval.metric.eval_loss",
+  "lap.alloc": "torch_memory.allocated_peak_gib",
+  "lap.before": "eval.metric.base_loss",
+  "lap.ga": "gradient_accumulation_steps",
+  "lap.gpu": "machine.gpu",
+  "lap.host": "host_ram.peak_gib",
+  "lap.host.gib": "machine.host_ram_gib",
+  "lap.mb": "per_device_batch_size",
+  "lap.path": "setup.path",
+  "lap.rank": "lora_rank",
+  "lap.repeat.runs": "main.adapter_sha256 of each certification run (one value)",
+  "lap.res": "torch_memory.reserved_peak_gib",
+  "lap.seq": "max_seq_length",
+  "lap.supd": "main.s_per_step",
+  "lap.updates": "max_steps",
+  "lap.vram.gib": "machine.vram_gib",
+  "loss.30b.maxdiff": "max over updates of |Poros losses[i] - mean(Unsloth loss[i])|, round 1",
+  "loss.72b.maxdiff": "max over updates of |Poros losses[i] - mean(Unsloth loss[i])|, round 1",
+  "m144.after": "trained.loss",
+  "m144.before": "base.loss",
+  "m144.data": "setup.data",
+  "m144.drive": "first words of model-drive.txt",
+  "m144.ends.after": "trained.ends",
+  "m144.ends.before": "base.ends",
+  "m144.heldout": "rows",
+  "m144.min": "wall_s / 60",
+  "m144.peak": "peak_vram_allocated_gb (decimal GB, as GiB)",
+  "m144.rank": "config.lora_rank",
+  "m144.rows": "setup.rows (rows trained on, the held-out rows apart)",
+  "m144.seq": "config.max_seq_length",
+  "m144.steps": "steps",
+  "m144.supd": "median of step s_per_step, steps 2..144",
+  "mac.gib": "machine.vram_gib",
+  "mac.gpu": "machine.gpu",
+  "mac.os": "machine.os_version",
+  "mac.torch": "machine.torch",
+  "mac32.mem": "torch_memory.allocated_peak_gib",
+  "mac32.seq": "data.seq_len",
+  "mac32.supd": "main.s_per_step",
+  "mac32.updates": "main.updates",
+  "mac72.drive": "first words of model-drive.txt",
+  "mac72.mem": "torch_memory.allocated_peak_gib",
+  "mac72.seq": "data.seq_len",
+  "mac72.supd": "main.s_per_step",
+  "mac72.updates": "main.updates",
+  "macmoe.mem": "torch_memory.allocated_peak_gib",
+  "macmoe.seq": "data.seq_len",
+  "macmoe.supd": "main.s_per_step",
+  "macmoe.updates": "main.updates",
+  "moe.adapter.dtype": "trainable.dtypes",
+  "moe.adapter.gap.gib": "trainable.params x (16 - 10) bytes: fp32 weight, gradient and moments against Poros's five bf16 tensors",
+  "moe.adapter.state.gib": "trainable.params x 5 bf16 tensors (weight, gradient, m, v, remainder) x 2 bytes",
+  "moe.experts": "poros.arch",
+  "moe.layers": "unsloth.decoder_layers",
+  "moe.model": "model",
+  "moe.ram.alloc": "median over runs of vram_alloc_gib",
+  "moe.ram.host": "median over runs of host_ram_gib",
+  "moe.ram.host.best": "min over runs of host_ram_gib",
+  "moe.ram.host.children": "child processes at the host peak (median of processes - 1)",
+  "moe.ram.host.few": "peak RssAnon + RssShmem over samples with at most three processes (median)",
+  "moe.ram.host.procs": "processes in the tree at the host peak (median)",
+  "moe.ram.host.train": "median over runs of the peak RssAnon + RssShmem after load_end_epoch",
+  "moe.ram.host.train.best": "min over runs of the training host peak",
+  "moe.ram.res": "median over runs of vram_reserved_gib",
+  "moe.ram.res.best": "min over runs of vram_reserved_gib",
+  "moe.ram.supd": "median over runs of s_med_2_N",
+  "moe.ram.supd.best": "min over runs of s_med_2_N",
+  "moe.ram.t1": "median over runs of t1_s",
+  "moe.ram.t1.best": "min over runs of t1_s",
+  "moe.ram.vs.prev.s_per_step": "Poros's median at the release commit against min over the earlier version's runs[].s_per_step_s",
+  "moe.ram.vs.s_per_step": "median s_med_2_N of Poros's runs against Unsloth's best",
+  "moe.ram.vs.s_per_step.ratio": "larger / smaller, to one decimal, rounded against Poros",
+  "moe.ram.vs.t1": "median t1_s of Poros's runs against Unsloth's best",
+  "moe.ram.vs.vram_reserved": "median vram_reserved_gib of Poros's runs against Unsloth's best",
+  "moe.trainable": "trainable.params",
+  "moe.unsloth.adapter.dtype": "trainable_dtypes",
+  "moe.unsloth.alloc": "median over runs of vram_alloc_gib",
+  "moe.unsloth.host": "median over runs of host_ram_gib",
+  "moe.unsloth.host.best": "min over runs of host_ram_gib",
+  "moe.unsloth.host.children": "child processes at the host peak (median of processes - 1)",
+  "moe.unsloth.host.few": "peak RssAnon + RssShmem over samples with at most three processes (median)",
+  "moe.unsloth.host.procs": "processes in the tree at the host peak (median)",
+  "moe.unsloth.host.train": "median over runs of the peak RssAnon + RssShmem after load_end_epoch",
+  "moe.unsloth.host.train.best": "min over runs of the training host peak",
+  "moe.unsloth.offloaded": "unsloth.swapped_layers",
+  "moe.unsloth.oproj": "frozen_adapters.elements",
+  "moe.unsloth.res": "median over runs of vram_reserved_gib",
+  "moe.unsloth.res.best": "min over runs of vram_reserved_gib",
+  "moe.unsloth.slower.best": "Unsloth's 24 November best run over its 18 November best run, minus one",
+  "moe.unsloth.slower.median": "Unsloth's 24 November median over its 18 November median, minus one",
+  "moe.unsloth.supd": "median over runs of s_med_2_N",
+  "moe.unsloth.supd.best": "min over runs of s_med_2_N",
+  "moe.unsloth.t1": "median over runs of t1_s",
+  "moe.unsloth.t1.best": "min over runs of t1_s",
+  "olmoe.ctl.heldout": "control.held_out[299]",
+  "olmoe.ctl.supd": "median of step s_per_step, updates 2..N",
+  "olmoe.ctl.unchanged": "control.weight_unchanged_mean",
+  "olmoe.ctl.vratio": "control.v_over_exact_last",
+  "olmoe.ctl.vratio.at": "update of the control's last sample",
+  "olmoe.gpu": "receipt.json gpu.name (every arm)",
+  "olmoe.heldout.fp32": "held_out[-1].fp32",
+  "olmoe.heldout.new": "held_out[-1].new",
+  "olmoe.lastpoint": "held_out[-1].step",
+  "olmoe.lr": "learning_rate",
+  "olmoe.maxdiff": "max over held_out[] of |new_minus_fp32|",
+  "olmoe.seedgap": "max over held_out[] of |fp32 - fp32_other|",
+  "olmoe.supd.new": "median of step s_per_step, updates 2..N",
+  "olmoe.unchanged.fp32": "mean of weight_unchanged over updates",
+  "olmoe.unchanged.new": "mean of weight_unchanged over updates",
+  "olmoe.updates": "max_steps",
+  "olmoe.vratio.new": "min and max of v_over_exact_median, updates 20 on",
+  "paths.eff.block_size": "block_size",
+  "paths.eff.cuda_expandable_segments": "cuda_expandable_segments",
+  "paths.eff.fused_compute": "ran_compute.fused_compute",
+  "paths.eff.host_staging": "host_staging.mode",
+  "paths.eff.nf4_dequant_cache_mb": "ran_compute.nf4_dequant_cache_mb",
+  "paths.eff.offload_embeddings_and_head": "offload_embeddings_and_head",
+  "paths.eff.ran_path": "ran_path",
+  "paths.eff.resident_blocks": "resident_blocks",
+  "paths.fast.block_size": "block_size",
+  "paths.fast.cuda_expandable_segments": "cuda_expandable_segments",
+  "paths.fast.fused_compute": "ran_compute.fused_compute",
+  "paths.fast.host_staging": "host_staging.mode",
+  "paths.fast.nf4_dequant_cache_mb": "ran_compute.nf4_dequant_cache_mb",
+  "paths.fast.offload_embeddings_and_head": "offload_embeddings_and_head",
+  "paths.fast.ran_path": "ran_path",
+  "paths.fast.resident_blocks": "resident_blocks",
+  "prev.moe.unsloth.host.best": "min over runs[].host_ram_gb",
+  "prev.moe.unsloth.host.procs": "max over runs[].host_sampler.processes_max",
+  "prev.moe.unsloth.host.train": "median.host_ram_train_gb",
+  "prev.moe.unsloth.res.best": "min over runs[].vram_reserved_gb",
+  "prev.moe.unsloth.supd": "median.s_per_step_s",
+  "prev.moe.unsloth.supd.best": "min over runs[].s_per_step_s",
+  "prev.moe.unsmin.offloaded": "runs[].unsloth.swapped_layers",
+  "prev.moe.unsmin.res.best": "min over runs[].vram_reserved_gb",
+  "prev.moe.unsmin.supd": "median.s_per_step_s",
+  "prev.moe.unsmin.supd.best": "min over runs[].s_per_step_s",
+  "prev.unsloth.date": "runs[].launch_utc",
+  "prev.unsloth.version": "unsloth stack.unsloth",
+  "prove.gpu": "env.gpu",
+  "prove.grads": "compared",
+  "prove.model": "model",
+  "prove.opt": "compared",
+  "prove.res.bs": "resident.block_size",
+  "prove.res.s": "resident.s_per_step",
+  "prove.res.vram": "resident.peak_vram_gib",
+  "prove.seq": "seq_len",
+  "prove.steps": "steps",
+  "prove.str.bs": "streamed.block_size",
+  "prove.str.s": "streamed.s_per_step",
+  "prove.str.vram": "streamed.peak_vram_gib",
+  "prove.tensors": "compared",
+  "r30.after": "eval.metric.eval_loss",
+  "r30.before": "eval.metric.base_loss",
+  "r30.host": "host_ram.peak_gib",
+  "r30.lr": "learning_rate",
+  "r30.path": "setup.path",
+  "r30.res": "torch_memory.reserved_peak_gib",
+  "r30.supd": "main.s_per_step",
+  "r30.updates": "max_steps",
+  "r30ssd.after": "eval.metric.eval_loss",
+  "r30ssd.before": "eval.metric.base_loss",
+  "r30ssd.cache": "moe_expert_cache_gib",
+  "r30ssd.host": "host_ram.peak_gib",
+  "r30ssd.hostcache": "store_options.cache",
+  "r30ssd.lr": "learning_rate",
+  "r30ssd.path": "setup.path",
+  "r30ssd.res": "torch_memory.reserved_peak_gib",
+  "r30ssd.supd": "main.s_per_step",
+  "r30ssd.updates": "max_steps",
+  "rec.cert.n": "rows whose recipe and machine certified.json lists",
+  "rec.cuda.n": "CUDA certification.json files",
+  "rec.m4.mac-32b.ev": "eval.metric",
+  "rec.m4.mac-32b.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-32b.gpu": "torch_memory",
+  "rec.m4.mac-32b.host": "host_ram.peak_gib",
+  "rec.m4.mac-32b.path": "setup.path",
+  "rec.m4.mac-32b.rank": "lora_rank",
+  "rec.m4.mac-32b.res": "resume.adapter_equal",
+  "rec.m4.mac-32b.s": "main.s_per_step",
+  "rec.m4.mac-32b.tok": "data.seq_len",
+  "rec.m4.mac-32b.upd": "main.updates",
+  "rec.m4.mac-72b.ev": "eval.metric",
+  "rec.m4.mac-72b.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-72b.gpu": "torch_memory",
+  "rec.m4.mac-72b.host": "host_ram.peak_gib",
+  "rec.m4.mac-72b.path": "setup.path",
+  "rec.m4.mac-72b.rank": "lora_rank",
+  "rec.m4.mac-72b.res": "resume.adapter_equal",
+  "rec.m4.mac-72b.s": "main.s_per_step",
+  "rec.m4.mac-72b.tok": "data.seq_len",
+  "rec.m4.mac-72b.upd": "main.updates",
+  "rec.m4.mac-7b.ev": "eval.metric",
+  "rec.m4.mac-7b.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-7b.gpu": "torch_memory",
+  "rec.m4.mac-7b.host": "host_ram.peak_gib",
+  "rec.m4.mac-7b.path": "setup.path",
+  "rec.m4.mac-7b.rank": "lora_rank",
+  "rec.m4.mac-7b.res": "resume.adapter_equal",
+  "rec.m4.mac-7b.s": "main.s_per_step",
+  "rec.m4.mac-7b.tok": "data.seq_len",
+  "rec.m4.mac-7b.upd": "main.updates",
+  "rec.m4.mac-first-run.ev": "eval.metric",
+  "rec.m4.mac-first-run.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-first-run.gpu": "torch_memory",
+  "rec.m4.mac-first-run.host": "host_ram.peak_gib",
+  "rec.m4.mac-first-run.path": "setup.path",
+  "rec.m4.mac-first-run.rank": "lora_rank",
+  "rec.m4.mac-first-run.res": "resume.adapter_equal",
+  "rec.m4.mac-first-run.s": "main.s_per_step",
+  "rec.m4.mac-first-run.tok": "data.seq_len",
+  "rec.m4.mac-first-run.upd": "main.updates",
+  "rec.m4.mac-moe.ev": "eval.metric",
+  "rec.m4.mac-moe.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-moe.gpu": "torch_memory",
+  "rec.m4.mac-moe.host": "host_ram.peak_gib",
+  "rec.m4.mac-moe.path": "setup.path",
+  "rec.m4.mac-moe.rank": "lora_rank",
+  "rec.m4.mac-moe.res": "resume.adapter_equal",
+  "rec.m4.mac-moe.s": "main.s_per_step",
+  "rec.m4.mac-moe.tok": "data.seq_len",
+  "rec.m4.mac-moe.upd": "main.updates",
+  "rec.m4.mac-prefer.ev": "eval.metric",
+  "rec.m4.mac-prefer.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-prefer.gpu": "torch_memory",
+  "rec.m4.mac-prefer.host": "host_ram.peak_gib",
+  "rec.m4.mac-prefer.path": "setup.path",
+  "rec.m4.mac-prefer.rank": "lora_rank",
+  "rec.m4.mac-prefer.res": "resume.adapter_equal",
+  "rec.m4.mac-prefer.s": "main.s_per_step",
+  "rec.m4.mac-prefer.tok": "data.seq_len",
+  "rec.m4.mac-prefer.upd": "main.updates",
+  "rec.m4.mac-support.ev": "eval.metric",
+  "rec.m4.mac-support.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-support.gpu": "torch_memory",
+  "rec.m4.mac-support.host": "host_ram.peak_gib",
+  "rec.m4.mac-support.path": "setup.path",
+  "rec.m4.mac-support.rank": "lora_rank",
+  "rec.m4.mac-support.res": "resume.adapter_equal",
+  "rec.m4.mac-support.s": "main.s_per_step",
+  "rec.m4.mac-support.tok": "data.seq_len",
+  "rec.m4.mac-support.upd": "main.updates",
+  "rec.m4.mac-voice.ev": "eval.metric",
+  "rec.m4.mac-voice.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.m4.mac-voice.gpu": "torch_memory",
+  "rec.m4.mac-voice.host": "host_ram.peak_gib",
+  "rec.m4.mac-voice.path": "setup.path",
+  "rec.m4.mac-voice.rank": "lora_rank",
+  "rec.m4.mac-voice.res": "resume.adapter_equal",
+  "rec.m4.mac-voice.s": "main.s_per_step",
+  "rec.m4.mac-voice.tok": "data.seq_len",
+  "rec.m4.mac-voice.upd": "main.updates",
+  "rec.mac.n": "Mac certification.json files",
+  "rec.n": "certification.json files",
+  "rec.noresume": "resume.adapter_equal",
+  "rec.r4060l.first-run.ev": "eval.metric",
+  "rec.r4060l.first-run.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4060l.first-run.gpu": "torch_memory",
+  "rec.r4060l.first-run.host": "host_ram.peak_gib",
+  "rec.r4060l.first-run.path": "setup.path",
+  "rec.r4060l.first-run.rank": "lora_rank",
+  "rec.r4060l.first-run.res": "resume.adapter_equal",
+  "rec.r4060l.first-run.s": "main.s_per_step",
+  "rec.r4060l.first-run.tok": "data.seq_len",
+  "rec.r4060l.first-run.upd": "main.updates",
+  "rec.r4060l.moe-30b-8gb.ev": "eval.metric",
+  "rec.r4060l.moe-30b-8gb.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4060l.moe-30b-8gb.gpu": "torch_memory",
+  "rec.r4060l.moe-30b-8gb.host": "host_ram.peak_gib",
+  "rec.r4060l.moe-30b-8gb.path": "setup.path",
+  "rec.r4060l.moe-30b-8gb.rank": "lora_rank",
+  "rec.r4060l.moe-30b-8gb.res": "resume.adapter_equal",
+  "rec.r4060l.moe-30b-8gb.s": "main.s_per_step",
+  "rec.r4060l.moe-30b-8gb.tok": "data.seq_len",
+  "rec.r4060l.moe-30b-8gb.upd": "main.updates",
+  "rec.r4090.big-32b.ev": "eval.metric",
+  "rec.r4090.big-32b.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.big-32b.gpu": "torch_memory",
+  "rec.r4090.big-32b.host": "host_ram.peak_gib",
+  "rec.r4090.big-32b.path": "setup.path",
+  "rec.r4090.big-32b.rank": "lora_rank",
+  "rec.r4090.big-32b.res": "resume.adapter_equal",
+  "rec.r4090.big-32b.s": "main.s_per_step",
+  "rec.r4090.big-32b.tok": "data.seq_len",
+  "rec.r4090.big-32b.upd": "main.updates",
+  "rec.r4090.big-72b-fast.ev": "eval.metric",
+  "rec.r4090.big-72b-fast.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.big-72b-fast.gpu": "torch_memory",
+  "rec.r4090.big-72b-fast.host": "host_ram.peak_gib",
+  "rec.r4090.big-72b-fast.path": "setup.path",
+  "rec.r4090.big-72b-fast.rank": "lora_rank",
+  "rec.r4090.big-72b-fast.res": "resume.adapter_equal",
+  "rec.r4090.big-72b-fast.s": "main.s_per_step",
+  "rec.r4090.big-72b-fast.tok": "data.seq_len",
+  "rec.r4090.big-72b-fast.upd": "main.updates",
+  "rec.r4090.big-72b.ev": "eval.metric",
+  "rec.r4090.big-72b.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.big-72b.gpu": "torch_memory",
+  "rec.r4090.big-72b.host": "host_ram.peak_gib",
+  "rec.r4090.big-72b.path": "setup.path",
+  "rec.r4090.big-72b.rank": "lora_rank",
+  "rec.r4090.big-72b.res": "resume.adapter_equal",
+  "rec.r4090.big-72b.s": "main.s_per_step",
+  "rec.r4090.big-72b.tok": "data.seq_len",
+  "rec.r4090.big-72b.upd": "main.updates",
+  "rec.r4090.first-run.ev": "eval.metric",
+  "rec.r4090.first-run.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.first-run.gpu": "torch_memory",
+  "rec.r4090.first-run.host": "host_ram.peak_gib",
+  "rec.r4090.first-run.path": "setup.path",
+  "rec.r4090.first-run.rank": "lora_rank",
+  "rec.r4090.first-run.res": "resume.adapter_equal",
+  "rec.r4090.first-run.s": "main.s_per_step",
+  "rec.r4090.first-run.tok": "data.seq_len",
+  "rec.r4090.first-run.upd": "main.updates",
+  "rec.r4090.moe-30b-8gb.ev": "eval.metric",
+  "rec.r4090.moe-30b-8gb.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.moe-30b-8gb.gpu": "torch_memory",
+  "rec.r4090.moe-30b-8gb.host": "host_ram.peak_gib",
+  "rec.r4090.moe-30b-8gb.path": "setup.path",
+  "rec.r4090.moe-30b-8gb.rank": "lora_rank",
+  "rec.r4090.moe-30b-8gb.res": "resume.adapter_equal",
+  "rec.r4090.moe-30b-8gb.s": "main.s_per_step",
+  "rec.r4090.moe-30b-8gb.tok": "data.seq_len",
+  "rec.r4090.moe-30b-8gb.upd": "main.updates",
+  "rec.r4090.moe-30b-ssd.ev": "eval.metric",
+  "rec.r4090.moe-30b-ssd.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.moe-30b-ssd.gpu": "torch_memory",
+  "rec.r4090.moe-30b-ssd.host": "host_ram.peak_gib",
+  "rec.r4090.moe-30b-ssd.path": "setup.path",
+  "rec.r4090.moe-30b-ssd.rank": "lora_rank",
+  "rec.r4090.moe-30b-ssd.res": "resume.adapter_equal",
+  "rec.r4090.moe-30b-ssd.s": "main.s_per_step",
+  "rec.r4090.moe-30b-ssd.tok": "data.seq_len",
+  "rec.r4090.moe-30b-ssd.upd": "main.updates",
+  "rec.r4090.moe-30b.ev": "eval.metric",
+  "rec.r4090.moe-30b.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.moe-30b.gpu": "torch_memory",
+  "rec.r4090.moe-30b.host": "host_ram.peak_gib",
+  "rec.r4090.moe-30b.path": "setup.path",
+  "rec.r4090.moe-30b.rank": "lora_rank",
+  "rec.r4090.moe-30b.res": "resume.adapter_equal",
+  "rec.r4090.moe-30b.s": "main.s_per_step",
+  "rec.r4090.moe-30b.tok": "data.seq_len",
+  "rec.r4090.moe-30b.upd": "main.updates",
+  "rec.r4090.prefer.ev": "eval.metric",
+  "rec.r4090.prefer.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.prefer.gpu": "torch_memory",
+  "rec.r4090.prefer.host": "host_ram.peak_gib",
+  "rec.r4090.prefer.path": "setup.path",
+  "rec.r4090.prefer.rank": "lora_rank",
+  "rec.r4090.prefer.res": "resume.adapter_equal",
+  "rec.r4090.prefer.s": "main.s_per_step",
+  "rec.r4090.prefer.tok": "data.seq_len",
+  "rec.r4090.prefer.upd": "main.updates",
+  "rec.r4090.support.ev": "eval.metric",
+  "rec.r4090.support.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.support.gpu": "torch_memory",
+  "rec.r4090.support.host": "host_ram.peak_gib",
+  "rec.r4090.support.path": "setup.path",
+  "rec.r4090.support.rank": "lora_rank",
+  "rec.r4090.support.res": "resume.adapter_equal",
+  "rec.r4090.support.s": "main.s_per_step",
+  "rec.r4090.support.tok": "data.seq_len",
+  "rec.r4090.support.upd": "main.updates",
+  "rec.r4090.voice.ev": "eval.metric",
+  "rec.r4090.voice.geo": "per_device_batch_size x gradient_accumulation_steps",
+  "rec.r4090.voice.gpu": "torch_memory",
+  "rec.r4090.voice.host": "host_ram.peak_gib",
+  "rec.r4090.voice.path": "setup.path",
+  "rec.r4090.voice.rank": "lora_rank",
+  "rec.r4090.voice.res": "resume.adapter_equal",
+  "rec.r4090.voice.s": "main.s_per_step",
+  "rec.r4090.voice.tok": "data.seq_len",
+  "rec.r4090.voice.upd": "main.updates",
+  "rec.resume.n": "resume.adapter_equal",
+  "recipe.alloc": "torch_memory.allocated_peak_gib",
+  "recipe.eval.after": "eval.metric.eval_loss",
+  "recipe.eval.before": "eval.metric.base_loss",
+  "recipe.heldout": "data.held_out",
+  "recipe.host": "host_ram.peak_gib",
+  "recipe.model": "command[2]",
+  "recipe.path": "setup.path",
+  "recipe.release": "poros",
+  "recipe.res": "torch_memory.reserved_peak_gib",
+  "recipe.rows": "data.rows",
+  "recipe.seq": "data.seq_len",
+  "recipe.supd": "main.s_per_step",
+  "recipe.updates": "main.updates",
+  "st.4060l.new": "step_seconds.expert_adamw",
+  "st.4060l.torch": "step_seconds.torch_adamw_bf16",
+  "st.4090.new": "step_seconds.expert_adamw",
+  "st.4090.torch": "step_seconds.torch_adamw_bf16",
+  "st.devices": "the devices whose self-test log is present and passed",
+  "st.elems": "the time line",
+  "st.mac.new": "step_seconds.expert_adamw",
+  "st.mac.torch": "step_seconds.torch_adamw_bf16",
+  "st.n": "count of self-tests present",
+  "st.times": "step_seconds of each self-test present",
+  "wl.alpha": "lora_alpha",
+  "wl.betas": "adam_beta1, adam_beta2",
+  "wl.clip": "max_grad_norm",
+  "wl.dropout": "lora_dropout",
+  "wl.ga": "gradient_accumulation_steps",
+  "wl.lr": "learning_rate",
+  "wl.mb": "per_device_batch_size",
+  "wl.rank": "lora_rank",
+  "wl.rows": "poros_fed_rows",
+  "wl.sched": "lr_scheduler",
+  "wl.seed": "seed",
+  "wl.seq": "max_seq_length",
+  "wl.trainable72": "trainable_params",
+  "wl.unsloth.clip": "args.clip",
+  "wl.unsloth.gc": "args.gc",
+  "wl.unsloth.lr": "args.lr",
+  "wl.unsloth.rank": "args.rank",
+  "wl.unsloth.seed": "args.seed",
+  "wl.unsloth.targets": "args.targets",
+  "wl.unsloth.wd": "args.wd",
+  "wl.updates": "max_steps",
+  "wl.wd": "weight_decay"
+ },
+ "frozen_commit": "1a8d7e912b166c373fcfec862ad7297221d33a71",
+ "pending": [],
+ "problems": [],
+ "sources": {
+  "card.gib": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "code.commit": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "code.version": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "dense.adapter.dtype": [
+   "docs/validation/h2h/4090/runs/a72_ga8_poros_r1_digest.json"
+  ],
+  "dense.commit": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.date": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.layers": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.poros.alloc": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.host": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.host.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.host.train": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.host.train.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.load.res": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.load.s": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.res": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.res.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.supd": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.supd.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json"
+  ],
+  "dense.poros.version": [
+   "docs/validation/h2h/4090/versions.txt"
+  ],
+  "dense.poros.vs.host_ram": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json",
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.poros.vs.host_ram_train": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json",
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.poros.vs.s_per_step": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json",
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.poros.vs.s_per_step.ratio": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json",
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.poros.vs.vram_reserved": [
+   "docs/validation/h2h/4090/arms/a72_ga8_poros.json",
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.adapter.dtype": [
+   "docs/validation/h2h/4090/runs/a72_ga8_uns_r1_raw.json"
+  ],
+  "dense.unsloth.alloc": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.embed": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.host": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.host.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.host.train": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.host.train.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.offloaded": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.res": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.res.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.supd": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "dense.unsloth.supd.best": [
+   "docs/validation/h2h/4090/arms/a72_ga8_uns.json"
+  ],
+  "do.32b.model": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/rel_m32_efficient.config.resolved.json"
+  ],
+  "do.32b.steps": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m32_sequential__rel_m32_efficient.json",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m32_sequential__rel_m32_fast.json"
+  ],
+  "do.32b.tensors": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m32_sequential__rel_m32_efficient.json",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m32_sequential__rel_m32_fast.json"
+  ],
+  "do.7b.model": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/rel_m7_efficient.config.resolved.json"
+  ],
+  "do.7b.steps": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m7_sequential__rel_m7_efficient.json",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m7_sequential__rel_m7_fast.json"
+  ],
+  "do.7b.tensors": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m7_sequential__rel_m7_efficient.json",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_m7_sequential__rel_m7_fast.json"
+  ],
+  "do.dropout": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/rel_moe_ref_efficient.config.resolved.json"
+  ],
+  "do.olmoe.steps": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_moe_ref_seq__rel_moe_ref_efficient.json"
+  ],
+  "do.olmoe.tensors": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/dropout/rec/cmp_rel_moe_ref_seq__rel_moe_ref_efficient.json"
+  ],
+  "env.bnb": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "env.cpu": [
+   "docs/validation/h2h/4090-r2/machine.json"
+  ],
+  "env.cuda": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "env.driver": [
+   "docs/validation/h2h/4090-r2/machine.json"
+  ],
+  "env.gpu": [
+   "docs/validation/h2h/4090-r2/machine.json"
+  ],
+  "env.gpu.mib": [
+   "docs/validation/h2h/4090-r2/machine.json"
+  ],
+  "env.host.gib": [
+   "docs/validation/h2h/4090-r2/machine.json"
+  ],
+  "env.os": [
+   "docs/validation/h2h/4090-r2/machine.json"
+  ],
+  "env.peft": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "env.sampler.s": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json"
+  ],
+  "env.tf.req": [
+   "docs/validation/h2h/4090-r2/NOTE_unsloth_versions.md"
+  ],
+  "env.torch": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "env.transformers": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "env.unsloth": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "env.unsloth.date": [
+   "docs/validation/h2h/4090-r2/unsloth_versions_date.txt"
+  ],
+  "env.unsloth.peft": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "env.unsloth.tf.cap": [
+   "docs/validation/h2h/4090-r2/NOTE_unsloth_versions.md"
+  ],
+  "env.unsloth.transformers": [
+   "docs/validation/h2h/4090-r2/versions.txt"
+  ],
+  "fg.checks": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/family/RESULT.txt"
+  ],
+  "fg.moe.families": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/family/RESULT.txt"
+  ],
+  "fg.n": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/family/RESULT.txt"
+  ],
+  "fg.resume.models": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/family/RESULT.txt"
+  ],
+  "fig1.status": [],
+  "lap.after": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.alloc": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.before": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.ga": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "lap.gpu": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.host": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.host.gib": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.mb": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "lap.path": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/events.jsonl"
+  ],
+  "lap.rank": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "lap.repeat.runs": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb-repeat/certification.json"
+  ],
+  "lap.res": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.seq": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "lap.supd": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "lap.updates": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "lap.vram.gib": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "loss.30b.maxdiff": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json"
+  ],
+  "loss.72b.maxdiff": [
+   "docs/validation/h2h/4090/runs/a72_ga8_poros_r1.json",
+   "docs/validation/h2h/4090/runs/a72_ga8_uns_r1_raw.json"
+  ],
+  "m144.after": [
+   "docs/validation/int/mac/launch-144-int/eval.json"
+  ],
+  "m144.before": [
+   "docs/validation/int/mac/launch-144-int/eval.json"
+  ],
+  "m144.data": [
+   "docs/validation/int/mac/launch-144-int/events.jsonl"
+  ],
+  "m144.drive": [
+   "docs/validation/int/mac/launch-144-int/model-drive.txt"
+  ],
+  "m144.ends.after": [
+   "docs/validation/int/mac/launch-144-int/eval.json"
+  ],
+  "m144.ends.before": [
+   "docs/validation/int/mac/launch-144-int/eval.json"
+  ],
+  "m144.heldout": [
+   "docs/validation/int/mac/launch-144-int/eval.json"
+  ],
+  "m144.min": [
+   "docs/validation/int/mac/launch-144-int/receipt.json"
+  ],
+  "m144.peak": [
+   "docs/validation/int/mac/launch-144-int/receipt.json"
+  ],
+  "m144.rank": [
+   "docs/validation/int/mac/launch-144-int/receipt.json"
+  ],
+  "m144.rows": [
+   "docs/validation/int/mac/launch-144-int/events.jsonl"
+  ],
+  "m144.seq": [
+   "docs/validation/int/mac/launch-144-int/receipt.json"
+  ],
+  "m144.steps": [
+   "docs/validation/int/mac/launch-144-int/receipt.json"
+  ],
+  "m144.supd": [
+   "docs/validation/int/mac/launch-144-int/events.jsonl"
+  ],
+  "mac.gib": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "mac.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "mac.os": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "mac.torch": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "mac32.mem": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "mac32.seq": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "mac32.supd": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "mac32.updates": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "mac72.drive": [
+   "docs/validation/recipes/m4-16gb/mac-72b/model-drive.txt"
+  ],
+  "mac72.mem": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "mac72.seq": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "mac72.supd": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "mac72.updates": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "macmoe.mem": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "macmoe.seq": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "macmoe.supd": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "macmoe.updates": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "moe.adapter.dtype": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json"
+  ],
+  "moe.adapter.gap.gib": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json"
+  ],
+  "moe.adapter.state.gib": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json"
+  ],
+  "moe.experts": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json"
+  ],
+  "moe.layers": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json"
+  ],
+  "moe.model": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json"
+  ],
+  "moe.ram.alloc": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.host": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.host.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.host.children": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3_host.csv"
+  ],
+  "moe.ram.host.few": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3_host.csv"
+  ],
+  "moe.ram.host.procs": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3_host.csv"
+  ],
+  "moe.ram.host.train": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3_host.csv"
+  ],
+  "moe.ram.host.train.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.res": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.res.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.supd": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.supd.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.t1": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.t1.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json"
+  ],
+  "moe.ram.vs.prev.s_per_step": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json",
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "moe.ram.vs.s_per_step": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.ram.vs.s_per_step.ratio": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.ram.vs.t1": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.ram.vs.vram_reserved": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r3.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.trainable": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1.json"
+  ],
+  "moe.unsloth.adapter.dtype": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "moe.unsloth.alloc": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.host": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.host.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.host.children": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3_host.csv"
+  ],
+  "moe.unsloth.host.few": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3_host.csv"
+  ],
+  "moe.unsloth.host.procs": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3_host.csv"
+  ],
+  "moe.unsloth.host.train": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2_host.csv",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3_host.csv"
+  ],
+  "moe.unsloth.host.train.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.offloaded": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json"
+  ],
+  "moe.unsloth.oproj": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "moe.unsloth.res": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.res.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.slower.best": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "moe.unsloth.slower.median": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "moe.unsloth.supd": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.supd.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.t1": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "moe.unsloth.t1.best": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r2.json",
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r3.json"
+  ],
+  "olmoe.ctl.heldout": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.ctl.supd": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_ctl_olmoe_s42/events.jsonl"
+  ],
+  "olmoe.ctl.unchanged": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.ctl.vratio": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.ctl.vratio.at": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_ctl_olmoe_s42/sample.jsonl"
+  ],
+  "olmoe.gpu": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_new_olmoe_s42/receipt.json",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_fp32_olmoe_s42/receipt.json",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_fp32_olmoe_s43/receipt.json"
+  ],
+  "olmoe.heldout.fp32": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.heldout.new": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.lastpoint": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.lr": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_new_olmoe_s42/config.resolved.json",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_new_olmoe_s42/.kit_commit",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_fp32_olmoe_s42/.kit_commit",
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_fp32_olmoe_s43/.kit_commit"
+  ],
+  "olmoe.maxdiff": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.seedgap": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/verdicts/cuda_olmoe.json"
+  ],
+  "olmoe.supd.new": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_new_olmoe_s42/events.jsonl"
+  ],
+  "olmoe.unchanged.fp32": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_fp32_olmoe_s42/sample.jsonl"
+  ],
+  "olmoe.unchanged.new": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_new_olmoe_s42/sample.jsonl"
+  ],
+  "olmoe.updates": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_new_olmoe_s42/config.resolved.json"
+  ],
+  "olmoe.vratio.new": [
+   "docs/validation/int/4090/release-1a8d7e912/blockA/olmoe_study/runs/o_new_olmoe_s42/sample.jsonl"
+  ],
+  "paths.eff.block_size": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "paths.eff.cuda_expandable_segments": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "paths.eff.fused_compute": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "paths.eff.host_staging": [
+   "docs/validation/recipes/rtx4090/big-72b/main/receipt.json"
+  ],
+  "paths.eff.nf4_dequant_cache_mb": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "paths.eff.offload_embeddings_and_head": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "paths.eff.ran_path": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "paths.eff.resident_blocks": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "paths.fast.block_size": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "paths.fast.cuda_expandable_segments": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "paths.fast.fused_compute": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "paths.fast.host_staging": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/receipt.json"
+  ],
+  "paths.fast.nf4_dequant_cache_mb": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "paths.fast.offload_embeddings_and_head": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "paths.fast.ran_path": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "paths.fast.resident_blocks": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "prev.moe.unsloth.host.best": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "prev.moe.unsloth.host.procs": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "prev.moe.unsloth.host.train": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "prev.moe.unsloth.res.best": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "prev.moe.unsloth.supd": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "prev.moe.unsloth.supd.best": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "prev.moe.unsmin.offloaded": [
+   "docs/validation/h2h/4090/arms/a30_ga8_unsmin.json"
+  ],
+  "prev.moe.unsmin.res.best": [
+   "docs/validation/h2h/4090/arms/a30_ga8_unsmin.json"
+  ],
+  "prev.moe.unsmin.supd": [
+   "docs/validation/h2h/4090/arms/a30_ga8_unsmin.json"
+  ],
+  "prev.moe.unsmin.supd.best": [
+   "docs/validation/h2h/4090/arms/a30_ga8_unsmin.json"
+  ],
+  "prev.unsloth.date": [
+   "docs/validation/h2h/4090/arms/a30_ga8_uns.json"
+  ],
+  "prev.unsloth.version": [
+   "docs/validation/h2h/4090/versions.txt"
+  ],
+  "prove.gpu": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.grads": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.model": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.opt": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.res.bs": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.res.s": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.res.vram": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.seq": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.steps": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.str.bs": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.str.s": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.str.vram": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "prove.tensors": [
+   "docs/validation/int/4090/release-1a8d7e912/blockB/prove/prove-1124-082922.json"
+  ],
+  "r30.after": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "r30.before": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "r30.host": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "r30.lr": [
+   "docs/validation/recipes/rtx4090/moe-30b/main/config.resolved.json"
+  ],
+  "r30.path": [
+   "docs/validation/recipes/rtx4090/moe-30b/main/events.jsonl"
+  ],
+  "r30.res": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "r30.supd": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "r30.updates": [
+   "docs/validation/recipes/rtx4090/moe-30b/main/config.resolved.json"
+  ],
+  "r30ssd.after": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "r30ssd.before": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "r30ssd.cache": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/config.resolved.json"
+  ],
+  "r30ssd.host": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "r30ssd.hostcache": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/config.resolved.json"
+  ],
+  "r30ssd.lr": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/config.resolved.json"
+  ],
+  "r30ssd.path": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/events.jsonl"
+  ],
+  "r30ssd.res": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "r30ssd.supd": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "r30ssd.updates": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/config.resolved.json"
+  ],
+  "rec.cert.n": [
+   "poros/recipes/certified.json",
+   "docs/validation/recipes/rtx4090/first-run/certification.json",
+   "docs/validation/recipes/rtx4090/support/certification.json",
+   "docs/validation/recipes/rtx4090/voice/certification.json",
+   "docs/validation/recipes/rtx4090/prefer/certification.json",
+   "docs/validation/recipes/rtx4090/big-32b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.cuda.n": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json",
+   "docs/validation/recipes/rtx4090/support/certification.json",
+   "docs/validation/recipes/rtx4090/voice/certification.json",
+   "docs/validation/recipes/rtx4090/prefer/certification.json",
+   "docs/validation/recipes/rtx4090/big-32b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-32b.ev": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "rec.m4.mac-32b.geo": [
+   "docs/validation/recipes/m4-16gb/mac-32b/main/config.resolved.json"
+  ],
+  "rec.m4.mac-32b.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "rec.m4.mac-32b.host": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "rec.m4.mac-32b.path": [
+   "docs/validation/recipes/m4-16gb/mac-32b/main/events.jsonl"
+  ],
+  "rec.m4.mac-32b.rank": [
+   "docs/validation/recipes/m4-16gb/mac-32b/main/config.resolved.json"
+  ],
+  "rec.m4.mac-32b.res": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "rec.m4.mac-32b.s": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "rec.m4.mac-32b.tok": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "rec.m4.mac-32b.upd": [
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json"
+  ],
+  "rec.m4.mac-72b.ev": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-72b.geo": [
+   "docs/validation/recipes/m4-16gb/mac-72b/main/config.resolved.json"
+  ],
+  "rec.m4.mac-72b.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-72b.host": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-72b.path": [
+   "docs/validation/recipes/m4-16gb/mac-72b/main/events.jsonl"
+  ],
+  "rec.m4.mac-72b.rank": [
+   "docs/validation/recipes/m4-16gb/mac-72b/main/config.resolved.json"
+  ],
+  "rec.m4.mac-72b.res": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-72b.s": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-72b.tok": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-72b.upd": [
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.m4.mac-7b.ev": [
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json"
+  ],
+  "rec.m4.mac-7b.geo": [
+   "docs/validation/recipes/m4-16gb/mac-7b/main/config.resolved.json"
+  ],
+  "rec.m4.mac-7b.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json"
+  ],
+  "rec.m4.mac-7b.host": [
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json"
+  ],
+  "rec.m4.mac-7b.path": [
+   "docs/validation/recipes/m4-16gb/mac-7b/main/events.jsonl"
+  ],
+  "rec.m4.mac-7b.rank": [
+   "docs/validation/recipes/m4-16gb/mac-7b/main/config.resolved.json"
+  ],
+  "rec.m4.mac-7b.res": [
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json"
+  ],
+  "rec.m4.mac-7b.s": [
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json"
+  ],
+  "rec.m4.mac-7b.tok": [
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json"
+  ],
+  "rec.m4.mac-7b.upd": [
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json"
+  ],
+  "rec.m4.mac-first-run.ev": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json"
+  ],
+  "rec.m4.mac-first-run.geo": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/main/config.resolved.json"
+  ],
+  "rec.m4.mac-first-run.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json"
+  ],
+  "rec.m4.mac-first-run.host": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json"
+  ],
+  "rec.m4.mac-first-run.path": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/main/events.jsonl"
+  ],
+  "rec.m4.mac-first-run.rank": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/main/config.resolved.json"
+  ],
+  "rec.m4.mac-first-run.res": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json"
+  ],
+  "rec.m4.mac-first-run.s": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json"
+  ],
+  "rec.m4.mac-first-run.tok": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json"
+  ],
+  "rec.m4.mac-first-run.upd": [
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json"
+  ],
+  "rec.m4.mac-moe.ev": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "rec.m4.mac-moe.geo": [
+   "docs/validation/recipes/m4-16gb/mac-moe/main/config.resolved.json"
+  ],
+  "rec.m4.mac-moe.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "rec.m4.mac-moe.host": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "rec.m4.mac-moe.path": [
+   "docs/validation/recipes/m4-16gb/mac-moe/main/events.jsonl"
+  ],
+  "rec.m4.mac-moe.rank": [
+   "docs/validation/recipes/m4-16gb/mac-moe/main/config.resolved.json"
+  ],
+  "rec.m4.mac-moe.res": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "rec.m4.mac-moe.s": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "rec.m4.mac-moe.tok": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "rec.m4.mac-moe.upd": [
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json"
+  ],
+  "rec.m4.mac-prefer.ev": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json"
+  ],
+  "rec.m4.mac-prefer.geo": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/main/config.resolved.json"
+  ],
+  "rec.m4.mac-prefer.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json"
+  ],
+  "rec.m4.mac-prefer.host": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json"
+  ],
+  "rec.m4.mac-prefer.path": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/main/events.jsonl"
+  ],
+  "rec.m4.mac-prefer.rank": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/main/config.resolved.json"
+  ],
+  "rec.m4.mac-prefer.res": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json"
+  ],
+  "rec.m4.mac-prefer.s": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json"
+  ],
+  "rec.m4.mac-prefer.tok": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json"
+  ],
+  "rec.m4.mac-prefer.upd": [
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json"
+  ],
+  "rec.m4.mac-support.ev": [
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json"
+  ],
+  "rec.m4.mac-support.geo": [
+   "docs/validation/recipes/m4-16gb/mac-support/main/config.resolved.json"
+  ],
+  "rec.m4.mac-support.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json"
+  ],
+  "rec.m4.mac-support.host": [
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json"
+  ],
+  "rec.m4.mac-support.path": [
+   "docs/validation/recipes/m4-16gb/mac-support/main/events.jsonl"
+  ],
+  "rec.m4.mac-support.rank": [
+   "docs/validation/recipes/m4-16gb/mac-support/main/config.resolved.json"
+  ],
+  "rec.m4.mac-support.res": [
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json"
+  ],
+  "rec.m4.mac-support.s": [
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json"
+  ],
+  "rec.m4.mac-support.tok": [
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json"
+  ],
+  "rec.m4.mac-support.upd": [
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json"
+  ],
+  "rec.m4.mac-voice.ev": [
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json"
+  ],
+  "rec.m4.mac-voice.geo": [
+   "docs/validation/recipes/m4-16gb/mac-voice/main/config.resolved.json"
+  ],
+  "rec.m4.mac-voice.gpu": [
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json"
+  ],
+  "rec.m4.mac-voice.host": [
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json"
+  ],
+  "rec.m4.mac-voice.path": [
+   "docs/validation/recipes/m4-16gb/mac-voice/main/events.jsonl"
+  ],
+  "rec.m4.mac-voice.rank": [
+   "docs/validation/recipes/m4-16gb/mac-voice/main/config.resolved.json"
+  ],
+  "rec.m4.mac-voice.res": [
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json"
+  ],
+  "rec.m4.mac-voice.s": [
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json"
+  ],
+  "rec.m4.mac-voice.tok": [
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json"
+  ],
+  "rec.m4.mac-voice.upd": [
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json"
+  ],
+  "rec.mac.n": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json",
+   "docs/validation/recipes/rtx4090/support/certification.json",
+   "docs/validation/recipes/rtx4090/voice/certification.json",
+   "docs/validation/recipes/rtx4090/prefer/certification.json",
+   "docs/validation/recipes/rtx4090/big-32b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.n": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json",
+   "docs/validation/recipes/rtx4090/support/certification.json",
+   "docs/validation/recipes/rtx4090/voice/certification.json",
+   "docs/validation/recipes/rtx4090/prefer/certification.json",
+   "docs/validation/recipes/rtx4090/big-32b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.noresume": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json",
+   "docs/validation/recipes/rtx4090/support/certification.json",
+   "docs/validation/recipes/rtx4090/voice/certification.json",
+   "docs/validation/recipes/rtx4090/prefer/certification.json",
+   "docs/validation/recipes/rtx4090/big-32b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "rec.r4060l.first-run.ev": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json"
+  ],
+  "rec.r4060l.first-run.geo": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/main/config.resolved.json"
+  ],
+  "rec.r4060l.first-run.gpu": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json"
+  ],
+  "rec.r4060l.first-run.host": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json"
+  ],
+  "rec.r4060l.first-run.path": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/main/events.jsonl"
+  ],
+  "rec.r4060l.first-run.rank": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/main/config.resolved.json"
+  ],
+  "rec.r4060l.first-run.res": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json"
+  ],
+  "rec.r4060l.first-run.s": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json"
+  ],
+  "rec.r4060l.first-run.tok": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json"
+  ],
+  "rec.r4060l.first-run.upd": [
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.ev": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.geo": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.gpu": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.host": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.path": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/events.jsonl"
+  ],
+  "rec.r4060l.moe-30b-8gb.rank": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.res": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.s": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.tok": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4060l.moe-30b-8gb.upd": [
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.big-32b.ev": [
+   "docs/validation/recipes/rtx4090/big-32b/certification.json"
+  ],
+  "rec.r4090.big-32b.geo": [
+   "docs/validation/recipes/rtx4090/big-32b/main/config.resolved.json"
+  ],
+  "rec.r4090.big-32b.gpu": [
+   "docs/validation/recipes/rtx4090/big-32b/certification.json"
+  ],
+  "rec.r4090.big-32b.host": [
+   "docs/validation/recipes/rtx4090/big-32b/certification.json"
+  ],
+  "rec.r4090.big-32b.path": [
+   "docs/validation/recipes/rtx4090/big-32b/main/events.jsonl"
+  ],
+  "rec.r4090.big-32b.rank": [
+   "docs/validation/recipes/rtx4090/big-32b/main/config.resolved.json"
+  ],
+  "rec.r4090.big-32b.res": [
+   "docs/validation/recipes/rtx4090/big-32b/certification.json"
+  ],
+  "rec.r4090.big-32b.s": [
+   "docs/validation/recipes/rtx4090/big-32b/certification.json"
+  ],
+  "rec.r4090.big-32b.tok": [
+   "docs/validation/recipes/rtx4090/big-32b/certification.json"
+  ],
+  "rec.r4090.big-32b.upd": [
+   "docs/validation/recipes/rtx4090/big-32b/certification.json"
+  ],
+  "rec.r4090.big-72b-fast.ev": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json"
+  ],
+  "rec.r4090.big-72b-fast.geo": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "rec.r4090.big-72b-fast.gpu": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json"
+  ],
+  "rec.r4090.big-72b-fast.host": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json"
+  ],
+  "rec.r4090.big-72b-fast.path": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/events.jsonl"
+  ],
+  "rec.r4090.big-72b-fast.rank": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/main/config.resolved.json"
+  ],
+  "rec.r4090.big-72b-fast.res": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json"
+  ],
+  "rec.r4090.big-72b-fast.s": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json"
+  ],
+  "rec.r4090.big-72b-fast.tok": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json"
+  ],
+  "rec.r4090.big-72b-fast.upd": [
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json"
+  ],
+  "rec.r4090.big-72b.ev": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "rec.r4090.big-72b.geo": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "rec.r4090.big-72b.gpu": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "rec.r4090.big-72b.host": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "rec.r4090.big-72b.path": [
+   "docs/validation/recipes/rtx4090/big-72b/main/events.jsonl"
+  ],
+  "rec.r4090.big-72b.rank": [
+   "docs/validation/recipes/rtx4090/big-72b/main/config.resolved.json"
+  ],
+  "rec.r4090.big-72b.res": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "rec.r4090.big-72b.s": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "rec.r4090.big-72b.tok": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "rec.r4090.big-72b.upd": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "rec.r4090.first-run.ev": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json"
+  ],
+  "rec.r4090.first-run.geo": [
+   "docs/validation/recipes/rtx4090/first-run/main/config.resolved.json"
+  ],
+  "rec.r4090.first-run.gpu": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json"
+  ],
+  "rec.r4090.first-run.host": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json"
+  ],
+  "rec.r4090.first-run.path": [
+   "docs/validation/recipes/rtx4090/first-run/main/events.jsonl"
+  ],
+  "rec.r4090.first-run.rank": [
+   "docs/validation/recipes/rtx4090/first-run/main/config.resolved.json"
+  ],
+  "rec.r4090.first-run.res": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json"
+  ],
+  "rec.r4090.first-run.s": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json"
+  ],
+  "rec.r4090.first-run.tok": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json"
+  ],
+  "rec.r4090.first-run.upd": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json"
+  ],
+  "rec.r4090.moe-30b-8gb.ev": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.moe-30b-8gb.geo": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "rec.r4090.moe-30b-8gb.gpu": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.moe-30b-8gb.host": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.moe-30b-8gb.path": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/main/events.jsonl"
+  ],
+  "rec.r4090.moe-30b-8gb.rank": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/main/config.resolved.json"
+  ],
+  "rec.r4090.moe-30b-8gb.res": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.moe-30b-8gb.s": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.moe-30b-8gb.tok": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.moe-30b-8gb.upd": [
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json"
+  ],
+  "rec.r4090.moe-30b-ssd.ev": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "rec.r4090.moe-30b-ssd.geo": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/config.resolved.json"
+  ],
+  "rec.r4090.moe-30b-ssd.gpu": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "rec.r4090.moe-30b-ssd.host": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "rec.r4090.moe-30b-ssd.path": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/events.jsonl"
+  ],
+  "rec.r4090.moe-30b-ssd.rank": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/main/config.resolved.json"
+  ],
+  "rec.r4090.moe-30b-ssd.res": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "rec.r4090.moe-30b-ssd.s": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "rec.r4090.moe-30b-ssd.tok": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "rec.r4090.moe-30b-ssd.upd": [
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json"
+  ],
+  "rec.r4090.moe-30b.ev": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "rec.r4090.moe-30b.geo": [
+   "docs/validation/recipes/rtx4090/moe-30b/main/config.resolved.json"
+  ],
+  "rec.r4090.moe-30b.gpu": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "rec.r4090.moe-30b.host": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "rec.r4090.moe-30b.path": [
+   "docs/validation/recipes/rtx4090/moe-30b/main/events.jsonl"
+  ],
+  "rec.r4090.moe-30b.rank": [
+   "docs/validation/recipes/rtx4090/moe-30b/main/config.resolved.json"
+  ],
+  "rec.r4090.moe-30b.res": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "rec.r4090.moe-30b.s": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "rec.r4090.moe-30b.tok": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "rec.r4090.moe-30b.upd": [
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json"
+  ],
+  "rec.r4090.prefer.ev": [
+   "docs/validation/recipes/rtx4090/prefer/certification.json"
+  ],
+  "rec.r4090.prefer.geo": [
+   "docs/validation/recipes/rtx4090/prefer/main/config.resolved.json"
+  ],
+  "rec.r4090.prefer.gpu": [
+   "docs/validation/recipes/rtx4090/prefer/certification.json"
+  ],
+  "rec.r4090.prefer.host": [
+   "docs/validation/recipes/rtx4090/prefer/certification.json"
+  ],
+  "rec.r4090.prefer.path": [
+   "docs/validation/recipes/rtx4090/prefer/main/events.jsonl"
+  ],
+  "rec.r4090.prefer.rank": [
+   "docs/validation/recipes/rtx4090/prefer/main/config.resolved.json"
+  ],
+  "rec.r4090.prefer.res": [
+   "docs/validation/recipes/rtx4090/prefer/certification.json"
+  ],
+  "rec.r4090.prefer.s": [
+   "docs/validation/recipes/rtx4090/prefer/certification.json"
+  ],
+  "rec.r4090.prefer.tok": [
+   "docs/validation/recipes/rtx4090/prefer/certification.json"
+  ],
+  "rec.r4090.prefer.upd": [
+   "docs/validation/recipes/rtx4090/prefer/certification.json"
+  ],
+  "rec.r4090.support.ev": [
+   "docs/validation/recipes/rtx4090/support/certification.json"
+  ],
+  "rec.r4090.support.geo": [
+   "docs/validation/recipes/rtx4090/support/main/config.resolved.json"
+  ],
+  "rec.r4090.support.gpu": [
+   "docs/validation/recipes/rtx4090/support/certification.json"
+  ],
+  "rec.r4090.support.host": [
+   "docs/validation/recipes/rtx4090/support/certification.json"
+  ],
+  "rec.r4090.support.path": [
+   "docs/validation/recipes/rtx4090/support/main/events.jsonl"
+  ],
+  "rec.r4090.support.rank": [
+   "docs/validation/recipes/rtx4090/support/main/config.resolved.json"
+  ],
+  "rec.r4090.support.res": [
+   "docs/validation/recipes/rtx4090/support/certification.json"
+  ],
+  "rec.r4090.support.s": [
+   "docs/validation/recipes/rtx4090/support/certification.json"
+  ],
+  "rec.r4090.support.tok": [
+   "docs/validation/recipes/rtx4090/support/certification.json"
+  ],
+  "rec.r4090.support.upd": [
+   "docs/validation/recipes/rtx4090/support/certification.json"
+  ],
+  "rec.r4090.voice.ev": [
+   "docs/validation/recipes/rtx4090/voice/certification.json"
+  ],
+  "rec.r4090.voice.geo": [
+   "docs/validation/recipes/rtx4090/voice/main/config.resolved.json"
+  ],
+  "rec.r4090.voice.gpu": [
+   "docs/validation/recipes/rtx4090/voice/certification.json"
+  ],
+  "rec.r4090.voice.host": [
+   "docs/validation/recipes/rtx4090/voice/certification.json"
+  ],
+  "rec.r4090.voice.path": [
+   "docs/validation/recipes/rtx4090/voice/main/events.jsonl"
+  ],
+  "rec.r4090.voice.rank": [
+   "docs/validation/recipes/rtx4090/voice/main/config.resolved.json"
+  ],
+  "rec.r4090.voice.res": [
+   "docs/validation/recipes/rtx4090/voice/certification.json"
+  ],
+  "rec.r4090.voice.s": [
+   "docs/validation/recipes/rtx4090/voice/certification.json"
+  ],
+  "rec.r4090.voice.tok": [
+   "docs/validation/recipes/rtx4090/voice/certification.json"
+  ],
+  "rec.r4090.voice.upd": [
+   "docs/validation/recipes/rtx4090/voice/certification.json"
+  ],
+  "rec.resume.n": [
+   "docs/validation/recipes/rtx4090/first-run/certification.json",
+   "docs/validation/recipes/rtx4090/support/certification.json",
+   "docs/validation/recipes/rtx4090/voice/certification.json",
+   "docs/validation/recipes/rtx4090/prefer/certification.json",
+   "docs/validation/recipes/rtx4090/big-32b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json",
+   "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b/certification.json",
+   "docs/validation/recipes/rtx4090/big-72b-fast/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/first-run/certification.json",
+   "docs/validation/recipes/rtx4060-laptop/moe-30b-8gb/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-first-run/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-7b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-support/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-voice/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-prefer/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-moe/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-32b/certification.json",
+   "docs/validation/recipes/m4-16gb/mac-72b/certification.json"
+  ],
+  "recipe.alloc": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.eval.after": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.eval.before": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.heldout": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.host": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.model": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.path": [
+   "docs/validation/recipes/rtx4090/big-72b/main/events.jsonl"
+  ],
+  "recipe.release": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.res": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.rows": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.seq": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.supd": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "recipe.updates": [
+   "docs/validation/recipes/rtx4090/big-72b/certification.json"
+  ],
+  "st.4060l.new": [
+   "docs/validation/int/4060l/optimizer_selftest/selftest_cuda.txt",
+   "docs/validation/int/4060l/optimizer_selftest/commit.txt"
+  ],
+  "st.4060l.torch": [
+   "docs/validation/int/4060l/optimizer_selftest/selftest_cuda.txt"
+  ],
+  "st.4090.new": [
+   "docs/validation/int/4090/optimizer_selftest/selftest_cuda_time.txt"
+  ],
+  "st.4090.torch": [
+   "docs/validation/int/4090/optimizer_selftest/selftest_cuda_time.txt"
+  ],
+  "st.devices": [
+   "docs/validation/int/4090/optimizer_selftest/selftest_cuda_time.txt",
+   "docs/validation/int/4060l/optimizer_selftest/selftest_cuda.txt",
+   "docs/validation/int/4060l/optimizer_selftest/commit.txt",
+   "docs/validation/int/mac/optimizer_selftest/selftest_mps.txt",
+   "docs/validation/int/mac/optimizer_selftest/results.jsonl"
+  ],
+  "st.elems": [
+   "docs/validation/int/mac/optimizer_selftest/selftest_mps.txt"
+  ],
+  "st.mac.new": [
+   "docs/validation/int/mac/optimizer_selftest/selftest_mps.txt",
+   "docs/validation/int/mac/optimizer_selftest/results.jsonl"
+  ],
+  "st.mac.torch": [
+   "docs/validation/int/mac/optimizer_selftest/selftest_mps.txt"
+  ],
+  "st.n": [
+   "docs/validation/int/4090/optimizer_selftest/selftest_cuda_time.txt",
+   "docs/validation/int/4060l/optimizer_selftest/selftest_cuda.txt",
+   "docs/validation/int/4060l/optimizer_selftest/commit.txt",
+   "docs/validation/int/mac/optimizer_selftest/selftest_mps.txt",
+   "docs/validation/int/mac/optimizer_selftest/results.jsonl"
+  ],
+  "st.times": [
+   "docs/validation/int/4090/optimizer_selftest/selftest_cuda_time.txt",
+   "docs/validation/int/4060l/optimizer_selftest/selftest_cuda.txt",
+   "docs/validation/int/4060l/optimizer_selftest/commit.txt",
+   "docs/validation/int/mac/optimizer_selftest/selftest_mps.txt",
+   "docs/validation/int/mac/optimizer_selftest/results.jsonl"
+  ],
+  "wl.alpha": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.betas": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.clip": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.dropout": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.ga": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.lr": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.mb": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.rank": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.rows": [
+   "docs/validation/h2h/4090-r2/rows_check_30b_ga8.json"
+  ],
+  "wl.sched": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.seed": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.seq": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.trainable72": [
+   "docs/validation/h2h/4090/runs/a72_ga8_uns_r1_raw.json"
+  ],
+  "wl.unsloth.clip": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "wl.unsloth.gc": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "wl.unsloth.lr": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "wl.unsloth.rank": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "wl.unsloth.seed": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "wl.unsloth.targets": [
+   "docs/validation/h2h/4090/runs/a72_ga8_uns_r1_raw.json"
+  ],
+  "wl.unsloth.wd": [
+   "docs/validation/h2h/4090-r2/a30_ga8_uns_r1_raw.json"
+  ],
+  "wl.updates": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ],
+  "wl.wd": [
+   "docs/validation/h2h/4090-r2/a30_ga8_ram_r1_config.resolved.json"
+  ]
+ },
+ "values": {
+  "card.gib": "23.516",
+  "code.commit": "\\texttt{1a8d7e91}",
+  "code.version": "1.0.0",
+  "dense.adapter.dtype": "fp32",
+  "dense.commit": "\\texttt{5d75e31a}",
+  "dense.date": "18 November 2026",
+  "dense.layers": "80",
+  "dense.poros.alloc": "9.859",
+  "dense.poros.host": "45.102",
+  "dense.poros.host.best": "45.101",
+  "dense.poros.host.train": "45.102",
+  "dense.poros.host.train.best": "45.101",
+  "dense.poros.load.res": "1.84",
+  "dense.poros.load.s": "283.4",
+  "dense.poros.res": "13.508",
+  "dense.poros.res.best": "13.449",
+  "dense.poros.supd": "17.703",
+  "dense.poros.supd.best": "17.700",
+  "dense.poros.version": "0.3.0",
+  "dense.poros.vs.host_ram": "Unsloth 6\\% less host RAM",
+  "dense.poros.vs.host_ram_train": "Unsloth 1.8$\\times$ less host RAM while training",
+  "dense.poros.vs.s_per_step": "Poros 1.1$\\times$ faster",
+  "dense.poros.vs.s_per_step.ratio": "1.1$\\times$",
+  "dense.poros.vs.vram_reserved": "Poros 1.5$\\times$ less VRAM",
+  "dense.unsloth.adapter.dtype": "fp32",
+  "dense.unsloth.alloc": "20.454",
+  "dense.unsloth.embed": "cpu",
+  "dense.unsloth.host": "42.961",
+  "dense.unsloth.host.best": "42.722",
+  "dense.unsloth.host.train": "25.740",
+  "dense.unsloth.host.train.best": "25.740",
+  "dense.unsloth.offloaded": "51",
+  "dense.unsloth.res": "21.123",
+  "dense.unsloth.res.best": "21.123",
+  "dense.unsloth.supd": "22.072",
+  "dense.unsloth.supd.best": "20.919",
+  "do.32b.model": "Qwen2.5-32B",
+  "do.32b.steps": "10",
+  "do.32b.tensors": "896",
+  "do.7b.model": "Qwen2.5-7B",
+  "do.7b.steps": "10",
+  "do.7b.tensors": "392",
+  "do.dropout": "0.05",
+  "do.olmoe.steps": "40",
+  "do.olmoe.tensors": "64",
+  "env.bnb": "0.50.2",
+  "env.cpu": "AMD EPYC 7502 32-Core Processor",
+  "env.cuda": "13.0",
+  "env.driver": "580.173.02",
+  "env.gpu": "NVIDIA GeForce RTX 4090",
+  "env.gpu.mib": "24564",
+  "env.host.gib": "59.6",
+  "env.os": "Ubuntu 24.04.1 LTS",
+  "env.peft": "0.20.0",
+  "env.sampler.s": "0.25",
+  "env.tf.req": "\\code{>=5.20,<5.23}",
+  "env.torch": "2.14.1",
+  "env.transformers": "5.22.2",
+  "env.unsloth": "2026.11.10",
+  "env.unsloth.date": "24 November 2026",
+  "env.unsloth.peft": "0.22.0",
+  "env.unsloth.tf.cap": "\\code{<=5.17.0}",
+  "env.unsloth.transformers": "5.17.0",
+  "fg.checks": "68",
+  "fg.moe.families": "Qwen3-MoE, OLMoE, Qwen2-MoE, DeepSeek-V2, Qwen3.5-MoE and Gemma~4-MoE",
+  "fg.n": "15",
+  "fg.resume.models": "Qwen2.5-0.5B and OLMoE-1B-7B",
+  "fig1.status": "",
+  "lap.after": "5.99",
+  "lap.alloc": "5.23",
+  "lap.before": "6.74",
+  "lap.ga": "8",
+  "lap.gpu": "RTX 4060 Laptop GPU",
+  "lap.host": "6.4",
+  "lap.host.gib": "14.9",
+  "lap.mb": "1",
+  "lap.path": "fast",
+  "lap.rank": "8",
+  "lap.repeat.runs": "2",
+  "lap.res": "6.00",
+  "lap.seq": "256",
+  "lap.supd": "13.57",
+  "lap.updates": "16",
+  "lap.vram.gib": "7.68",
+  "loss.30b.maxdiff": "0.0198",
+  "loss.72b.maxdiff": "0.0010",
+  "m144.after": "0.68",
+  "m144.before": "3.01",
+  "m144.data": "chats",
+  "m144.drive": "the Mac's internal SSD",
+  "m144.ends.after": "4",
+  "m144.ends.before": "1",
+  "m144.heldout": "4",
+  "m144.min": "100",
+  "m144.peak": "11.3",
+  "m144.rank": "16",
+  "m144.rows": "143",
+  "m144.seq": "128",
+  "m144.steps": "144",
+  "m144.supd": "37.9",
+  "mac.gib": "16",
+  "mac.gpu": "Apple M4 10-core GPU",
+  "mac.os": "macOS 27.2.1",
+  "mac.torch": "2.15.0",
+  "mac32.mem": "7.2",
+  "mac32.seq": "128",
+  "mac32.supd": "17.7",
+  "mac32.updates": "8",
+  "mac72.drive": "an external drive",
+  "mac72.mem": "11.3",
+  "mac72.seq": "128",
+  "mac72.supd": "41.1",
+  "mac72.updates": "6",
+  "macmoe.mem": "9.1",
+  "macmoe.seq": "128",
+  "macmoe.supd": "18.4",
+  "macmoe.updates": "16",
+  "moe.adapter.dtype": "bf16",
+  "moe.adapter.gap.gib": "3.5",
+  "moe.adapter.state.gib": "5.86",
+  "moe.experts": "128",
+  "moe.layers": "48",
+  "moe.model": "Qwen3-30B-A3B",
+  "moe.ram.alloc": "8.261",
+  "moe.ram.host": "19.850",
+  "moe.ram.host.best": "19.834",
+  "moe.ram.host.children": "1",
+  "moe.ram.host.few": "19.9",
+  "moe.ram.host.procs": "2",
+  "moe.ram.host.train": "19.850",
+  "moe.ram.host.train.best": "19.834",
+  "moe.ram.res": "9.107",
+  "moe.ram.res.best": "9.088",
+  "moe.ram.supd": "4.606",
+  "moe.ram.supd.best": "4.588",
+  "moe.ram.t1": "122.4",
+  "moe.ram.t1.best": "105.1",
+  "moe.ram.vs.prev.s_per_step": "Poros 1.2$\\times$ faster",
+  "moe.ram.vs.s_per_step": "Poros 1.9$\\times$ faster",
+  "moe.ram.vs.s_per_step.ratio": "1.9$\\times$",
+  "moe.ram.vs.t1": "Poros 9\\% sooner to the first update",
+  "moe.ram.vs.vram_reserved": "Poros 2.1$\\times$ less VRAM",
+  "moe.trainable": "629,145,600",
+  "moe.unsloth.adapter.dtype": "fp32",
+  "moe.unsloth.alloc": "19.503",
+  "moe.unsloth.host": "22.899",
+  "moe.unsloth.host.best": "22.891",
+  "moe.unsloth.host.children": "34",
+  "moe.unsloth.host.few": "11.2",
+  "moe.unsloth.host.procs": "35",
+  "moe.unsloth.host.train": "22.899",
+  "moe.unsloth.host.train.best": "22.891",
+  "moe.unsloth.offloaded": "28",
+  "moe.unsloth.oproj": "4,718,592",
+  "moe.unsloth.res": "19.721",
+  "moe.unsloth.res.best": "19.721",
+  "moe.unsloth.slower.best": "53\\%",
+  "moe.unsloth.slower.median": "44\\%",
+  "moe.unsloth.supd": "8.874",
+  "moe.unsloth.supd.best": "8.829",
+  "moe.unsloth.t1": "139.0",
+  "moe.unsloth.t1.best": "133.5",
+  "olmoe.ctl.heldout": "1.6463",
+  "olmoe.ctl.supd": "0.495",
+  "olmoe.ctl.unchanged": "47.13\\%",
+  "olmoe.ctl.vratio": "1.107",
+  "olmoe.ctl.vratio.at": "300",
+  "olmoe.gpu": "RTX~4090",
+  "olmoe.heldout.fp32": "1.6344",
+  "olmoe.heldout.new": "1.6342",
+  "olmoe.lastpoint": "299",
+  "olmoe.lr": "$2\\times10^{-5}$",
+  "olmoe.maxdiff": "0.0038",
+  "olmoe.seedgap": "0.0138",
+  "olmoe.supd.new": "0.508",
+  "olmoe.unchanged.fp32": "0.12\\%",
+  "olmoe.unchanged.new": "0.45\\%",
+  "olmoe.updates": "300",
+  "olmoe.vratio.new": "1.00003 to 1.00015",
+  "paths.eff.block_size": "\\code{4}",
+  "paths.eff.cuda_expandable_segments": "\\code{true}",
+  "paths.eff.fused_compute": "\\code{true}",
+  "paths.eff.host_staging": "\\code{pinned}",
+  "paths.eff.nf4_dequant_cache_mb": "\\code{0}",
+  "paths.eff.offload_embeddings_and_head": "\\code{true}",
+  "paths.eff.ran_path": "\\code{efficient}",
+  "paths.eff.resident_blocks": "\\code{0}",
+  "paths.fast.block_size": "\\code{4}",
+  "paths.fast.cuda_expandable_segments": "\\code{true}",
+  "paths.fast.fused_compute": "\\code{true}",
+  "paths.fast.host_staging": "\\code{pinned}",
+  "paths.fast.nf4_dequant_cache_mb": "\\code{6697}",
+  "paths.fast.offload_embeddings_and_head": "\\code{true}",
+  "paths.fast.ran_path": "\\code{fast}",
+  "paths.fast.resident_blocks": "\\code{0}",
+  "prev.moe.unsloth.host.best": "18.065",
+  "prev.moe.unsloth.host.procs": "3",
+  "prev.moe.unsloth.host.train": "11.0",
+  "prev.moe.unsloth.res.best": "19.760",
+  "prev.moe.unsloth.supd": "6.181",
+  "prev.moe.unsloth.supd.best": "5.764",
+  "prev.moe.unsmin.offloaded": "48",
+  "prev.moe.unsmin.res.best": "13.871",
+  "prev.moe.unsmin.supd": "9.505",
+  "prev.moe.unsmin.supd.best": "9.285",
+  "prev.unsloth.date": "18 November 2026",
+  "prev.unsloth.version": "2026.11.4",
+  "prove.gpu": "RTX 4090",
+  "prove.grads": "392",
+  "prove.model": "Qwen2.5-7B",
+  "prove.opt": "1176",
+  "prove.res.bs": "28",
+  "prove.res.s": "0.30",
+  "prove.res.vram": "10.63",
+  "prove.seq": "512",
+  "prove.steps": "200",
+  "prove.str.bs": "4",
+  "prove.str.s": "0.47",
+  "prove.str.vram": "7.91",
+  "prove.tensors": "392",
+  "r30.after": "5.70",
+  "r30.before": "6.48",
+  "r30.host": "19.8",
+  "r30.lr": "$2\\times10^{-4}$",
+  "r30.path": "efficient",
+  "r30.res": "8.89",
+  "r30.supd": "4.61",
+  "r30.updates": "16",
+  "r30ssd.after": "5.72",
+  "r30ssd.before": "6.50",
+  "r30ssd.cache": "10.5",
+  "r30ssd.host": "11.2",
+  "r30ssd.hostcache": "4\\,GiB",
+  "r30ssd.lr": "$2\\times10^{-4}$",
+  "r30ssd.path": "fast",
+  "r30ssd.res": "21.57",
+  "r30ssd.supd": "4.28",
+  "r30ssd.updates": "16",
+  "rec.cert.n": "19",
+  "rec.cuda.n": "12",
+  "rec.m4.mac-32b.ev": "7.89 $\\to$ 7.61",
+  "rec.m4.mac-32b.geo": "1$\\times$1",
+  "rec.m4.mac-32b.gpu": "7.20",
+  "rec.m4.mac-32b.host": "pool",
+  "rec.m4.mac-32b.path": "seq.",
+  "rec.m4.mac-32b.rank": "16",
+  "rec.m4.mac-32b.res": "identical",
+  "rec.m4.mac-32b.s": "17.74",
+  "rec.m4.mac-32b.tok": "128",
+  "rec.m4.mac-32b.upd": "8",
+  "rec.m4.mac-72b.ev": "7.45 $\\to$ 7.29",
+  "rec.m4.mac-72b.geo": "1$\\times$1",
+  "rec.m4.mac-72b.gpu": "11.34",
+  "rec.m4.mac-72b.host": "pool",
+  "rec.m4.mac-72b.path": "seq.",
+  "rec.m4.mac-72b.rank": "16",
+  "rec.m4.mac-72b.res": "not run",
+  "rec.m4.mac-72b.s": "41.06",
+  "rec.m4.mac-72b.tok": "128",
+  "rec.m4.mac-72b.upd": "6",
+  "rec.m4.mac-7b.ev": "6.96 $\\to$ 6.72",
+  "rec.m4.mac-7b.geo": "1$\\times$1",
+  "rec.m4.mac-7b.gpu": "4.37",
+  "rec.m4.mac-7b.host": "pool",
+  "rec.m4.mac-7b.path": "seq.",
+  "rec.m4.mac-7b.rank": "16",
+  "rec.m4.mac-7b.res": "identical",
+  "rec.m4.mac-7b.s": "5.64",
+  "rec.m4.mac-7b.tok": "256",
+  "rec.m4.mac-7b.upd": "16",
+  "rec.m4.mac-first-run.ev": "7.32 $\\to$ 7.00",
+  "rec.m4.mac-first-run.geo": "1$\\times$1",
+  "rec.m4.mac-first-run.gpu": "2.27",
+  "rec.m4.mac-first-run.host": "pool",
+  "rec.m4.mac-first-run.path": "seq.",
+  "rec.m4.mac-first-run.rank": "16",
+  "rec.m4.mac-first-run.res": "identical",
+  "rec.m4.mac-first-run.s": "0.72",
+  "rec.m4.mac-first-run.tok": "256",
+  "rec.m4.mac-first-run.upd": "16",
+  "rec.m4.mac-moe.ev": "7.19 $\\to$ 7.06",
+  "rec.m4.mac-moe.geo": "1$\\times$1",
+  "rec.m4.mac-moe.gpu": "9.14",
+  "rec.m4.mac-moe.host": "pool",
+  "rec.m4.mac-moe.path": "seq.",
+  "rec.m4.mac-moe.rank": "16",
+  "rec.m4.mac-moe.res": "identical",
+  "rec.m4.mac-moe.s": "18.38",
+  "rec.m4.mac-moe.tok": "128",
+  "rec.m4.mac-moe.upd": "16",
+  "rec.m4.mac-prefer.ev": "pref.\\ 0.693 $\\to$ 0.803",
+  "rec.m4.mac-prefer.geo": "1$\\times$1",
+  "rec.m4.mac-prefer.gpu": "6.19",
+  "rec.m4.mac-prefer.host": "pool",
+  "rec.m4.mac-prefer.path": "seq.",
+  "rec.m4.mac-prefer.rank": "16",
+  "rec.m4.mac-prefer.res": "identical",
+  "rec.m4.mac-prefer.s": "18.70",
+  "rec.m4.mac-prefer.tok": "512",
+  "rec.m4.mac-prefer.upd": "16",
+  "rec.m4.mac-support.ev": "6.54 $\\to$ 6.35",
+  "rec.m4.mac-support.geo": "1$\\times$1",
+  "rec.m4.mac-support.gpu": "5.38",
+  "rec.m4.mac-support.host": "pool",
+  "rec.m4.mac-support.path": "seq.",
+  "rec.m4.mac-support.rank": "16",
+  "rec.m4.mac-support.res": "identical",
+  "rec.m4.mac-support.s": "9.94",
+  "rec.m4.mac-support.tok": "512",
+  "rec.m4.mac-support.upd": "16",
+  "rec.m4.mac-voice.ev": "6.58 $\\to$ 6.40",
+  "rec.m4.mac-voice.geo": "1$\\times$1",
+  "rec.m4.mac-voice.gpu": "5.38",
+  "rec.m4.mac-voice.host": "pool",
+  "rec.m4.mac-voice.path": "seq.",
+  "rec.m4.mac-voice.rank": "16",
+  "rec.m4.mac-voice.res": "identical",
+  "rec.m4.mac-voice.s": "9.95",
+  "rec.m4.mac-voice.tok": "512",
+  "rec.m4.mac-voice.upd": "16",
+  "rec.mac.n": "8",
+  "rec.n": "20",
+  "rec.noresume": "\\code{mac-72b}",
+  "rec.r4060l.first-run.ev": "7.35 $\\to$ 5.95",
+  "rec.r4060l.first-run.geo": "1$\\times$8",
+  "rec.r4060l.first-run.gpu": "1.30 / 1.45",
+  "rec.r4060l.first-run.host": "2.5",
+  "rec.r4060l.first-run.path": "eff.",
+  "rec.r4060l.first-run.rank": "16",
+  "rec.r4060l.first-run.res": "identical",
+  "rec.r4060l.first-run.s": "1.37",
+  "rec.r4060l.first-run.tok": "256",
+  "rec.r4060l.first-run.upd": "16",
+  "rec.r4060l.moe-30b-8gb.ev": "6.74 $\\to$ 5.99",
+  "rec.r4060l.moe-30b-8gb.geo": "1$\\times$8",
+  "rec.r4060l.moe-30b-8gb.gpu": "5.23 / 6.00",
+  "rec.r4060l.moe-30b-8gb.host": "6.4",
+  "rec.r4060l.moe-30b-8gb.path": "fast",
+  "rec.r4060l.moe-30b-8gb.rank": "8",
+  "rec.r4060l.moe-30b-8gb.res": "identical",
+  "rec.r4060l.moe-30b-8gb.s": "13.57",
+  "rec.r4060l.moe-30b-8gb.tok": "256",
+  "rec.r4060l.moe-30b-8gb.upd": "16",
+  "rec.r4090.big-32b.ev": "6.55 $\\to$ 5.48",
+  "rec.r4090.big-32b.geo": "1$\\times$8",
+  "rec.r4090.big-32b.gpu": "11.14 / 12.71",
+  "rec.r4090.big-32b.host": "19.1",
+  "rec.r4090.big-32b.path": "eff.",
+  "rec.r4090.big-32b.rank": "16",
+  "rec.r4090.big-32b.res": "identical",
+  "rec.r4090.big-32b.s": "8.27",
+  "rec.r4090.big-32b.tok": "512",
+  "rec.r4090.big-32b.upd": "16",
+  "rec.r4090.big-72b-fast.ev": "6.47 $\\to$ 5.45",
+  "rec.r4090.big-72b-fast.geo": "1$\\times$8",
+  "rec.r4090.big-72b-fast.gpu": "18.28 / 21.67",
+  "rec.r4090.big-72b-fast.host": "42.9",
+  "rec.r4090.big-72b-fast.path": "fast",
+  "rec.r4090.big-72b-fast.rank": "16",
+  "rec.r4090.big-72b-fast.res": "identical",
+  "rec.r4090.big-72b-fast.s": "15.77",
+  "rec.r4090.big-72b-fast.tok": "512",
+  "rec.r4090.big-72b-fast.upd": "16",
+  "rec.r4090.big-72b.ev": "6.49 $\\to$ 5.45",
+  "rec.r4090.big-72b.geo": "1$\\times$8",
+  "rec.r4090.big-72b.gpu": "11.85 / 18.16",
+  "rec.r4090.big-72b.host": "45.1",
+  "rec.r4090.big-72b.path": "eff.",
+  "rec.r4090.big-72b.rank": "16",
+  "rec.r4090.big-72b.res": "identical",
+  "rec.r4090.big-72b.s": "19.50",
+  "rec.r4090.big-72b.tok": "512",
+  "rec.r4090.big-72b.upd": "16",
+  "rec.r4090.first-run.ev": "7.35 $\\to$ 5.95",
+  "rec.r4090.first-run.geo": "1$\\times$8",
+  "rec.r4090.first-run.gpu": "1.30 / 1.45",
+  "rec.r4090.first-run.host": "2.4",
+  "rec.r4090.first-run.path": "eff.",
+  "rec.r4090.first-run.rank": "16",
+  "rec.r4090.first-run.res": "identical",
+  "rec.r4090.first-run.s": "2.32",
+  "rec.r4090.first-run.tok": "256",
+  "rec.r4090.first-run.upd": "16",
+  "rec.r4090.moe-30b-8gb.ev": "6.74 $\\to$ 5.99",
+  "rec.r4090.moe-30b-8gb.geo": "1$\\times$8",
+  "rec.r4090.moe-30b-8gb.gpu": "5.07 / 5.65",
+  "rec.r4090.moe-30b-8gb.host": "7.3",
+  "rec.r4090.moe-30b-8gb.path": "eff.",
+  "rec.r4090.moe-30b-8gb.rank": "8",
+  "rec.r4090.moe-30b-8gb.res": "identical",
+  "rec.r4090.moe-30b-8gb.s": "15.80",
+  "rec.r4090.moe-30b-8gb.tok": "256",
+  "rec.r4090.moe-30b-8gb.upd": "16",
+  "rec.r4090.moe-30b-ssd.ev": "6.50 $\\to$ 5.72",
+  "rec.r4090.moe-30b-ssd.geo": "1$\\times$8",
+  "rec.r4090.moe-30b-ssd.gpu": "19.04 / 21.57",
+  "rec.r4090.moe-30b-ssd.host": "11.2",
+  "rec.r4090.moe-30b-ssd.path": "fast",
+  "rec.r4090.moe-30b-ssd.rank": "16",
+  "rec.r4090.moe-30b-ssd.res": "identical",
+  "rec.r4090.moe-30b-ssd.s": "4.28",
+  "rec.r4090.moe-30b-ssd.tok": "512",
+  "rec.r4090.moe-30b-ssd.upd": "16",
+  "rec.r4090.moe-30b.ev": "6.48 $\\to$ 5.70",
+  "rec.r4090.moe-30b.geo": "1$\\times$8",
+  "rec.r4090.moe-30b.gpu": "8.26 / 8.89",
+  "rec.r4090.moe-30b.host": "19.8",
+  "rec.r4090.moe-30b.path": "eff.",
+  "rec.r4090.moe-30b.rank": "16",
+  "rec.r4090.moe-30b.res": "identical",
+  "rec.r4090.moe-30b.s": "4.61",
+  "rec.r4090.moe-30b.tok": "512",
+  "rec.r4090.moe-30b.upd": "16",
+  "rec.r4090.prefer.ev": "pref.\\ 0.693 $\\to$ 0.700",
+  "rec.r4090.prefer.geo": "1$\\times$8",
+  "rec.r4090.prefer.gpu": "7.38 / 9.65",
+  "rec.r4090.prefer.host": "7.2",
+  "rec.r4090.prefer.path": "eff.",
+  "rec.r4090.prefer.rank": "16",
+  "rec.r4090.prefer.res": "identical",
+  "rec.r4090.prefer.s": "3.50",
+  "rec.r4090.prefer.tok": "512",
+  "rec.r4090.prefer.upd": "16",
+  "rec.r4090.support.ev": "6.61 $\\to$ 5.51",
+  "rec.r4090.support.geo": "1$\\times$8",
+  "rec.r4090.support.gpu": "6.39 / 7.23",
+  "rec.r4090.support.host": "7.2",
+  "rec.r4090.support.path": "eff.",
+  "rec.r4090.support.rank": "16",
+  "rec.r4090.support.res": "identical",
+  "rec.r4090.support.s": "2.93",
+  "rec.r4090.support.tok": "512",
+  "rec.r4090.support.upd": "16",
+  "rec.r4090.voice.ev": "6.62 $\\to$ 5.53",
+  "rec.r4090.voice.geo": "1$\\times$8",
+  "rec.r4090.voice.gpu": "6.39 / 7.26",
+  "rec.r4090.voice.host": "7.2",
+  "rec.r4090.voice.path": "eff.",
+  "rec.r4090.voice.rank": "16",
+  "rec.r4090.voice.res": "identical",
+  "rec.r4090.voice.s": "2.89",
+  "rec.r4090.voice.tok": "512",
+  "rec.r4090.voice.upd": "16",
+  "rec.resume.n": "19",
+  "recipe.alloc": "11.85",
+  "recipe.eval.after": "5.45",
+  "recipe.eval.before": "6.49",
+  "recipe.heldout": "7",
+  "recipe.host": "45.1",
+  "recipe.model": "Qwen2.5-72B-Instruct",
+  "recipe.path": "efficient",
+  "recipe.release": "1.0.0",
+  "recipe.res": "18.16",
+  "recipe.rows": "143",
+  "recipe.seq": "512",
+  "recipe.supd": "19.50",
+  "recipe.updates": "16",
+  "st.4060l.new": "0.0141",
+  "st.4060l.torch": "0.0260",
+  "st.4090.new": "0.0072",
+  "st.4090.torch": "0.0060",
+  "st.devices": "the RTX~4090, the RTX~4060 Laptop GPU and the M4 Mac",
+  "st.elems": "128M",
+  "st.mac.new": "0.0599",
+  "st.mac.torch": "0.0529",
+  "st.n": "three",
+  "st.times": "0.0072\\,s against 0.0060\\,s on the RTX~4090; 0.0141\\,s against 0.0260\\,s on the RTX~4060 Laptop GPU; 0.0599\\,s against 0.0529\\,s on the M4 Mac",
+  "wl.alpha": "32",
+  "wl.betas": "0.9, 0.999",
+  "wl.clip": "1.0",
+  "wl.dropout": "0.0",
+  "wl.ga": "8",
+  "wl.lr": "$2\\times10^{-5}$",
+  "wl.mb": "1",
+  "wl.rank": "16",
+  "wl.rows": "128",
+  "wl.sched": "constant",
+  "wl.seed": "42",
+  "wl.seq": "512",
+  "wl.trainable72": "210,534,400",
+  "wl.unsloth.clip": "1.0",
+  "wl.unsloth.gc": "\\code{unsloth}",
+  "wl.unsloth.lr": "$2\\times10^{-5}$",
+  "wl.unsloth.rank": "16",
+  "wl.unsloth.seed": "42",
+  "wl.unsloth.targets": "q, k, v, o, gate, up, down",
+  "wl.unsloth.wd": "0.01",
+  "wl.updates": "16",
+  "wl.wd": "0.01"
+ }
+}

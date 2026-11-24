@@ -1,0 +1,550 @@
+# The models Poros names: what `poros models` lists and what words like
+# "qwen 7b" resolve to (the CLI interface design, section 4).
+#
+# Per model:
+#   id        the Hugging Face repo id
+#   arch      its config.json model_type (checked against arch_registry)
+#   family    a word people type; "qwen2.5" also answers to "qwen"
+#   size      parameters, as people say it ("7b", "30b")
+#   variant   base | instruct | coder ("instruct" = post-trained: Qwen3's
+#             hybrid-thinking checkpoints are instruct, their -Base repos base)
+#   entry     dense | moe (the training path)
+#   evidence  validated: a parity receipt ran THIS id (`receipt`): the whole
+#             model, or its first layers (the receipt's line says which)
+#             measured: a measured training run of THIS id (`receipt`), and no
+#             parity receipt of it ships: it trains, and nothing says bit for bit
+#             same-shape: architecture and tensor shapes identical to a
+#             validated id (`via`); its own weights were not parity-tested
+#             none: no parity receipt ran this whole model; what its
+#             architecture runs on is the registry's to say
+#   receipt   the parity receipt (validated), a run of this id (measured,
+#             same-shape),
+#             or what ran of its real first layers (none)
+#   gated     the repo needs a license accepted on huggingface.co
+#   aliases   extra words that name it
+#   metal     the Mac table, one row per length on one device class. A same-shape
+#             model uses its base's rows; no row means it does not train there.
+#             evidence: what a gate that ran this whole model at this length says, on
+#             that class. validated: it held to one graph (direct). checked: it ran
+#             twice, or from both sources, the same (repeat, streaming). measured: no such
+#             gate, but a real run gives figures. none: neither. A trim moves nothing.
+#             evidence, receipt and macos_build are written from the Mac's runs.
+#             method: what `prove` compares, when not what the tier implies. 7B runs
+#             from disk, and memory can still hold it for a gate.
+#
+# No sizes, memory or speed here: those come from receipts (the plan's
+# cells) and the Hub, one source per number. tests/test_catalog.py checks
+# every entry against the receipts and the architecture registry.
+
+# ---- Qwen2.5 (qwen2) ------------------------------------------------------
+
+[[model]]
+id = "Qwen/Qwen2.5-0.5B"
+arch = "qwen2"
+family = "qwen2.5"
+size = "0.5b"
+variant = "base"
+entry = "dense"
+evidence = "validated"
+receipt = "docs/validation/int/4090/round8/recheck/fg15_RESULT.txt"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 256
+default = true
+tier = "ram"
+grad_accum = 1
+save_steps = 1000
+synthetic_steps = 200
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen2.5-0.5b-s256/gate-direct.json"
+macos_build = "26B123"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 512
+tier = "ram"
+grad_accum = 1
+save_steps = 1000
+synthetic_steps = 200
+evidence = "none"
+
+[[model]]
+id = "Qwen/Qwen2.5-0.5B-Instruct"
+arch = "qwen2"
+family = "qwen2.5"
+size = "0.5b"
+variant = "instruct"
+entry = "dense"
+evidence = "same-shape"
+via = "Qwen/Qwen2.5-0.5B"
+
+[[model]]
+id = "Qwen/Qwen2.5-7B"
+arch = "qwen2"
+family = "qwen2.5"
+size = "7b"
+variant = "base"
+entry = "dense"
+evidence = "validated"
+receipt = "docs/validation/h2h/4090/exact_prove_receipt.json"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+method = "ram-vs-ssd"
+grad_accum = 1
+save_steps = 300
+synthetic_steps = 200
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen2.5-7b-s128/gate-direct.json"
+macos_build = "26B123"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 256
+tier = "ssd"
+method = "ram-vs-ssd"
+grad_accum = 1
+save_steps = 300
+synthetic_steps = 200
+evidence = "measured"
+macos_build = "26B123"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 512
+tier = "ssd"
+method = "ram-vs-ssd"
+grad_accum = 1
+save_steps = 300
+synthetic_steps = 200
+evidence = "none"
+
+[[model]]
+id = "Qwen/Qwen2.5-7B-Instruct"
+arch = "qwen2"
+family = "qwen2.5"
+size = "7b"
+variant = "instruct"
+entry = "dense"
+evidence = "same-shape"
+via = "Qwen/Qwen2.5-7B"
+
+[[model]]
+id = "Qwen/Qwen2.5-32B"
+arch = "qwen2"
+family = "qwen2.5"
+size = "32b"
+variant = "base"
+entry = "dense"
+evidence = "measured"
+receipt = "docs/validation/h2h/4090/runs/c32_poros_r1_receipt.json"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "checked"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen2.5-32b-s128/gate-repeat.json"
+macos_build = "26B123"
+
+[[model]]
+id = "Qwen/Qwen2.5-32B-Instruct"
+arch = "qwen2"
+family = "qwen2.5"
+size = "32b"
+variant = "instruct"
+entry = "dense"
+evidence = "same-shape"
+via = "Qwen/Qwen2.5-32B"
+
+[[model]]
+id = "Qwen/Qwen2.5-72B"
+arch = "qwen2"
+family = "qwen2.5"
+size = "72b"
+variant = "base"
+entry = "dense"
+evidence = "measured"
+receipt = "docs/validation/int/mac/round4/receipts/qwen2.5-72b-s128/receipt.json"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 25
+synthetic_steps = 20
+evidence = "checked"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s128/gate-repeat.json"
+macos_build = "26B123"
+
+[[model]]
+id = "Qwen/Qwen2.5-72B-Instruct"
+arch = "qwen2"
+family = "qwen2.5"
+size = "72b"
+variant = "instruct"
+entry = "dense"
+evidence = "same-shape"
+via = "Qwen/Qwen2.5-72B"
+
+[[model]]
+id = "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+arch = "qwen2"
+family = "deepseek"
+size = "1.5b"
+variant = "instruct"
+entry = "dense"
+evidence = "validated"
+receipt = "docs/validation/h2h/4060l/exact/prove_DeepSeek_R1_Distill_Qwen_1.5B_receipt.json"
+aliases = ["r1", "distill"]
+
+# ---- Qwen3 (qwen3, qwen3_5) -------------------------------------------------
+
+[[model]]
+id = "Qwen/Qwen3-0.6B"
+arch = "qwen3"
+family = "qwen3"
+size = "0.6b"
+variant = "instruct"
+entry = "dense"
+evidence = "validated"
+receipt = "docs/validation/int/4090/round8/fg14_RESULT.txt"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 256
+default = true
+tier = "ram"
+grad_accum = 1
+save_steps = 1000
+synthetic_steps = 200
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen3-0.6b-s256/gate-direct.json"
+macos_build = "26B123"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 512
+tier = "ram"
+grad_accum = 1
+save_steps = 1000
+synthetic_steps = 200
+evidence = "none"
+
+[[model]]
+id = "Qwen/Qwen3-32B"
+arch = "qwen3"
+family = "qwen3"
+size = "32b"
+variant = "instruct"
+entry = "dense"
+evidence = "measured"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen3-32b-s128/receipt.json"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "measured"
+macos_build = "26B123"
+
+[[model]]
+id = "Qwen/Qwen3.5-4B"
+arch = "qwen3_5"
+family = "qwen3.5"
+size = "4b"
+variant = "instruct"
+entry = "dense"
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen3.5-4b-s256/gate-direct.json"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ram"
+grad_accum = 1
+save_steps = 300
+synthetic_steps = 200
+evidence = "none"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 256
+tier = "ram"
+grad_accum = 1
+save_steps = 300
+synthetic_steps = 200
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen3.5-4b-s256/gate-direct.json"
+macos_build = "26B123"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 512
+tier = "ram"
+grad_accum = 1
+save_steps = 300
+synthetic_steps = 200
+evidence = "none"
+
+[[model]]
+id = "Qwen/Qwen3.8-27B"
+arch = "qwen3_5"
+family = "qwen3.8"
+size = "27b"
+variant = "instruct"
+entry = "dense"
+evidence = "none"
+receipt = "docs/validation/int/4090/round8/fg14_RESULT.txt"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "checked"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen3.8-27b-s128/gate-repeat.json"
+macos_build = "26B123"
+
+# ---- Gemma (gemma3, gemma4) -------------------------------------------------
+
+[[model]]
+id = "google/gemma-3-1b-pt"
+arch = "gemma3_text"
+family = "gemma3"
+size = "1b"
+variant = "base"
+entry = "dense"
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/gemma-3-1b-pt-s256/gate-direct.json"
+gated = true
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 256
+default = true
+tier = "ram"
+grad_accum = 1
+save_steps = 1000
+synthetic_steps = 200
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/gemma-3-1b-pt-s256/gate-direct.json"
+macos_build = "26B123"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 512
+tier = "ram"
+grad_accum = 1
+save_steps = 1000
+synthetic_steps = 200
+evidence = "none"
+
+[[model]]
+id = "google/gemma-3-27b-pt"
+arch = "gemma3"
+family = "gemma3"
+size = "27b"
+variant = "base"
+entry = "dense"
+evidence = "measured"
+receipt = "docs/validation/metal/m4_16gb/receipts/gemma-3-27b-pt-s128/receipt.json"
+gated = true
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "measured"
+macos_build = "26B123"
+
+[[model]]
+id = "google/gemma-4-31B-it"
+arch = "gemma4"
+family = "gemma4"
+size = "31b"
+variant = "instruct"
+entry = "dense"
+evidence = "measured"
+receipt = "docs/validation/metal/m4_16gb/receipts/gemma-4-31b-it-s128/receipt.json"
+gated = true
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "measured"
+macos_build = "26B123"
+
+# ---- Mixture of experts (poros.moe) ------------------------------------------
+
+[[model]]
+id = "Qwen/Qwen3-30B-A3B-Instruct-2507"
+arch = "qwen3_moe"
+family = "qwen3"
+size = "30b"
+variant = "instruct"
+entry = "moe"
+evidence = "validated"
+receipt = "docs/validation/moe/moe_oasst1_quality_l40s_200.json"
+aliases = ["a3b"]
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "checked"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen3-30b-a3b-instruct-2507-s128/gate-repeat.json"
+macos_build = "26B123"
+
+[[model]]
+id = "Qwen/Qwen3-Coder-30B-A3B-Instruct"
+arch = "qwen3_moe"
+family = "qwen3"
+size = "30b"
+variant = "coder"
+entry = "moe"
+evidence = "same-shape"
+via = "Qwen/Qwen3-30B-A3B-Instruct-2507"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen3-coder-30b-a3b-instruct-s128/receipt.json"
+aliases = ["a3b"]
+
+[[model]]
+id = "Qwen/Qwen1.5-MoE-A2.7B"
+arch = "qwen2_moe"
+family = "qwen1.5"
+size = "14b"
+variant = "base"
+entry = "moe"
+evidence = "validated"
+receipt = "docs/validation/int/4090/round8/fg14_RESULT.txt"  # the family gate's row: this id's first 4 layers
+aliases = ["a2.7b"]
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "checked"
+receipt = "docs/validation/metal/m4_16gb/receipts/qwen1.5-moe-a2.7b-s128/gate-repeat.json"
+macos_build = "26B123"
+
+[[model]]
+id = "allenai/OLMoE-1B-7B-0924"
+arch = "olmoe"
+family = "olmoe"
+size = "7b"
+variant = "base"
+entry = "moe"
+evidence = "validated"
+receipt = "docs/validation/int/4090/round8/recheck/fg15_RESULT.txt"  # the family gate's row: this id's first 4 layers
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "validated"
+receipt = "docs/validation/metal/m4_16gb/receipts/olmoe-1b-7b-0924-s128/gate-direct.json"
+macos_build = "26B123"
+
+[[model]]
+id = "deepseek-ai/DeepSeek-V2-Lite"
+arch = "deepseek_v2"
+family = "deepseek"
+size = "16b"
+variant = "base"
+entry = "moe"
+evidence = "validated"
+receipt = "docs/validation/int/4090/round8/fg14_RESULT.txt"  # the family gate's row: this id's first 4 layers
+aliases = ["lite", "v2"]
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "checked"
+receipt = "docs/validation/metal/m4_16gb/receipts/deepseek-v2-lite-s128/gate-repeat.json"
+macos_build = "26B123"
+
+[[model]]
+id = "Qwen/Qwen3.6-35B-A3B"
+arch = "qwen3_5_moe"
+family = "qwen3.6"
+size = "35b"
+variant = "instruct"
+entry = "moe"
+evidence = "none"
+receipt = "docs/validation/int/4090/logs/fg_whole_qwen3_6_35b_RESULT.txt"
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 64  # 128 grows swap past the guard on 16 GB, twice
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "none"
+
+[[model]]
+id = "google/gemma-4-26B-A4B-it"
+arch = "gemma4_moe"
+family = "gemma4"
+size = "26b"
+variant = "instruct"
+entry = "moe"
+evidence = "none"
+receipt = "docs/validation/int/4090/round8/fg14_RESULT.txt"  # the family gate's row: its first 6 layers
+
+[[model.metal]]
+device_class = "apple-m4-10gpu-16gb"
+seq = 128
+default = true
+tier = "ssd"
+grad_accum = 1
+save_steps = 50
+synthetic_steps = 20
+evidence = "checked"
+receipt = "docs/validation/metal/m4_16gb/receipts/gemma-4-26b-a4b-it-s128/gate-repeat.json"
+macos_build = "26B123"

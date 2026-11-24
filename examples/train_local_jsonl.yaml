@@ -1,0 +1,12 @@
+# Train on your own local data — the file needs no conversion:
+# rows can be {"text": ...}, {"instruction"/"output": ...}, or chat
+# {"messages": [...]} and the loader detects the shape.
+# Full walkthrough: docs/training.md
+
+model_name_or_path: "Qwen/Qwen2.5-7B"   # start small; scale up after one green run
+dataset: "./my_data.jsonl"              # also .json / .csv / .parquet / .txt
+quantization: nf4
+lora_rank: 16
+lora_alpha: 32
+max_steps: 200
+output_dir: ./my-adapter

@@ -1,0 +1,32 @@
+name: Architecture request
+description: Ask for a model family Poros doesn't support yet, with your validation pack if you have one.
+labels: [architecture]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: The Hugging Face model id.
+      placeholder: "google/gemma-4-27b"
+    validations:
+      required: true
+  - type: textarea
+    id: check
+    attributes:
+      label: What Poros says about it
+      description: The output of `poros check <model>` and `poros arch <model>`.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: pack
+    attributes:
+      label: Validation pack
+      description: >
+        If `poros prove <model> --unvalidated` passed on your GPU, attach the files in the folder
+        it names (drag them here), and say which GPU it ran on.
+  - type: textarea
+    id: why
+    attributes:
+      label: Anything else
+      description: Where its layers live, its attention type, or anything you found.

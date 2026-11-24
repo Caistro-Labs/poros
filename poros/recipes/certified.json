@@ -1,0 +1,690 @@
+{
+ "schema": "poros.certified.v1",
+ "release": "1.0.0",
+ "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71",
+ "certifier": "Caistro Labs",
+ "generated_by": "scripts/certify/generate.py from scripts/certify/sources.toml",
+ "recipes": {
+  "first-run": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 256,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram"
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 2.3174,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 1.48,
+    "torch_reserved_peak_gib": 1.445,
+    "torch_allocated_peak_gib": 1.296,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 2.401,
+    "receipt": "docs/validation/recipes/rtx4090/first-run",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   },
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4060 Laptop GPU",
+     "vram_gib": 7.68,
+     "host_ram_gib": 14.901,
+     "mac_class": null,
+     "os": "Omarchy"
+    },
+    "settings": {
+     "max_seq_length": 256,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram"
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 1.3737,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 1.643,
+    "torch_reserved_peak_gib": 1.445,
+    "torch_allocated_peak_gib": 1.296,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 2.479,
+    "receipt": "docs/validation/recipes/rtx4060-laptop/first-run",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "support": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram"
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 2.9276,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 7.234,
+    "torch_reserved_peak_gib": 7.226,
+    "torch_allocated_peak_gib": 6.386,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 7.216,
+    "receipt": "docs/validation/recipes/rtx4090/support",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "voice": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram"
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 2.8861,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 7.307,
+    "torch_reserved_peak_gib": 7.265,
+    "torch_allocated_peak_gib": 6.386,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 7.216,
+    "receipt": "docs/validation/recipes/rtx4090/voice",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "prefer": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram"
+    },
+    "loop": "dpo",
+    "data": "pairs",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 3.4994,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 9.695,
+    "torch_reserved_peak_gib": 9.654,
+    "torch_allocated_peak_gib": 7.376,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 7.221,
+    "receipt": "docs/validation/recipes/rtx4090/prefer",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "big-32b": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram"
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 8.2733,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 12.773,
+    "torch_reserved_peak_gib": 12.707,
+    "torch_allocated_peak_gib": 11.143,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 19.115,
+    "receipt": "docs/validation/recipes/rtx4090/big-32b",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "big-72b": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram",
+     "offload_embeddings_and_head": true
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": true,
+    "updates": 16,
+    "s_per_step": 19.5039,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 18.295,
+    "torch_reserved_peak_gib": 18.156,
+    "torch_allocated_peak_gib": 11.845,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 45.113,
+    "receipt": "docs/validation/recipes/rtx4090/big-72b",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "big-72b-fast": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 4,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "path": "fast",
+     "store": "ram",
+     "offload_embeddings_and_head": true
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "fast",
+    "ran_offload": true,
+    "updates": 16,
+    "s_per_step": 15.768,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 21.279,
+    "torch_reserved_peak_gib": 21.672,
+    "torch_allocated_peak_gib": 18.278,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 42.864,
+    "receipt": "docs/validation/recipes/rtx4090/big-72b-fast",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "moe-30b": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ram"
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 4.6069,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 8.959,
+    "torch_reserved_peak_gib": 8.892,
+    "torch_allocated_peak_gib": 8.261,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 19.849,
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "moe-30b-ssd": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "path": "fast",
+     "store": "ssd",
+     "store_options": {
+      "cache": "4G"
+     },
+     "moe_expert_cache_gib": 10.5
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "fast",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 4.2782,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 21.576,
+    "torch_reserved_peak_gib": 21.568,
+    "torch_allocated_peak_gib": 19.044,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 11.183,
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-ssd",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "moe-30b-8gb": [
+   {
+    "machine": {
+     "platform": "cuda",
+     "gpu": "RTX 4090",
+     "vram_gib": 23.52,
+     "host_ram_gib": 59.605,
+     "mac_class": null,
+     "os": "Ubuntu 24.04.1 LTS"
+    },
+    "settings": {
+     "max_seq_length": 256,
+     "lora_rank": 8,
+     "lora_alpha": 16,
+     "lora_dropout": 0.0,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 8,
+     "store": "ssd"
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "efficient",
+    "ran_offload": false,
+    "updates": 16,
+    "s_per_step": 15.7954,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": 5.658,
+    "torch_reserved_peak_gib": 5.65,
+    "torch_allocated_peak_gib": 5.074,
+    "memory_peak_gib": null,
+    "host_ram_peak_gib": 7.345,
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-8gb",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-72b": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 128,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 6,
+    "s_per_step": 41.0642,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 11.342,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-72b",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-32b": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 128,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 8,
+    "s_per_step": 17.7419,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 7.198,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-32b",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-moe": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 128,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 16,
+    "s_per_step": 18.3809,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 9.142,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-moe",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-7b": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 256,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 16,
+    "s_per_step": 5.6362,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 4.369,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-7b",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-first-run": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 256,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 16,
+    "s_per_step": 0.7177,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 2.273,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-first-run",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-prefer": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "dpo",
+    "data": "pairs",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 16,
+    "s_per_step": 18.6991,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 6.191,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-prefer",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-support": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 16,
+    "s_per_step": 9.9399,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 5.382,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-support",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ],
+  "mac-voice": [
+   {
+    "machine": {
+     "platform": "mac",
+     "gpu": "Apple M4 10-core GPU 16GB",
+     "vram_gib": 16.0,
+     "host_ram_gib": null,
+     "mac_class": "apple-m4-10gpu-16gb",
+     "os": "macOS 27.2.1"
+    },
+    "settings": {
+     "max_seq_length": 512,
+     "lora_rank": 16,
+     "lora_alpha": 32,
+     "lora_dropout": 0.0,
+     "block_size": 1,
+     "per_device_batch_size": 1,
+     "gradient_accumulation_steps": 1
+    },
+    "loop": "sft",
+    "data": "chats",
+    "ran_path": "sequential",
+    "ran_offload": null,
+    "updates": 16,
+    "s_per_step": 9.9472,
+    "s_per_step_rule": "median of updates 2..N",
+    "gpu_memory_used_gib": null,
+    "torch_reserved_peak_gib": null,
+    "torch_allocated_peak_gib": null,
+    "memory_peak_gib": 5.383,
+    "host_ram_peak_gib": null,
+    "receipt": "docs/validation/recipes/m4-16gb/mac-voice",
+    "commit": "1a8d7e912b166c373fcfec862ad7297221d33a71"
+   }
+  ]
+ },
+ "pending": {},
+ "dropped": []
+}

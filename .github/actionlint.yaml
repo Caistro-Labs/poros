@@ -1,0 +1,4 @@
+# actionlint: the label gpu-parity.yml's self-hosted runner carries.
+self-hosted-runner:
+  labels:
+    - gpu

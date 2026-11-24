@@ -1,0 +1,6 @@
+# Read by codespell in .github/workflows/lint.yml and .pre-commit-config.yaml.
+# skip: data, receipts and the paper. ignore-words-list: names in the code (bu, lins, iterm),
+# typos the tests feed in on purpose (chekpoint, modle, ...), and words spelled as meant.
+[codespell]
+skip = *.lock,*.json,*.jsonl,*.ipynb,*.svg,*.tsv,*.csv,*.txt,*.log,*.tex,*.bib,./node_modules,./docs/validation,./paper,./.git
+ignore-words-list = bu,lins,iterm,afile,ue,asser,chekpoint,trian,caf,modle,matc,evnts,eficient,downlod,delet,cliente,notse,pre-selected,pre-selects,unparseable,wont

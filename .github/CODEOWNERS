@@ -1,0 +1,33 @@
+# Who owns what. The last pattern that matches a path wins.
+
+# Every change requests the maintainer's review.
+* @Tigres2526
+
+# Engine correctness and residency invariants need maintainer review.
+/poros/core/ @Tigres2526
+/poros/train/ @Tigres2526
+/poros/patch/hf/ @Tigres2526
+/poros/preflight/ @Tigres2526
+/poros/moe/ @Tigres2526
+/poros/sss/ @Tigres2526
+/poros/plan/ @Tigres2526
+
+# Benchmark code, configs, and public claims.
+/poros/bench/ @Tigres2526
+/configs/bench/ @Tigres2526
+/README.md @Tigres2526
+/CHANGELOG.md @Tigres2526
+
+# Project governance and release metadata.
+/pyproject.toml @Tigres2526
+/LICENSE @Tigres2526
+/SECURITY.md @Tigres2526
+
+# CI and releases. A workflow change can hand a job secrets or turn off the check that would
+# have caught it, so the maintainer reviews each one.
+/.github/ @Tigres2526
+/build.sh @Tigres2526
+/ci/ @Tigres2526
+/scripts/release.py @Tigres2526
+/scripts/smoke_wheel.sh @Tigres2526
+/scripts/repo_rules.sh @Tigres2526

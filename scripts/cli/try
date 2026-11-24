@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Run the CLI from this checkout, whatever `poros` on PATH points at.
+#   scripts/cli/try                 -> intro + the interactive shell (train is simulated without a GPU)
+#   scripts/cli/try sim [steps] [s] -> live training view, fake trainer (no GPU)
+#   scripts/cli/try oom             -> out-of-memory screen + retry menu
+#   scripts/cli/try <any poros args>
+here="$(cd "$(dirname "$0")/../.." && pwd)"
+export PYTHONPATH="$here${PYTHONPATH:+:$PYTHONPATH}"
+# No CUDA here? Run the real CLI path against the simulated trainer
+# (poros/cli/ui/simulate.py), labelled "simulated" everywhere it shows.
+if ! command -v nvidia-smi >/dev/null 2>&1 || ! nvidia-smi -L >/dev/null 2>&1; then
+  export POROS_DEV_SIMULATE="${POROS_DEV_SIMULATE:-1}"
+fi
+if [ ! -t 1 ]; then
+  echo "note: not a terminal -- the live view is off. Run this in a real terminal window." >&2
+fi
+case "$1" in
+  sim) shift; exec python3 "$here/scripts/cli/sim_train.py" "${1:-60}" "${2:-0.3}" ;;
+  oom) exec python3 "$here/scripts/cli/sim_oom.py" ;;
+  *)   exec python3 -m poros.cli.main "$@" ;;
+esac

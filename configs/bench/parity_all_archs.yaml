@@ -1,0 +1,67 @@
+# Poros Bench: the cross-architecture parity gate
+#
+# Checks 0.00e+00 bitwise parity (resident vs blockwise) on the
+# smallest representative model of the Qwen families (Gemma parity is
+# gated separately; see docs/validation/ in github.com/Caistro-Labs/poros-benchmarks).
+# Parity is a property of the *code path* (mask construction, rotary embeds,
+# forward signature), not of scale. We nonetheless validate at 32B -- the
+# minimal benchmark scale -- matching the paper's 03_parity_32b protocol
+# (Qwen2.5-32B, 48 steps, dropout 0.0).
+#
+# This is step 1 of the validation: every architecture is checked with Poros
+# first. Hardware-specific VRAM/speed numbers come from the benchmark
+# matrix configs (step 2).
+#
+# Run:  poros bench matrix configs/bench/parity_all_archs.yaml
+# Gate: every poros cell must report parity_loss_max_diff == 0.0 and
+#       parity_weight_max_diff == 0.0 (bitwise_exact == true).
+# -------------------------------------------------------------------
+spec_id: parity_all_archs
+
+hardware:
+  gpu_name: "unknown"   # overridden per-run; parity is hardware-independent
+  vram_gb: 0.0
+
+models:
+  - model_id: "Qwen/Qwen2.5-32B"
+    display_name: "Qwen2.5-32B"
+    param_count_b: 32.0
+  - model_id: "Qwen/Qwen3-32B"
+    display_name: "Qwen3-32B"
+    param_count_b: 32.0
+
+# Parity = poros (blockwise) vs resident reference. Other baselines are
+# irrelevant to the bitwise gate and are excluded to keep the run cheap.
+methods:
+  - poros
+  - resident
+
+precisions:
+  - nf4
+
+training:
+  steps: 48          # a family's own checks: docs/models.md
+  seq_len: 512
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  dataset: "synthetic"
+  seed: 42
+  n_passes: 1        # parity is deterministic; one pass is sufficient
+
+lora:
+  rank: 16
+  alpha: 32
+  # 0.0 to match the paper's parity protocol (01_full_parity / 03_parity_32b).
+  # Dropout is set to zero so parity isolates the streaming mechanism, not the
+  # dropout RNG; dropout parity is validated separately (02_parity_dropout).
+  dropout: 0.0
+
+poros:
+  block_size: 4
+  enable_prefetch: true
+
+reporting:
+  output_dir: "./bench_output/parity_all_archs"
+  html: true
+  markdown: true
+  emit_json: true

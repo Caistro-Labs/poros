@@ -1,0 +1,67 @@
+name: Compat
+
+# Two legs that differ only in dependency versions:
+#   control = the pins in ci/control.txt, the stack the release was gated on
+#   canary  = the newest releases of Poros's upstream libraries, past pyproject.toml's ranges
+# canary red, control green: an upstream release broke Poros; fix it before moving a range.
+# canary green: the range's top can move to these releases once the GPU gates pass on them.
+# control red: a Poros change broke it, or the pins stopped resolving.
+# Both run the CPU suite; the canary also holds tests/moe to skipping only its CUDA cases.
+on:
+  schedule:
+    - cron: "23 5 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - pyproject.toml
+      - ci/control.txt
+      - .github/workflows/compat.yml
+      - .github/actions/setup-poros/action.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: compat-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compat:
+    name: ${{ matrix.leg }}
+    runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        leg: [control, canary]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/setup-poros
+        with:
+          constraints: ${{ matrix.leg == 'control' && 'ci/control.txt' || '' }}
+
+      - name: Upgrade to the newest upstream releases
+        if: matrix.leg == 'canary'
+        env:
+          CANARY_PACKAGES: transformers peft accelerate datasets safetensors bitsandbytes huggingface-hub
+        run: |
+          read -ra pkgs <<< "$CANARY_PACKAGES"
+          python -m pip install --upgrade torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --upgrade --upgrade-strategy eager "${pkgs[@]}"
+
+      - name: Versions under test
+        run: python -m pip list --format=freeze | grep -iE '^(torch|transformers|peft|accelerate|datasets|safetensors|bitsandbytes|huggingface-hub)==' || true
+
+      - run: pytest -v -ra -m "not gpu"
+
+      - name: MoE tests skip only their CUDA cases
+        if: matrix.leg == 'canary'
+        shell: bash # -o pipefail: fail on pytest's status, not tee's
+        run: |
+          pytest -v -ra -m "not gpu" tests/moe | tee pytest.log
+          if grep "^SKIPPED" pytest.log | grep -v "needs CUDA"; then
+            echo "::error::MoE tests skipped for a reason other than CUDA"; exit 1
+          fi

@@ -1,0 +1,749 @@
+/* ============================================================
+   Poros Report — Design Tokens & Styling
+   ============================================================
+   Theme: warm-dark.
+   Background: brand ink, warm-shifted near-black (#0C0C0B / #141210).
+   Text: brand cream (#F4F1EC).
+   Accent: Caistro orange (#FF6B35) -- used sparingly.
+   Type: Geist Mono for data/labels; refined display for headings.
+   Texture: halftone/dither overlay (subtle grain).
+   Motion: staggered bar growth, VRAM % count-up, parity curve draw-on.
+   ============================================================ */
+
+/* --- DESIGN TOKENS ---------------------------------------- */
+:root {
+  /* palette */
+  --bg-primary:    #0C0C0B;
+  --bg-secondary:  #141210;
+  --bg-card:       #1A1816;
+  --bg-card-hover: #1F1D1A;
+  --text-primary:  #F4F1EC;
+  --text-secondary:#A89F94;
+  --text-muted:    #6B6560;
+  --accent:        #FF6B35;
+  --accent-dim:    rgba(255, 107, 53, 0.4);  /* accent at low opacity, not a baked shade (brand: never shade the accent) */
+  --accent-glow:   rgba(255, 107, 53, 0.12);
+  --success:       #5CB85C;
+  --success-dim:   rgba(92, 184, 92, 0.15);
+  --warning:       #F0AD4E;
+  --warning-dim:   rgba(240, 173, 78, 0.15);
+  --error:         #D9534F;
+  --border:        #2A2622;
+  --border-subtle: #221F1C;
+
+  /* bars */
+  --bar-resident:  #6B6560;   /* warm neutrals: one system, distinguished by lightness */
+  --bar-peft:      #948A7E;
+  --bar-unsloth:   #BEB5A9;
+  --bar-poros:     #FF6B35;   /* the sole hue: Poros */
+  --bar-height:    32px;
+
+  /* budget lines */
+  --budget-16:     #F0AD4E;
+  --budget-24:     #A89F94;
+
+  /* typography */
+  --font-mono:    'Geist Mono', 'JetBrains Mono', 'Fira Code', 'SF Mono',
+                  'Cascadia Code', 'Source Code Pro', ui-monospace, monospace;
+  --font-display: 'Instrument Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-size-xs:  0.75rem;
+  --font-size-sm:  0.8125rem;
+  --font-size-base:0.875rem;
+  --font-size-md:  1rem;
+  --font-size-lg:  1.25rem;
+  --font-size-xl:  1.75rem;
+  --font-size-2xl: 2.5rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height:   1.6;
+
+  /* spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* radii */
+  --radius-sm: 4px;
+  --radius:    6px;
+  --radius-lg: 10px;
+
+  /* shadows */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow:     0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg:  0 4px 24px rgba(0, 0, 0, 0.5);
+
+  /* easing */
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-expo:  cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* --- BASE ------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* --- HALFTONE OVERLAY ------------------------------------- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: radial-gradient(
+    circle,
+    var(--text-muted) 0.8px,
+    transparent 0.8px
+  );
+  /* Coarser tile + GPU promotion keeps the fixed overlay cheap to repaint. */
+  background-size: 5px 5px;
+  transform: translateZ(0);
+  will-change: transform;
+  z-index: 50;
+}
+
+/* --- LAYOUT ----------------------------------------------- */
+.poros-report {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+/* --- TYPOGRAPHY ------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+  line-height: 1.15;
+  margin-bottom: var(--space-sm);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+  line-height: 1.2;
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  max-width: 68ch;
+}
+
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+/* all changing numbers use tabular-nums to prevent layout shift */
+.tabnum {
+  font-variant-numeric: tabular-nums;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+a:hover {
+  color: var(--text-primary);
+}
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- HEADER ----------------------------------------------- */
+.poros-header {
+  margin-bottom: var(--space-3xl);
+}
+
+.poros-header__badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent-dim);
+  border-radius: var(--radius-sm);
+  padding: 2px 10px;
+  margin-bottom: var(--space-md);
+}
+
+.poros-header__subtitle {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-normal);
+  max-width: 56ch;
+  line-height: 1.5;
+}
+
+/* --- CARDS ------------------------------------------------ */
+.poros-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow);
+}
+
+.poros-card--hero {
+  border-color: var(--accent-dim);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 107, 53, 0.04) 0%,
+    var(--bg-card) 40%
+  );
+}
+
+.poros-card__title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* --- STAT ROW --------------------------------------------- */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.stat-cell {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.stat-cell__label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-cell__value {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.stat-cell__value--accent {
+  color: var(--accent);
+}
+
+.stat-cell__value--success {
+  color: var(--success);
+}
+
+.stat-cell__unit {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  font-weight: var(--font-weight-normal);
+  margin-left: 2px;
+}
+
+/* --- VRAM BAR CHART (HERO) -------------------------------- */
+.vram-chart {
+  position: relative;
+  padding: var(--space-md) 0;
+}
+
+.vram-chart__row {
+  display: grid;
+  grid-template-columns: 120px 1fr 80px;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  min-height: 44px; /* touch target */
+}
+
+.vram-chart__label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.vram-chart__track {
+  position: relative;
+  height: var(--bar-height);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  overflow: visible;
+}
+
+.vram-bar {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  /* Static fallback: bars are at full target width with ZERO JS, so the chart
+     renders in snapshots / PDF / email / no-JS contexts. JS adds data-animate
+     to grow them in as a progressive enhancement. */
+  width: var(--target-width);
+  transform: scaleX(1);
+  transform-origin: left center;
+  position: relative;
+}
+
+.vram-bar[data-animate="true"] {
+  /* `both` => the 0% (scaleX 0) state also applies during the delay (backwards
+     fill), so the bar starts empty and grows; without JS it stays full above. */
+  animation: bar-grow 1200ms var(--ease-out-quart) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.vram-bar--resident  { background: var(--bar-resident); }
+.vram-bar--peft      { background: var(--bar-peft); }
+.vram-bar--unsloth   { background: var(--bar-unsloth); }
+.vram-bar--poros     { background: var(--bar-poros); }
+
+.vram-chart__value {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.vram-chart__value--accent {
+  color: var(--accent);
+  font-weight: var(--font-weight-bold);
+}
+
+/* budget reference lines */
+.budget-line {
+  position: absolute;
+  top: -12px;
+  bottom: -12px;
+  width: 0;
+  border-left: 1.5px dashed var(--budget-16);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+.budget-line__label {
+  position: absolute;
+  top: -20px;
+  left: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.budget-line--24 {
+  border-left-color: var(--budget-24);
+  opacity: 0.4;
+}
+
+/* --- SAVED HERO NUMBER ------------------------------------ */
+.saved-hero {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.saved-hero__pct {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.saved-hero__label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+}
+
+.saved-hero__detail {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* --- SPEED CHART ------------------------------------------ */
+.speed-chart__row {
+  display: grid;
+  grid-template-columns: 120px 1fr 100px;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  min-height: 44px;
+}
+
+.speed-bar {
+  height: 24px;
+  border-radius: var(--radius-sm);
+  /* Static fallback: full width with zero JS (see .vram-bar). */
+  width: var(--target-width);
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.speed-bar[data-animate="true"] {
+  animation: bar-grow 1000ms var(--ease-out-cubic) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.speed-bar--resident { background: var(--bar-resident); }
+.speed-bar--unsloth  { background: var(--bar-unsloth); }
+.speed-bar--poros    { background: var(--bar-poros); }
+
+/* --- PARITY TABLE ----------------------------------------- */
+.parity-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.parity-table th {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-muted);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+}
+
+.parity-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.parity-table tr:last-child td {
+  border-bottom: none;
+}
+
+.parity-table tr:hover td {
+  background: var(--bg-card-hover);
+}
+
+/* parity badges */
+.parity-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+.parity-badge--exact {
+  background: var(--success-dim);
+  color: var(--success);
+}
+
+.parity-badge--drift {
+  background: var(--warning-dim);
+  color: var(--warning);
+}
+
+.parity-badge--na {
+  background: rgba(95, 90, 91, 0.12);
+  color: var(--text-muted, #5f5a5b);
+}
+
+.parity-badge--oom {
+  background: rgba(217, 83, 79, 0.15);
+  color: var(--error);
+}
+
+/* --- PARITY SVG CURVE ------------------------------------- */
+.parity-curve-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  margin: var(--space-lg) 0;
+}
+
+.parity-curve {
+  width: 100%;
+  height: 100%;
+}
+
+.parity-curve__line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.parity-curve__line--resident {
+  stroke: var(--bar-resident);
+}
+
+.parity-curve__line--poros {
+  stroke: var(--accent);
+}
+
+.parity-curve__line[data-animate="true"] {
+  animation: draw-line 2000ms var(--ease-out-expo) forwards;
+  animation-delay: var(--delay, 400ms);
+}
+
+/* --- OOM TABLE -------------------------------------------- */
+.oom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+.oom-table th {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-muted);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+}
+
+.oom-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+/* --- CONFIG BLOCK ----------------------------------------- */
+.config-block {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.7;
+}
+
+/* --- FOOTER ----------------------------------------------- */
+.poros-footer {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.poros-footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- LEGEND ----------------------------------------------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.legend__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.legend__swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- ANIMATIONS ------------------------------------------- */
+@keyframes bar-grow {
+  /* Animate transform (compositor-only, no layout/reflow) instead of width,
+     so the grow-in is cheap and the base width stays the static fallback. */
+  from {
+    transform: scaleX(0);
+    opacity: 0.3;
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: var(--line-length, 1000);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes count-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* stagger cards */
+.poros-card {
+  opacity: 0;
+  animation: fade-in-up 600ms var(--ease-out-cubic) forwards;
+  animation-delay: var(--card-delay, 0ms);
+}
+
+/* --- REDUCED MOTION --------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .vram-bar,
+  .speed-bar {
+    width: var(--target-width) !important;
+    transform: scaleX(1) !important;
+    opacity: 1 !important;
+  }
+
+  .poros-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .parity-curve__line {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* --- RESPONSIVE ------------------------------------------- */
+@media (max-width: 640px) {
+  .poros-report {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .vram-chart__row {
+    grid-template-columns: 80px 1fr 60px;
+    gap: var(--space-sm);
+  }
+
+  .speed-chart__row {
+    grid-template-columns: 80px 1fr 80px;
+    gap: var(--space-sm);
+  }
+
+  .stat-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vram-chart__label,
+  .vram-chart__value {
+    font-size: var(--font-size-xs);
+  }
+}

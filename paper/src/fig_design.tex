@@ -1,0 +1,94 @@
+% fig_design.tex: Figure 2, blockwise residency and the copy schedule.  No measured numbers.
+\begingroup
+\sffamily\footnotesize
+\tikzset{
+  region/.style={draw=lpfg!55,line width=0.5pt,rounded corners=2pt,fill=lppaper},
+  blk/.style={draw=lpfg!75,line width=0.4pt,fill=lprule!60,minimum width=2.05cm,minimum height=0.40cm,
+              inner sep=0pt,font=\sffamily\scriptsize},
+  pre/.style={blk,dashed,fill=white},
+  inp/.style={draw=lpmuted,dashed,line width=0.4pt,fill=white,minimum width=2.05cm,minimum height=0.56cm,
+              inner sep=0pt,align=center,font=\sffamily\scriptsize,text=lpmuted},
+  adapt/.style={draw=lpaccent,line width=0.6pt,fill=lpaccentlt,minimum width=2.05cm,minimum height=0.62cm,
+                inner sep=0pt,align=center,font=\sffamily\scriptsize},
+  title/.style={font=\sffamily\footnotesize\bfseries,anchor=base west},
+  rtitle/.style={font=\sffamily\scriptsize\bfseries},
+  note/.style={font=\sffamily\scriptsize,text=lpmuted},
+  sq/.style={draw=lpfg!80,line width=0.35pt,minimum size=0.25cm,inner sep=0pt,font=\sffamily\tiny},
+  fw/.style={sq,fill=white},
+  bw/.style={sq,fill=lpbase!60},
+  stay/.style={sq,dashed,draw=lpfg!60,fill=white,text=lpmuted},
+  mb/.style={circle,fill=lpfg,inner sep=0pt,minimum size=1.9pt},
+  arr/.style={-{Stealth[length=3.6pt,width=3.2pt]},line width=0.55pt,lpfg},
+}
+\begin{tikzpicture}[x=1cm,y=1cm]
+% ===================== (a) where state lives =====================
+\node[title] at (0,4.55) {(a) Where state lives};
+\node[region,minimum width=2.45cm,minimum height=3.35cm,anchor=south west] (host) at (0,0.95) {};
+\node[rtitle,anchor=north] at ($(host.north)+(0,-0.06)$) {Host memory};
+\node[note,anchor=north] at ($(host.north)+(0,-0.38)$) {frozen NF4 blocks};
+\node[blk] at (1.225,3.33) {$\mathcal{B}_1$};
+\node[blk] at (1.225,2.87) {$\mathcal{B}_2$};
+\node[font=\scriptsize] at (1.225,2.52) {$\vdots$};
+\node[blk] at (1.225,2.10) {$\mathcal{B}_K$};
+\node[inp] (hin) at (1.225,1.40) {saved inputs\\[-2pt]efficient path};
+
+\node[region,minimum width=2.45cm,minimum height=3.35cm,anchor=south west,draw=lpfg!80] (gpu) at (3.25,0.95) {};
+\node[rtitle,anchor=north] at ($(gpu.north)+(0,-0.06)$) {GPU};
+\node[adapt] at (4.475,3.38) {adapters $\theta$\\optimizer state};
+\node[blk] (gk) at (4.475,2.64) {$\mathcal{B}_k$ computing};
+\node[pre] (gn) at (4.475,2.18) {$\mathcal{B}_{k+1}$ prefetch};
+\node[inp] (gin) at (4.475,1.40) {saved inputs\\[-2pt]fast path};
+
+\draw[arr] (2.47,2.64) -- node[note,above,yshift=-1pt] {copy} (3.23,2.64);
+\draw[arr,dashed] (2.47,2.18) -- (3.23,2.18);
+\draw[{Stealth[length=3pt,width=2.8pt]}-{Stealth[length=3pt,width=2.8pt]},line width=0.4pt,lpmuted,densely dashed]
+  (2.27,1.40) -- (3.43,1.40);
+
+\node[region,minimum width=2.45cm,minimum height=0.52cm,anchor=south west,fill=white,draw=lpfg!40,dashed] (ssd) at (0,0.0) {};
+\node[note] at (ssd.center) {SSD file: MoE experts};
+\draw[lpfg!40,line width=0.4pt,densely dotted] (ssd.north) -- (host.south);
+\node[note,anchor=west,align=left] at (3.25,0.26) {no write-back:\\[-1pt]the host copy is the only one};
+
+% ===================== (b) block copies per update =====================
+\begin{scope}[xshift=6.35cm]
+\node[title] at (0,4.55) {(b) Block copies in one update ($K{=}4$, $\G{=}3$)};
+% -- sequential --
+\node[rtitle,anchor=base west] at (0,3.95) {Sequential};
+\node[note,anchor=base east] at (8.45,3.95) {$2\G K = 24$ copies};
+\foreach \g in {0,1,2} {
+  \pgfmathsetmacro{\x}{0.13+\g*2.78}
+  \foreach \b [count=\i from 0] in {1,2,3,4} {
+    \node[fw] at ({\x+\i*0.30},3.55) {\b};
+    \node[mb] at ({\x+\i*0.30},3.29) {};
+  }
+  \foreach \b [count=\i from 4] in {4,3,2,1} {
+    \node[bw] at ({\x+\i*0.30},3.55) {\b};
+    \node[mb] at ({\x+\i*0.30},3.29) {};
+  }
+  \node[note] at ({\x+1.05},3.02) {micro-batch \pgfmathparse{int(\g+1)}\pgfmathresult};
+}
+% -- block-major --
+\node[rtitle,anchor=base west] at (0,2.42) {Block-major};
+\node[note,anchor=base east] at (8.45,2.42) {\textcolor{lpaccent}{$2K-1 = 7$ copies}};
+\foreach \b [count=\i from 0] in {1,2,3,4} {
+  \node[fw] at ({0.13+\i*0.62},2.02) {\b};
+  \foreach \m in {-1,0,1} {\node[mb] at ({0.13+\i*0.62+\m*0.085},1.76) {};}
+}
+\foreach \b [count=\i from 0] in {4,3,2,1} {
+  \ifnum\b=4
+    \node[stay] at ({3.05+\i*0.62},2.02) {\b};
+  \else
+    \node[bw] at ({3.05+\i*0.62},2.02) {\b};
+  \fi
+  \foreach \m in {-1,0,1} {\node[mb] at ({3.05+\i*0.62+\m*0.085},1.76) {};}
+}
+\node[note] at (1.06,1.49) {forward};
+\node[note] at (3.98,1.49) {backward, $g=1,\dots,\G$};
+% -- legend --
+\node[fw] at (0.13,0.62) {};      \node[note,anchor=west] at (0.30,0.62) {forward copy};
+\node[bw] at (2.20,0.62) {};      \node[note,anchor=west] at (2.37,0.62) {backward copy};
+\node[stay] at (4.45,0.62) {};    \node[note,anchor=west] at (4.62,0.62) {no copy};
+\node[mb] at (6.10,0.62) {};      \node[note,anchor=west] at (6.20,0.62) {one micro-batch};
+\end{scope}
+\end{tikzpicture}
+\endgroup

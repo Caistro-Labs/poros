@@ -1,0 +1,12 @@
+{
+ "env": {
+  "capability": [
+   8,
+   6
+  ],
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "torch": "2.14.1+cu130",
+  "triton": "3.8.0"
+ },
+ "note": "grouped expert backend: torch.nn.functional.grouped_mm + chunked backward"
+}

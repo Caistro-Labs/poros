@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use Poros in your research, please cite it as below."
+title: "Poros: Large-Model Fine-Tuning on Consumer GPUs"
+abstract: >-
+  Poros fine-tunes LoRA adapters on language models larger than the GPU's
+  memory: the frozen NF4 base waits in host RAM and streams through the GPU one
+  block of layers at a time, and the backward pass recomputes each block. Runs
+  go from the command line or step by step through a Python Run API, with SFT,
+  DPO and other objectives as recipes, mixture-of-experts models with their
+  experts in host RAM or on an SSD store, and Apple silicon Macs.
+type: software
+authors:
+  - given-names: Jeffrey
+    family-names: Tigres
+    affiliation: "Caistro Labs"
+version: 1.0.0
+license: Apache-2.0
+repository-code: "https://github.com/Caistro-Labs/poros"
+keywords:
+  - QLoRA
+  - LoRA
+  - fine-tuning
+  - large-language-models
+  - memory-efficient-training
+  - blockwise-residency

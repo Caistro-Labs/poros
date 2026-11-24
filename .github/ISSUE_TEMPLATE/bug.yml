@@ -1,0 +1,39 @@
+name: Bug
+description: Something crashed, gave a wrong result, or ran out of memory.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and model
+      description: The command or code you ran, the model id, and your block_size and path if you set them.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: machine
+    attributes:
+      label: Your machine
+      description: The output of `poros machine` and `poros check <model>`.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Poros version
+      description: The output of `poros --version`.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Full output
+      description: The whole error and traceback. Don't paste tokens or keys.
+      render: shell

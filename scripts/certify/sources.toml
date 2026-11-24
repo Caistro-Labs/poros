@@ -1,0 +1,199 @@
+# Which committed receipts certify which built-in recipe on which machine (scripts/certify/
+# generate.py reads this; scripts/certify/run_recipe.py reads how many updates to measure and
+# which phases a run may skip). Every figure and setting comes from the receipt: this file only
+# names it. Each entry's receipts are in order of preference: the first in the tree is used.
+# None in the tree leaves the certification pending; the release check fails while any is.
+# Paths are relative to the repository's root. A certification run is committed as the entry's
+# first receipt, docs/validation/recipes/<machine>/<recipe>/.
+#
+# disk_gb: free space the driver requires where the runs go (--home) before it starts: the runs,
+# checkpoints and an SSD store the recipe builds; a planning floor, upward of what a run used
+# (the M4 7B rehearsal's home took 3.2 GB), never a figure shown to anyone.
+# updates: the run's measured optimizer steps (default 16). resume, eval (default true): whether
+# the run's stop-and-continue and its poros eval run; false only where the time is unreasonable
+# on that machine, and the reason is said beside it.
+
+# accept_decision: a planner cell `generate.py --release` may land although it changes what the
+# preflight decides for a run without a recipe at its settings (path, tables, a refusal, the row
+# length kept). Each is named with why, after a short real run on its machine has confirmed it:
+#   [[accept_decision]]
+#   cell = "recipe-big-72b-rtx4090"
+#   reason = "..."
+
+# commit: the one certification commit. Every certification run, on every machine, is made at
+# it, and the generator accepts no receipt from any other. It is the release branch's merge that
+# brought this tooling in; the commit right after that merge sets it here and regenerates
+# poros/recipes/certified.json, whose commit field is the pin's, and changes nothing else. A
+# later commit that changes only docs, receipts or the generated data (certified.json,
+# poros/plan/cells.json) does not move it. Any other change to poros/ or pyproject.toml moves it,
+# and every run is made again there; generate.py --release refuses while the package differs
+# from the pinned commit's.
+release = "1.0.0"
+
+commit = "1a8d7e912b166c373fcfec862ad7297221d33a71"
+
+# exempt: a file of poros/ that may differ from the pinned commit, by its exact path, with why a
+# run made at the pin is the same run. Only what shows or prints a plan, never what a run
+# executes or decides its settings with (generate.py NEVER_EXEMPT refuses those even if listed);
+# --release prints each one every time.
+# strings_only = true: a Python file, under any path (NEVER_EXEMPT's included), that differs from
+# the pin's in its text alone. The gate parses both versions and compares them with every string
+# constant blanked (code_without_text): a changed default, comparison, call, dict key or
+# f-string expression refuses. --release prints "(strings only)" beside it.
+[[exempt]]
+path = "poros/cli/train_cmd.py"
+reason = "in the session the run's card is on screen from the start of the load, with the load and the wait for the first step as its states; the held-out hint wraps onto rail rows; the trainer is built by the same call with the same arguments, and the run's config, data, hooks and records are the pinned code's; display only"
+
+[[exempt]]
+path = "poros/cli/ui/components.py"
+reason = "the activity line's label is drawn still, without the moving sweep; display only"
+
+[[exempt]]
+path = "poros/cli/ui/curve.py"
+reason = "a curve of one point is one dot; display only"
+
+[[exempt]]
+path = "poros/cli/ui/run_card.py"
+reason = "the run card draws before its first value: an empty chart, a dash for each value not measured yet, a waiting checkpoint table; display only"
+
+[[exempt]]
+path = "poros/cli/ui/screens.py"
+reason = "the session's live surface is the run card from the first frame, or the load's one line where the card does not fit the terminal, drawn from one reading of the run; outside the session the finished summary is the pinned code's, row for row; display only"
+
+[[exempt]]
+path = "poros/cli/ui/train_view.py"
+reason = "the live view can start before the load and is told when the load ends; its hooks pass on the same values; display only"
+
+# RTX 4090, 24 GB, 64 GB host RAM
+
+[[cert]]
+recipe = "first-run"
+disk_gb = 3
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/first-run"]
+
+[[cert]]
+recipe = "support"
+disk_gb = 8
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/support"]
+
+[[cert]]
+recipe = "voice"
+disk_gb = 8
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/voice"]
+
+[[cert]]
+recipe = "prefer"
+disk_gb = 8
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/prefer"]
+
+[[cert]]
+recipe = "big-32b"
+disk_gb = 12
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/big-32b"]
+
+[[cert]]
+recipe = "big-72b"
+disk_gb = 20
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/big-72b"]
+
+[[cert]]
+recipe = "big-72b-fast"
+disk_gb = 20
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/big-72b-fast"]
+
+[[cert]]
+# its three runs took 27.2 GB of the home at M8 (the 4090 rehearsal)
+recipe = "moe-30b"
+disk_gb = 36
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/moe-30b"]
+
+[[cert]]
+# 41.5 GB at M8: its 14.3 GiB store and three runs (the 4090 rehearsal)
+recipe = "moe-30b-ssd"
+disk_gb = 56
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/moe-30b-ssd"]
+
+[[cert]]
+# the RTX 4060 Laptop's run at M8 took about 15 GB of store and 13.3 GB of outputs
+recipe = "moe-30b-8gb"
+disk_gb = 40
+machine = "rtx4090"
+receipts = ["docs/validation/recipes/rtx4090/moe-30b-8gb"]
+
+# RTX 4060 Laptop GPU, 8 GB: first-run, certified on a second card. moe-30b-8gb ran there at the
+# certification commit, twice to the same adapter (recipes/rtx4060-laptop/moe-30b-8gb and
+# moe-30b-8gb-repeat), on the path the check chose (fast); a recipe that leaves its path to the
+# run certifies only where the run decides efficient or sequential, so it is certified on the RTX
+# 4090 and measured on the laptop. The three 7B recipes are refused on 8 GB by the fit check
+# (docs/validation/int/4060l/refused).
+
+[[cert]]
+recipe = "first-run"
+disk_gb = 3
+machine = "rtx4060-laptop"
+receipts = ["docs/validation/recipes/rtx4060-laptop/first-run"]
+
+# Apple M4, 16 GB. The M4 table's rows were measured before the certification commit, so none
+# certifies a recipe: each is certified by its own run.
+
+[[cert]]
+recipe = "mac-72b"
+disk_gb = 16
+machine = "m4-16gb"
+updates = 6
+# a second 72B run, stopped and continued, would double the job; the other Mac recipes' runs
+# stop and continue at the same commit, and each must end at its uninterrupted run's adapter
+resume = false
+receipts = ["docs/validation/recipes/m4-16gb/mac-72b"]
+
+[[cert]]
+recipe = "mac-32b"
+disk_gb = 10
+machine = "m4-16gb"
+updates = 8
+receipts = ["docs/validation/recipes/m4-16gb/mac-32b"]
+
+[[cert]]
+recipe = "mac-moe"
+disk_gb = 10
+machine = "m4-16gb"
+receipts = ["docs/validation/recipes/m4-16gb/mac-moe"]
+
+[[cert]]
+recipe = "mac-7b"
+disk_gb = 6
+machine = "m4-16gb"
+receipts = ["docs/validation/recipes/m4-16gb/mac-7b"]
+
+[[cert]]
+recipe = "mac-first-run"
+disk_gb = 2
+machine = "m4-16gb"
+receipts = ["docs/validation/recipes/m4-16gb/mac-first-run"]
+
+[[cert]]
+recipe = "mac-prefer"
+disk_gb = 8
+machine = "m4-16gb"
+receipts = ["docs/validation/recipes/m4-16gb/mac-prefer"]
+
+[[cert]]
+recipe = "mac-support"
+disk_gb = 8
+machine = "m4-16gb"
+receipts = ["docs/validation/recipes/m4-16gb/mac-support"]
+
+[[cert]]
+recipe = "mac-voice"
+disk_gb = 8
+machine = "m4-16gb"
+receipts = ["docs/validation/recipes/m4-16gb/mac-voice"]

@@ -1,0 +1,35 @@
+name: Set up Poros
+description: Python, CPU torch on Linux, and Poros with its training stack and the dev extra.
+inputs:
+  python-version:
+    description: Python version (pyproject.toml supports 3.11 to 3.13)
+    default: "3.12"
+  constraints:
+    description: Optional pip constraints file (the compat control leg uses ci/control.txt)
+    default: ""
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: pip
+        cache-dependency-path: pyproject.toml
+
+    - name: Install
+      shell: bash
+      env:
+        CONSTRAINTS: ${{ inputs.constraints }}
+      run: |
+        python -m pip install --upgrade pip
+        args=()
+        if [[ -n "$CONSTRAINTS" ]]; then args+=(-c "$CONSTRAINTS"); fi
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+          # CPU torch inside pyproject.toml's Linux range: runners have no GPU, and this skips
+          # gigabytes of CUDA wheels.
+          torch_req="$(python -c 'import tomllib; print(next(d.split(";")[0].strip() for d in tomllib.load(open("pyproject.toml", "rb"))["project"]["dependencies"] if d.startswith("torch") and "!=" in d))')"
+          python -m pip install "${args[@]}" "$torch_req" --index-url https://download.pytorch.org/whl/cpu
+        fi
+        # torch needs setuptools on Python 3.12 and the CPU index above stops at 78.1.0, which the
+        # dependency audit (security.yml) refuses; PyPI has the fixed one.
+        python -m pip install "${args[@]}" -e ".[dev]" "setuptools>=84.1"

@@ -1,0 +1,11 @@
+# key	repo	revision	kind	notes
+# kind: ladder (an unvalidated dense family: every rung must run and say user_asserted) |
+#       refuse (must be refused before any weight download, in seconds, with a remedy)
+llama	HuggingFaceTB/SmolLM2-135M	93efa2f097d58c2a74874c7e644dbc9b0cee75a2	ladder	llama, not in the registry
+mistral	Locutusque/TinyMistral-248M	e84fb52945d42de4f2361b6047decdc65426dc2b	ladder	mistral, fp16 weights
+phi3	microsoft/Phi-3-mini-4k-instruct	f39ac1d28e925b323eae81227eaba4464caced4e	ladder	phi3 (its auto_map is ignored: transformers' own class)
+gpt_neox	EleutherAI/pythia-70m	a39f36b100fe8a5377810d56c3f4789b9c53ac42	ladder	gpt_neox (a committed pack exists: docs/validation/gpt_neox)
+mixtral	TitanML/tiny-mixtral	40b934a7efa1bf6732ba19ed7a97956c201fd775	refuse	an unvalidated MoE family
+gpt_oss	openai/gpt-oss-20b	6cee5e81ee83917806bbde320786a8fb61efebee	refuse	target: MXFP4-native, stays gated
+gemma4_per_layer	google/gemma-4-E2B	433813a669639fd7eaa83155828e9000ed357d53	refuse	Gemma 4 E2B: per-layer inputs, unsupported in the registry
+gemma2	unsloth/gemma-2-2b	25319945f7fd83b8b903e12081777b7eef2ba993	ladder	gemma2, a dense roadmap target: the any-model ladder takes it (no_flag_trains)

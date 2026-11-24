@@ -1,0 +1,43 @@
+# Poros quickstart: Qwen2.5-7B NF4 QLoRA
+#
+# A minimal training configuration for getting started. block_size 4 is the default; a lower
+# one (2 or 1) holds less GPU memory and takes longer a step. `poros train` checks the run
+# against your GPU before anything downloads.
+#
+# Usage:
+#   poros train examples/qwen2_5_7b_quickstart.yaml
+#
+# Or from Python:
+#   from poros import PorosTrainer
+#   trainer = PorosTrainer.from_pretrained("Qwen/Qwen2.5-7B", quantization="nf4")
+#   trainer.train("OpenAssistant/oasst1", steps=200, seq_len=512)
+#   trainer.save("./poros_output/qwen2_5_7b_quickstart")
+
+model_name_or_path: "Qwen/Qwen2.5-7B"
+dataset: "OpenAssistant/oasst1"   # Apache-2.0; or "synthetic" for a license-free smoke test
+quantization: nf4
+torch_dtype: bfloat16
+
+# Layers per streamed block
+block_size: 4
+enable_prefetch: true
+
+# LoRA
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+
+# Training
+num_epochs: 1
+per_device_batch_size: 1
+gradient_accumulation_steps: 8
+max_seq_length: 512
+learning_rate: 2.0e-5
+lr_scheduler: cosine
+warmup_steps: 100
+seed: 42
+
+# Output
+output_dir: ./poros_output/qwen2_5_7b_quickstart
+save_steps: 500
+logging_steps: 10

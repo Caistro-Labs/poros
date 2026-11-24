@@ -1,0 +1,32 @@
+name: Hardware report
+description: What fit, or didn't, on your machine.
+labels: [hardware-report]
+body:
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware
+      placeholder: "RTX 3090 24 GB · 64 GB RAM · Ubuntu 24.04"
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Did it fit?
+      options:
+        - "Yes, trained end to end"
+        - "Loaded, failed during training"
+        - "Didn't load"
+    validations:
+      required: true
+  - type: input
+    id: numbers
+    attributes:
+      label: Peak VRAM · host RAM · step time
+      placeholder: "14.2 GB · 41 GB · 3.1 s/step"

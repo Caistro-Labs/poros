@@ -1,0 +1,56 @@
+# Poros real-data cross-check -- Qwen2.5-32B (qwen2) on OpenAssistant/oasst1
+#
+# This is not one of the systems benchmarks. The headline parity / VRAM /
+# throughput numbers run on "synthetic" (deterministic, zero-download,
+# license-free tokens -- see configs/bench/official_b300_*.yaml). This config
+# is a labelled check that a run learns on real text:
+# it trains on a real instruction dataset and is read for the loss curve in
+# events.jsonl (loss should decrease; resident-vs-blockwise loss should track).
+#
+# Dataset: OpenAssistant/oasst1 is Apache-2.0 -- same license as poros -- so
+# anyone can reproduce this without accepting a non-commercial license (unlike
+# tatsu-lab/alpaca, which is CC BY-NC 4.0). It plays the role of the paper's Alpaca
+# side-check, with a permissive license.
+# -------------------------------------------------------------------
+spec_id: crosscheck_oasst1_qwen25_32b
+
+hardware:
+  gpu_name: "NVIDIA B300 SXM6"
+  vram_gb: 268.0
+  pcie_gen: 5
+
+models:
+  - model_id: "Qwen/Qwen2.5-32B"
+    display_name: "Qwen2.5-32B"
+    param_count_b: 32.5
+
+methods:
+  - poros
+  - resident
+
+precisions:
+  - nf4
+
+training:
+  steps: 200
+  seq_len: 512
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  dataset: "OpenAssistant/oasst1"  # Apache-2.0 real instruction data (learning cross-check only)
+  seed: 42
+  n_passes: 1
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+
+poros:
+  block_size: 4
+  enable_prefetch: true
+
+reporting:
+  output_dir: "./bench_output/crosscheck_oasst1/qwen25_32b"
+  html: true
+  markdown: true
+  emit_json: true

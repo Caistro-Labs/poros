@@ -1,0 +1,56 @@
+# Poros A100 benchmark run -- Qwen2.5-32B
+#
+# 200 steps x 3 passes, NF4, on NVIDIA A100 80GB PCIe (PCIe Gen4). Per-model
+# config so the HF cache can be cleared between large models (the machine's disk is the limit).
+#
+# gradient_accumulation_steps = 1 so one "step" == one optimizer step == one
+# forward+backward; the harness times every method per optimizer step, so
+# slowdown compares like with like.
+#
+# Stack: torch 2.10+cu128 / transformers 5.5.0 (the first B300 stack;
+# unsloth pins torch 2.10). Same attention path for all methods (default
+# fast path, deterministic=False): every method on the same path.
+# -------------------------------------------------------------------
+spec_id: official_a100_qwen25_32b
+
+hardware:
+  gpu_name: "NVIDIA A100 80GB PCIe"
+  vram_gb: 80.0
+  pcie_gen: 4
+
+models:
+  - model_id: "Qwen/Qwen2.5-32B"
+    display_name: "Qwen2.5-32B"
+    param_count_b: 32.5
+
+methods:
+  - poros
+  - resident
+  - unsloth
+
+precisions:
+  - nf4
+
+training:
+  steps: 200
+  seq_len: 512
+  batch_size: 1
+  gradient_accumulation_steps: 1
+  dataset: "synthetic"
+  seed: 42
+  n_passes: 3
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.0   # paper parity protocol
+
+poros:
+  block_size: 4
+  enable_prefetch: true
+
+reporting:
+  output_dir: "./bench_output/official_a100_qwen25_32b"
+  html: true
+  markdown: true
+  emit_json: true

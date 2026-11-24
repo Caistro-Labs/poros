@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Ruff
+.ruff_cache/
+
+# Report output (generated reports are ignored; the curated showcase + assets ship)
+poros_output/
+*.html
+!poros/report/assets/*.css
+
+# Worktrees
+.worktrees/
+
+# CUDA / ML artifacts
+*.pt
+*.bin
+*.safetensors
+*.gguf
+wandb/
+runs/
+
+# Logs
+# LaTeX build byproducts
+*.aux
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.log
+# a validation run's log is its receipt (docs/validation/*/README.md names them)
+!docs/validation/**/*.log
+events.jsonl
+# a validation run's per-step file, job output and run folder are receipts too (weights stay ignored)
+!docs/validation/**/events.jsonl
+!docs/validation/**/*.out
+!docs/validation/**/runs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# arXiv build outputs (regeneratable)
+paper/poros-arxiv-submission.tar.gz
+paper/src/main.pdf

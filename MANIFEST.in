@@ -1,0 +1,4 @@
+# The sdist holds the package (poros/, with its package data), README, LICENSE and NOTICE. The
+# tests need the whole repository -- its docs and configs, and for some the benchmark logs
+# (github.com/Caistro-Labs/poros-benchmarks) -- so none ship here; they ship with the repository.
+prune tests

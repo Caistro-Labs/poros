@@ -1,0 +1,17 @@
+# key	entry	repo	revision	mode	layers	tier	expect	notes
+# One row per catalog model marked validated that no family row names: the family gate's checks on that model itself,
+# whole where it fits the card fully resident, else on its first LAYERS layers (fetch.py's cut). Columns as families.tsv.
+# Run: FG_TSV=scripts/family_gate/catalog.tsv FG_CHECKS=paths,parity,moeref,moegate FG_ANYMODEL=0 FG_PRUNE=1
+#      FG_PRUNE_SNAPSHOTS=1 bash scripts/family_gate.sh OUT   (rows in this order keep the disk peak under 20 GB)
+# The two gemma-3 rows fetch ungated copies of gated Google repos: every weight shard has the sha256 the Hub records
+# for Google's own (an earlier check of the two copies, in the development repository).
+cat_deepseek_r1_qwen_1_5b	dense	deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B	ad9f0ae0864d7fbcd1cd905e3c6c5b069cc8b562	snapshot	0	bitwise	fused=True reason=none	catalog model deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B, whole model
+cat_gemma3_1b_pt	dense	unsloth/gemma-3-1b-pt	34a98bf3eaecc08c699516f625eb5e56e4c5d99d	snapshot	0	bitwise	fused=True reason=none	catalog model google/gemma-3-1b-pt @ fcf18a2a, whole model, from its ungated copy: the weight shard's sha256 is Google's
+cat_qwen3_5_4b	dense	Qwen/Qwen3.5-4B	851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a	snapshot	0	bitwise	fused=True reason=none	catalog model Qwen/Qwen3.5-4B, whole model
+cat_qwen2_5_7b	dense	Qwen/Qwen2.5-7B	d149729398750b98c0af14eb82c78cfe92750796	snapshot	0	bitwise	fused=True reason=none	catalog model Qwen/Qwen2.5-7B, whole model
+cat_qwen3_30b_a3b_instruct	moe	Qwen/Qwen3-30B-A3B-Instruct-2507	0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe	trunc	4	full	moe=fused reason=none	catalog model Qwen/Qwen3-30B-A3B-Instruct-2507, its first 4 of 48 layers
+cat_gemma3_27b_pt	dense	unsloth/gemma-3-27b-pt	eb493e07419db4938e915c619689bb513181aebb	trunc	6	bitwise	fused=True reason=none	catalog model google/gemma-3-27b-pt @ 9fe3c4eb, its first 6 of 62 layers, from its ungated copy: all 12 weight shards' sha256 are Google's
+cat_gemma4_31b_it	dense	google/gemma-4-31B-it	842da3794eaa0b77d5f08bae87a17459d91ff475	trunc	6	bitwise	fused=True reason=none	catalog model google/gemma-4-31B-it, its first 6 layers
+cat_qwen3_32b	dense	Qwen/Qwen3-32B	9216db5781bf21249d130ec9da846c4624c16137	trunc	8	bitwise	fused=True reason=none	catalog model Qwen/Qwen3-32B, its first 8 of 64 layers
+cat_qwen2_5_32b	dense	Qwen/Qwen2.5-32B	1818d35814b8319459f4bd55ed1ac8709630f003	trunc	8	bitwise	fused=True reason=none	catalog model Qwen/Qwen2.5-32B, its first 8 of 64 layers
+cat_qwen2_5_72b	dense	Qwen/Qwen2.5-72B	efba10c8e54e91e0d9570ab5f7b51a958474d4cb	trunc	8	bitwise	fused=True reason=none	catalog model Qwen/Qwen2.5-72B, its first 8 of 80 layers

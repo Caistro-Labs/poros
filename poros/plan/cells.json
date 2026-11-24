@@ -1,0 +1,5030 @@
+[
+ {
+  "id": "qwen2.5-32b-rtx5090-synthetic",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": true,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.02,
+    "unit": "GiB",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_syn/events.jsonl#/data/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 27.307,
+    "unit": "GiB",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_syn/events.jsonl#/data/peak_vram_reserved_gb"
+   },
+   "s_per_step": {
+    "value": 12.933,
+    "unit": "s",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_syn/summary.json#/s_per_step"
+   },
+   "load_time": {
+    "value": 34.86,
+    "unit": "s",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_syn/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx5090-synthetic",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": null,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.21,
+    "unit": "GiB",
+    "receipt": "docs/validation/rss/rss_7b_5090_summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.13,
+    "unit": "GiB",
+    "receipt": "docs/validation/rss/rss_7b_5090_summary.json#/peak_host_rss_gb"
+   },
+   "s_per_step": {
+    "value": 3.372,
+    "unit": "s",
+    "receipt": "docs/validation/rss/rss_7b_5090_summary.json#/s_per_step"
+   },
+   "load_time": {
+    "value": 12.83,
+    "unit": "s",
+    "receipt": "docs/validation/rss/rss_7b_5090_summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx5090-synthetic-streamed",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": true,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.19,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/sweep/oob_7b/summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 12.06,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/sweep/oob_7b/summary.json#/peak_host_rss_gb"
+   },
+   "load_time": {
+    "value": 20.18,
+    "unit": "s",
+    "receipt": "docs/validation/streamed-load/sweep/oob_7b/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx5090-synthetic-streamed",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": true,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.05,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/sweep/v32b_rss_refix/summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 34.71,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/sweep/v32b_rss_refix/summary.json#/peak_host_rss_gb"
+   },
+   "load_time": {
+    "value": 56.31,
+    "unit": "s",
+    "receipt": "docs/validation/streamed-load/sweep/v32b_rss_refix/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx3090-alpaca",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": null,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "host": {
+   "dataset": "tatsu-lab/alpaca"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.14,
+    "unit": "GiB",
+    "receipt": "docs/validation/audits/audit_7b_3090_rerun/summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.34,
+    "unit": "GiB",
+    "receipt": "docs/validation/audits/audit_7b_3090_rerun/summary.json#/peak_host_rss_gb"
+   },
+   "s_per_step": {
+    "value": 1.129,
+    "unit": "s",
+    "receipt": "docs/validation/audits/audit_7b_3090_rerun/summary.json#/train_only_s_per_step_median"
+   },
+   "load_time": {
+    "value": 14.22,
+    "unit": "s",
+    "receipt": "docs/validation/audits/audit_7b_3090_rerun/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-pro6000-alpaca",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": null,
+   "entry": "dense",
+   "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition"
+  },
+  "host": {
+   "dataset": "tatsu-lab/alpaca"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 10.96,
+    "unit": "GiB",
+    "receipt": "docs/validation/audits/audit_32b_pro6000_rerun/summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 62.25,
+    "unit": "GiB",
+    "receipt": "docs/validation/audits/audit_32b_pro6000_rerun/summary.json#/peak_host_rss_gb"
+   },
+   "s_per_step": {
+    "value": 1.242,
+    "unit": "s",
+    "receipt": "docs/validation/audits/audit_32b_pro6000_rerun/summary.json#/train_only_s_per_step_median"
+   },
+   "load_time": {
+    "value": 15.52,
+    "unit": "s",
+    "receipt": "docs/validation/audits/audit_32b_pro6000_rerun/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx3090-synthetic",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "scripts/table6_bench.py's own loop, not poros train",
+   "note": "uncapped; peak reserved 12.75 GiB, under the cap, so no spill"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.364,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/table6_qwen3_30b_a3b.json#/arms/poros_streamed/peak_vram_allocated_gib"
+   },
+   "peak_vram_reserved": {
+    "value": 12.75,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/table6_qwen3_30b_a3b.json#/arms/poros_streamed/peak_vram_reserved_gib"
+   },
+   "peak_host_ram": {
+    "value": 22.037,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/table6_qwen3_30b_a3b.json#/arms/poros_streamed/host_rss_high_water_gib"
+   },
+   "s_per_step": {
+    "value": 7.352,
+    "unit": "s",
+    "receipt": "docs/validation/moe/3090/table6_qwen3_30b_a3b.json#/arms/poros_streamed/median_s_per_step"
+   },
+   "load_time": {
+    "value": 142.3,
+    "unit": "s",
+    "receipt": "docs/validation/moe/3090/table6_qwen3_30b_a3b.json#/arms/poros_streamed/load_prepare_s"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx5090-synthetic-streamed",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": true,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 18.14,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/sweep/v72b_rss_refix/summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 48.19,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/sweep/v72b_rss_refix/summary.json#/peak_host_rss_gb"
+   },
+   "load_time": {
+    "value": 99.75,
+    "unit": "s",
+    "receipt": "docs/validation/streamed-load/sweep/v72b_rss_refix/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-pro6000-synthetic",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": null,
+   "entry": "dense",
+   "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 18.13,
+    "unit": "GiB",
+    "receipt": "docs/validation/rss/rss_72b_pro6000_summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 136.5,
+    "unit": "GiB",
+    "receipt": "docs/validation/rss/rss_72b_pro6000_summary.json#/peak_host_rss_gb"
+   },
+   "load_time": {
+    "value": 697.1,
+    "unit": "s",
+    "receipt": "docs/validation/rss/rss_72b_pro6000_summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-pro6000-oasst1",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": true,
+   "entry": "dense",
+   "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition"
+  },
+  "host": {
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.023,
+    "unit": "GiB",
+    "receipt": "docs/validation/downstream-eval/train_events.jsonl#/data/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 27.346,
+    "unit": "GiB",
+    "receipt": "docs/validation/downstream-eval/train_events.jsonl#/data/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 61.97,
+    "unit": "GiB",
+    "receipt": "docs/validation/downstream-eval/train_summary.json#/peak_host_rss_gb"
+   },
+   "s_per_step": {
+    "value": 10.301,
+    "unit": "s",
+    "receipt": "docs/validation/downstream-eval/train_summary.json#/s_per_step"
+   },
+   "load_time": {
+    "value": 16.51,
+    "unit": "s",
+    "receipt": "docs/validation/downstream-eval/train_summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx5090-oasst1",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": null,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "host": {
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.02,
+    "unit": "GiB",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_oasst1_masked/summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 61.98,
+    "unit": "GiB",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_oasst1_masked/summary.json#/peak_host_rss_gb"
+   },
+   "s_per_step": {
+    "value": 12.7,
+    "unit": "s",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_oasst1_masked/summary.json#/s_per_step"
+   },
+   "load_time": {
+    "value": 28.76,
+    "unit": "s",
+    "receipt": "docs/validation/consumer-5090/nf4_5090_oasst1_masked/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-a100-synthetic",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "gpu",
+   "selfcheck": true,
+   "entry": "dense",
+   "gpu": "NVIDIA A100 80GB PCIe"
+  },
+  "host": {
+   "torch": "2.7.1+cu126"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.016,
+    "unit": "GiB",
+    "receipt": "docs/validation/bf16/blog/nf4_qwen32b_syn/events.jsonl#/data/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 27.344,
+    "unit": "GiB",
+    "receipt": "docs/validation/bf16/blog/nf4_qwen32b_syn/events.jsonl#/data/peak_vram_reserved_gb"
+   },
+   "s_per_step": {
+    "value": 17.153,
+    "unit": "s",
+    "receipt": "docs/validation/bf16/blog/nf4_qwen32b_syn/summary.json#/s_per_step"
+   },
+   "load_time": {
+    "value": 345.47,
+    "unit": "s",
+    "receipt": "docs/validation/bf16/blog/nf4_qwen32b_syn/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx5090-synthetic-streamed",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": true,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 0.96,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/smoke_0p5b/summary.json#/peak_vram_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.39,
+    "unit": "GiB",
+    "receipt": "docs/validation/streamed-load/smoke_0p5b/summary.json#/peak_host_rss_gb"
+   },
+   "load_time": {
+    "value": 7.13,
+    "unit": "s",
+    "receipt": "docs/validation/streamed-load/smoke_0p5b/summary.json#/setup_seconds"
+   }
+  }
+ },
+ {
+  "id": "olmoe-1b-7b-rtx3090ti-synthetic",
+  "key": {
+   "model": "allenai/OLMoE-1B-7B-0924",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "dataset": "synthetic:512"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 3.381,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/olmoe_synthetic_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "olmoe-1b-7b-rtx3090ti-oasst1",
+  "key": {
+   "model": "allenai/OLMoE-1B-7B-0924",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 3.765,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/olmoe_oasst1_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "qwen1.5-moe-a2.7b-rtx3090ti-synthetic",
+  "key": {
+   "model": "Qwen/Qwen1.5-MoE-A2.7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "dataset": "synthetic:512"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 5.841,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/qwen15_moe_synthetic_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "qwen1.5-moe-a2.7b-rtx3090ti-oasst1",
+  "key": {
+   "model": "Qwen/Qwen1.5-MoE-A2.7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.599,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/qwen15_moe_oasst1_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "deepseek-v2-lite-rtx3090ti-synthetic",
+  "key": {
+   "model": "deepseek-ai/DeepSeek-V2-Lite",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "dataset": "synthetic:512"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 5.419,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/deepseek_v2_lite_synthetic_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "deepseek-v2-lite-rtx3090ti-oasst1",
+  "key": {
+   "model": "deepseek-ai/DeepSeek-V2-Lite",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.671,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/deepseek_v2_lite_oasst1_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-l40s-synthetic",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA L40S"
+  },
+  "host": {
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "loader": "bf16 from_pretrained on the host, then prepare_moe (moe/README.md)",
+   "dataset": "synthetic:512"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.782,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/moe_synthetic_quality_l40s_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-l40s-oasst1",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA L40S"
+  },
+  "host": {
+   "harness": "scripts/moe_synthetic_quality.py's own loop, not poros train",
+   "loader": "bf16 from_pretrained on the host, then prepare_moe (moe/README.md)",
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.841,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/moe_oasst1_quality_l40s_200.json#/streamed/peak_vram_bytes"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-a5000-synthetic-d0.05",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA RTX A5000"
+  },
+  "host": {
+   "os": "native Linux container (7.65-CPU quota)",
+   "harness": "moe/a5000/scripts/table6_native.py's own loop, not poros train",
+   "omp_num_threads": "7"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.406,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.05.json#/peak_vram_allocated_gib"
+   },
+   "peak_vram_reserved": {
+    "value": 12.447,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.05.json#/peak_vram_reserved_gib"
+   },
+   "peak_host_ram": {
+    "value": 21.776,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.05.json#/host_rss_high_water_gib"
+   },
+   "s_per_step": {
+    "value": 5.492,
+    "unit": "s",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.05.json#/median_s_per_step"
+   },
+   "load_time": {
+    "value": 193.2,
+    "unit": "s",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.05.json#/load_prepare_s"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-a5000-synthetic-d0",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA RTX A5000"
+  },
+  "host": {
+   "os": "native Linux container (7.65-CPU quota)",
+   "harness": "moe/a5000/scripts/table6_native.py's own loop, not poros train",
+   "omp_num_threads": "7"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.42,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.json#/peak_vram_allocated_gib"
+   },
+   "peak_vram_reserved": {
+    "value": 11.887,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.json#/peak_vram_reserved_gib"
+   },
+   "peak_host_ram": {
+    "value": 21.756,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.json#/host_rss_high_water_gib"
+   },
+   "s_per_step": {
+    "value": 5.348,
+    "unit": "s",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.json#/median_s_per_step"
+   },
+   "load_time": {
+    "value": 193.9,
+    "unit": "s",
+    "receipt": "docs/validation/moe/a5000/t6_poros_streamed_d0.json#/load_prepare_s"
+   }
+  }
+ },
+ {
+  "id": "qwen3-coder-30b-a3b-rtx3090-synthetic",
+  "key": {
+   "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "poros train (moe/3090/scripts/coder_e2e.py)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.421,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/qwen3_coder_30b_a3b_e2e.json#/events/5/data/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.494,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/qwen3_coder_30b_a3b_e2e.json#/events/5/data/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.03,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/3090/qwen3_coder_30b_a3b_e2e.json#/train/peak_host_rss_gib"
+   }
+  }
+ },
+ {
+  "id": "olmoe-1b-7b-a5000-synthetic",
+  "key": {
+   "model": "allenai/OLMoE-1B-7B-0924",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA RTX A5000"
+  },
+  "host": {
+   "os": "native Linux container (7.65-CPU quota)",
+   "harness": "poros train (moe/a5000/scripts/e2e_family.py)"
+  },
+  "fields": {
+   "peak_host_ram": {
+    "value": 9.57,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/e2e_olmoe_1b_7b_0924.json#/train_a/max_child_rss_gib"
+   }
+  }
+ },
+ {
+  "id": "qwen1.5-moe-a2.7b-a5000-synthetic",
+  "key": {
+   "model": "Qwen/Qwen1.5-MoE-A2.7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA RTX A5000"
+  },
+  "host": {
+   "os": "native Linux container (7.65-CPU quota)",
+   "harness": "poros train (moe/a5000/scripts/e2e_family.py)"
+  },
+  "fields": {
+   "peak_host_ram": {
+    "value": 14.72,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/e2e_qwen1_5_moe_a2_7b.json#/train_a/max_child_rss_gib"
+   }
+  }
+ },
+ {
+  "id": "deepseek-v2-lite-a5000-synthetic",
+  "key": {
+   "model": "deepseek-ai/DeepSeek-V2-Lite",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "NVIDIA RTX A5000"
+  },
+  "host": {
+   "os": "native Linux container (7.65-CPU quota)",
+   "harness": "poros train (moe/a5000/scripts/e2e_family.py)"
+  },
+  "fields": {
+   "peak_host_ram": {
+    "value": 18.12,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/a5000/e2e_deepseek_v2_lite.json#/train_a/max_child_rss_gib"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx3090-oasst1",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "poros train",
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 18.268,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node5/receipts/x72_a/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 19.488,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node5/receipts/x72_a/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 44.968,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node5/receipts/x72_a/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 133.585,
+    "unit": "s",
+    "receipt": "docs/validation/launch_3090/node5/receipts/x72_a/receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx3090-oasst1",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "poros train",
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.122,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node6/receipts/q32_a/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 13.175,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node6/receipts/q32_a/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.63,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node6/receipts/q32_a/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 56.907,
+    "unit": "s",
+    "receipt": "docs/validation/launch_3090/node6/receipts/q32_a/receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3.8-27b-rtx3090-oasst1",
+  "key": {
+   "model": "Qwen/Qwen3.8-27B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "NVIDIA GeForce RTX 3090"
+  },
+  "host": {
+   "os": "WSL2",
+   "harness": "poros train",
+   "dataset": "OpenAssistant/oasst1"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 14.189,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node7/receipts/q38_a/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 15.801,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node7/receipts/q38_a/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 24.089,
+    "unit": "GiB",
+    "receipt": "docs/validation/launch_3090/node7/receipts/q38_a/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 59.475,
+    "unit": "s",
+    "receipt": "docs/validation/launch_3090/node7/receipts/q38_a/receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-dropout0.05",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.245,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_seq.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.004,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_seq.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.113,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_seq.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 4.75,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_seq.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-efficient",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.105,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.16,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.114,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 3.976,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-fast",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.908,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_fast.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.004,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_fast.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.114,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_fast.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 3.336,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_fast.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-efficient-b1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.08,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff_b1.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 10.131,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff_b1.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.862,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff_b1.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 5.429,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m7_eff_b1.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-synthetic-dropout0.05",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.119,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_seq.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 12.885,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_seq.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.422,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_seq.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 18.433,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_seq.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-synthetic-efficient",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 12.279,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 13.961,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.95,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 12.18,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-synthetic-fast",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 16.303,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_fast.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 18.178,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_fast.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.42,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_fast.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 9.96,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_fast.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-synthetic-efficient-b1",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 9.755,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff_b1.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 10.811,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff_b1.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 23.922,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff_b1.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 14.22,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/m32_eff_b1.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-efficient",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "moe_compute": "fused",
+   "expert_cache": null
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)",
+   "note": "moe_expert_compute and moe_expert_cache_gib unset: the fused default and the path's default cache (one layer), on the release tree (docs/validation/moe/4090/README.md)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.488,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_eff_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 8.935,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_eff_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.056,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_eff_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.498,
+    "unit": "s",
+    "receipt": "docs/validation/moe/4090/summary.json#/q30k_def_eff/median_s",
+    "method": "the median update after update 1 (summary.json, from q30k_def_eff_events.jsonl)"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-fast",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "fused",
+   "expert_cache": null
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)",
+   "note": "moe_expert_compute and moe_expert_cache_gib unset: the fused default and the path's default cache (sized to what this GPU leaves), on the release tree (docs/validation/moe/4090/README.md)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 17.574,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_fast_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 19.564,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_fast_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.867,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_fast_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.423,
+    "unit": "s",
+    "receipt": "docs/validation/moe/4090/summary.json#/q30k_def_fast/median_s",
+    "method": "the median update after update 1 (summary.json, from q30k_def_fast_events.jsonl)"
+   },
+   "vram_budget": {
+    "value": 22.95,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_fast_config.resolved.json#/ran_compute/moe_expert_cache_reason"
+   },
+   "expert_cache_size": {
+    "value": 10.427,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30k_def_fast_config.resolved.json#/ran_compute/moe_expert_cache_gib"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-oasst1-fused-efficient-b1-8x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.113,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 10.707,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 1.469,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-oasst1-fused-sequential-8x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.707,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 11.07,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 1.977,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-oasst1-fused-sequential-b1-8x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 9.53,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 11.309,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 1.894,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-oasst1-fused-efficient-b1-1x8",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.628,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 8.539,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 3.587,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-oasst1-fused-sequential-1x8",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.888,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 9.359,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 3.598,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-oasst1-fused-fast-8x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.23,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 13.754,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 1.543,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-oasst1-fused-fast-1x8",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.275,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 11.457,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 2.202,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx4090-oasst1-fused-efficient-b1-8x1-offload",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 10.305,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 13.354,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 12.869,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx4090-oasst1-fused-efficient-b1-8x1-offload-r2",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 10.306,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 13.805,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 12.875,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx4090-oasst1-fused-efficient-b1-8x1-offload-r3",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 10.306,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 13.354,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 12.874,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx4090-oasst1-fused-efficient-b1-1x8-offload",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.484,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 10.559,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 17.369,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx4090-oasst1-fused-sequential-1x8-offload",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 10.943,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 13.805,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 31.198,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx4090-oasst1-fused-fast-b2-8x1-offload",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 2,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 19.648,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 22.223,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 13.497,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-72b-rtx4090-oasst1-fused-fast-2x4-offload",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 2,
+   "grad_accum": 4,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "p2 (b5e2a277)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 19.926,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/vram_peak_mb_max"
+   },
+   "peak_vram_reserved": {
+    "value": 22.625,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/reserved_mb_max"
+   },
+   "s_per_step": {
+    "value": 14.463,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/runs.log#/s_med_2_8",
+    "method": "median of steps 2 to 8"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-oasst1-fused-efficient-b1-4x2-offload-c1000",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 4,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": true,
+   "dequant_cache": 1000
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "wiprb",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.569,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb4_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.899,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb4_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 25.811,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb4_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 8.311,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb4_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-oasst1-fused-efficient-b1-8x1-offload-c1000",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": true,
+   "dequant_cache": 1000
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "wiprb",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.333,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb8_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 14.024,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb8_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.42,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb8_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 8.316,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_eff_b1_mb8_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-oasst1-fused-sequential-4x2-offload",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 4,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "wiprb",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.674,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb4_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 10.824,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb4_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.419,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb4_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 9.219,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb4_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-32b-rtx4090-oasst1-fused-sequential-8x1-offload",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "fused_compute": true,
+   "offload": true
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (scripts/prun.sh)",
+   "tree": "wiprb",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 9.149,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb8_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 12.143,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb8_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.417,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb8_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 8.709,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/s32rb_seq_b4_mb8_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-peft-fast-1x8",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": false,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 1.671,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb1_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 4.199,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb1_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.94,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb1_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.644,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb1_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-peft-fast-2x4",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 2,
+   "grad_accum": 4,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": false,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.543,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb2_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 6.827,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb2_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.939,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb2_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.393,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r16_peft_mb2_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-fused-fast-1x8",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.073,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fused_mb1_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 3.26,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fused_mb1_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.929,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fused_mb1_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.376,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fused_mb1_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-fused-sequential-2x4",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 2,
+   "grad_accum": 4,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 3.049,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_seq_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 4.018,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_seq_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.941,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_seq_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.755,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_seq_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-fused-efficient-2x4",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 2,
+   "grad_accum": 4,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 3.029,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_eff_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 4.037,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_eff_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.94,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_eff_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.423,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_eff_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-fused-fast-2x4",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 2,
+   "grad_accum": 4,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "64 oasst1 rows of 512 tokens",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 3.095,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fast_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 4.194,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fast_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.94,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fast_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.171,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/fk_qwen2_fast_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-peft-fast-1x8-r64",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 64,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": false,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 1.984,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb1_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 4.356,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb1_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.945,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb1_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.581,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb1_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-fused-fast-1x8-r64",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 64,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.386,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_fused_mb1_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 3.414,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_fused_mb1_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.943,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_fused_mb1_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.502,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_fused_mb1_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-peft-fast-2x4-r64",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 2,
+   "grad_accum": 4,
+   "lora_rank": 64,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": false,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.855,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb2_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 6.992,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb2_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.946,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb2_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.377,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r64_peft_mb2_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-peft-fast-1x8-r128",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 128,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": false,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.375,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb1_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 4.707,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb1_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.945,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb1_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.597,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb1_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-fused-fast-1x8-r128",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 128,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": true,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rT (docs/validation/fused/rank_tiles/README.md: the final rank-128 launch, commit 2ce61d09)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.787,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rT_r128_fused_mb1_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 3.793,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rT_r128_fused_mb1_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.941,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rT_r128_fused_mb1_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.287,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rT_r128_fused_mb1_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-0.5b-rtx4090-oasst1-peft-fast-2x4-r128",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 2,
+   "grad_accum": 4,
+   "lora_rank": 128,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "fused_compute": false,
+   "offload": false
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train (docs/validation/fused/scripts/prun.sh)",
+   "tree": "rk1 (docs/validation/fused/rank_tiles/README.md)",
+   "dataset": "2,400 oasst1 rows of at least 1,200 characters (docs/validation/fused/scripts/make_rows.py)",
+   "note": "lora_target_modules: the 7 projections, what auto takes for qwen2"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 3.248,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb2_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 7.391,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb2_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 2.945,
+    "unit": "GiB",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb2_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.389,
+    "unit": "s",
+    "receipt": "docs/validation/fused/rank_tiles/rtx4090/rk_r128_peft_mb2_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-efficient-g",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "moe_compute": "fused",
+   "expert_cache": null
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.488,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_def_eff_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 8.935,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_def_eff_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.967,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_def_eff_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.98,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_def_eff_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-fast-c9-g",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 16.326,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_c9_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 17.554,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_c9_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.153,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_c9_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.092,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30g_c9_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-fast-c12",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "fused",
+   "expert_cache": 12.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 17.799,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30_c12_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 19.967,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30_c12_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.779,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30_c12_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.07,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30_c12_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-fast-4x2-c9-rc",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 4,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "oasst1 rows that fill 512 tokens (docs/validation/moe/4090/scripts/full_rows.py)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 17.678,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb4_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 19.318,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb4_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.04,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb4_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.883,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb4_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-fast-c9-rc",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "oasst1 rows that fill 512 tokens (docs/validation/moe/4090/scripts/full_rows.py)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 16.882,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb8_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 18.286,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb8_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.984,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb8_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.608,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_fz_mb8_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-reference-fast-4x2-c6-rc",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 4,
+   "grad_accum": 2,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "reference",
+   "expert_cache": 6.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "oasst1 rows that fill 512 tokens (docs/validation/moe/4090/scripts/full_rows.py)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 17.253,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb4_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 20.949,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb4_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.942,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb4_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 5.777,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb4_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-reference-fast-c6-rc",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "reference",
+   "expert_cache": 6.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "oasst1 rows that fill 512 tokens (docs/validation/moe/4090/scripts/full_rows.py)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 16.625,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb8_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 19.982,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb8_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.022,
+    "unit": "GiB",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb8_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 4.714,
+    "unit": "s",
+    "receipt": "docs/validation/rtx4090-rc/receipts/q30rc_ref_mb8_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-fast-1x8-c9",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 17.121,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_fast_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 19.887,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_fast_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.886,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_fast_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 4.89,
+    "unit": "s",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_fast_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-sequential-1x8-c9",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.547,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_sequential_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 9.246,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_sequential_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.872,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_sequential_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 13.043,
+    "unit": "s",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb1_sequential_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-sequential-c9",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "sequential",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.48,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_sequential_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 10.598,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_sequential_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.14,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_sequential_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.81,
+    "unit": "s",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_sequential_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-efficient-c9",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 16.506,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_efficient_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 18.233,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_efficient_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.882,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_efficient_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.124,
+    "unit": "s",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_efficient_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen3-30b-a3b-rtx4090-oasst1-fused-fast-c9",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "moe_compute": "fused",
+   "expert_cache": 9.0
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "64 oasst1 rows of 512 tokens (the head-to-head rows)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 16.884,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_fast_receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 18.151,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_fast_receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.12,
+    "unit": "GiB",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_fast_receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.072,
+    "unit": "s",
+    "receipt": "docs/validation/moe/4090/receipts/q30f_bw_mb8_fast_receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-sequential-8x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 12.517,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_seq.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 20.283,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_seq.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.114,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_seq.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 3.814,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_seq.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-efficient-8x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 15.002,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_efficient.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 22.959,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_efficient.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.112,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_efficient.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 3.052,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_efficient.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-fast-8x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 8,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 16.838,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_fast.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 22.973,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_fast.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.113,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_fast.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 3.087,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one8_fast.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-sequential-1x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "sequential"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.192,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_seq.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.004,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_seq.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.107,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_seq.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 0.655,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_seq.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-efficient-1x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.936,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_efficient.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.025,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_efficient.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.114,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_efficient.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 0.638,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_efficient.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "qwen2.5-7b-rtx4090-synthetic-fast-1x1",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.05,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast"
+  },
+  "host": {
+   "os": "Linux",
+   "harness": "poros train",
+   "dataset": "synthetic",
+   "allocator": "expandable_segments:False (the host's PYTORCH_ALLOC_CONF)"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.589,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_fast.receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 11.005,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_fast.receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 15.112,
+    "unit": "GiB",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_fast.receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 0.601,
+    "unit": "s",
+    "receipt": "docs/validation/block-major-dropout/receipts/rel_m7_one_fast.receipt.json#/s_per_step"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen1.5-moe-a2.7b-s128",
+  "key": {
+   "model": "Qwen/Qwen1.5-MoE-A2.7B",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 4.251,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen1.5-moe-a2.7b-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 2.418,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen1.5-moe-a2.7b-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 9.9,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen1.5-moe-a2.7b-s128/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen2.5-0.5b-s256",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ram",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.264,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-0.5b-s256/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 1.425,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-0.5b-s256/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 0.717,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-0.5b-s256/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen2.5-32b-s128",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.197,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-32b-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "8 steps"
+   },
+   "gpu_visible": {
+    "value": 3.94,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-32b-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "8 steps"
+   },
+   "s_per_step": {
+    "value": 29.261,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-32b-s128/receipt.json#/s_per_step",
+    "method": "8 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen2.5-72b-s128",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.345,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "6 steps"
+   },
+   "gpu_visible": {
+    "value": 6.469,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "6 steps"
+   },
+   "s_per_step": {
+    "value": 70.485,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s128/receipt.json#/s_per_step",
+    "method": "6 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen2.5-72b-s256",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.361,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s256/receipt.json#/peak_vram_allocated_gb",
+    "method": "4 steps"
+   },
+   "gpu_visible": {
+    "value": 6.495,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s256/events.jsonl#/data/vram_reserved_mb",
+    "method": "4 steps"
+   },
+   "s_per_step": {
+    "value": 90.32,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s256/receipt.json#/s_per_step",
+    "method": "4 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen2.5-72b-s512-r8",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 8,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.651,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s512-r8/receipt.json#/peak_vram_allocated_gb",
+    "method": "4 steps"
+   },
+   "gpu_visible": {
+    "value": 7.157,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s512-r8/events.jsonl#/data/vram_reserved_mb",
+    "method": "4 steps"
+   },
+   "s_per_step": {
+    "value": 127.815,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-72b-s512-r8/receipt.json#/s_per_step",
+    "method": "4 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen2.5-7b-s256",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 4.153,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-7b-s256/receipt.json#/peak_vram_allocated_gb",
+    "method": "100 steps"
+   },
+   "gpu_visible": {
+    "value": 2.251,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-7b-s256/events.jsonl#/data/vram_reserved_mb",
+    "method": "100 steps"
+   },
+   "s_per_step": {
+    "value": 5.742,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen2.5-7b-s256/receipt.json#/s_per_step",
+    "method": "100 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen3-0.6b-s256",
+  "key": {
+   "model": "Qwen/Qwen3-0.6B",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ram",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 2.396,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-0.6b-s256/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 1.479,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-0.6b-s256/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 0.97,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-0.6b-s256/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen3-30b-a3b-instruct-2507-s128",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.966,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-30b-a3b-instruct-2507-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 5.822,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-30b-a3b-instruct-2507-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 20.971,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-30b-a3b-instruct-2507-s128/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen3-32b-s128",
+  "key": {
+   "model": "Qwen/Qwen3-32B",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.213,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-32b-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "6 steps"
+   },
+   "gpu_visible": {
+    "value": 3.971,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-32b-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "6 steps"
+   },
+   "s_per_step": {
+    "value": 31.337,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-32b-s128/receipt.json#/s_per_step",
+    "method": "6 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen3-coder-30b-a3b-instruct-s128",
+  "key": {
+   "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.831,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-coder-30b-a3b-instruct-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "4 steps"
+   },
+   "gpu_visible": {
+    "value": 5.728,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-coder-30b-a3b-instruct-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "4 steps"
+   },
+   "s_per_step": {
+    "value": 23.428,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3-coder-30b-a3b-instruct-s128/receipt.json#/s_per_step",
+    "method": "4 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen3.5-4b-s256",
+  "key": {
+   "model": "Qwen/Qwen3.5-4B",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ram",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 5.727,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3.5-4b-s256/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 3.517,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3.5-4b-s256/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 4.615,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3.5-4b-s256/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-qwen3.8-27b-s128",
+  "key": {
+   "model": "Qwen/Qwen3.8-27B",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.338,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3.8-27b-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "6 steps"
+   },
+   "gpu_visible": {
+    "value": 4.076,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3.8-27b-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "6 steps"
+   },
+   "s_per_step": {
+    "value": 27.206,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/qwen3.8-27b-s128/receipt.json#/s_per_step",
+    "method": "6 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-olmoe-1b-7b-0924-s128",
+  "key": {
+   "model": "allenai/OLMoE-1B-7B-0924",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 4.108,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/olmoe-1b-7b-0924-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 1.535,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/olmoe-1b-7b-0924-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 3.889,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/olmoe-1b-7b-0924-s128/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-deepseek-v2-lite-s128",
+  "key": {
+   "model": "deepseek-ai/DeepSeek-V2-Lite",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 4.192,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/deepseek-v2-lite-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 2.597,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/deepseek-v2-lite-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 10.637,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/deepseek-v2-lite-s128/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-gemma-3-1b-pt-s256",
+  "key": {
+   "model": "google/gemma-3-1b-pt",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ram",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 3.504,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-3-1b-pt-s256/receipt.json#/peak_vram_allocated_gb",
+    "method": "20 steps"
+   },
+   "gpu_visible": {
+    "value": 2.218,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-3-1b-pt-s256/events.jsonl#/data/vram_reserved_mb",
+    "method": "20 steps"
+   },
+   "s_per_step": {
+    "value": 1.249,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-3-1b-pt-s256/receipt.json#/s_per_step",
+    "method": "20 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-gemma-3-27b-pt-s128",
+  "key": {
+   "model": "google/gemma-3-27b-pt",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 5.253,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-3-27b-pt-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "6 steps"
+   },
+   "gpu_visible": {
+    "value": 3.77,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-3-27b-pt-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "6 steps"
+   },
+   "s_per_step": {
+    "value": 27.496,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-3-27b-pt-s128/receipt.json#/s_per_step",
+    "method": "6 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-gemma-4-26b-a4b-it-s128",
+  "key": {
+   "model": "google/gemma-4-26B-A4B-it",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.303,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-4-26b-a4b-it-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "6 steps"
+   },
+   "gpu_visible": {
+    "value": 5.246,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-4-26b-a4b-it-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "6 steps"
+   },
+   "s_per_step": {
+    "value": 20.692,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-4-26b-a4b-it-s128/receipt.json#/s_per_step",
+    "method": "6 steps"
+   }
+  }
+ },
+ {
+  "id": "mac-gemma-4-31b-it-s128",
+  "key": {
+   "model": "google/gemma-4-31B-it",
+   "quantization": "nf4",
+   "seq_len": 128,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {},
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 5.866,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-4-31b-it-s128/receipt.json#/peak_vram_allocated_gb",
+    "method": "6 steps"
+   },
+   "gpu_visible": {
+    "value": 3.987,
+    "unit": "GiB",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-4-31b-it-s128/events.jsonl#/data/vram_reserved_mb",
+    "method": "6 steps"
+   },
+   "s_per_step": {
+    "value": 31.888,
+    "unit": "s",
+    "receipt": "docs/validation/metal/m4_16gb/receipts/gemma-4-31b-it-s128/receipt.json#/s_per_step",
+    "method": "6 steps"
+   }
+  }
+ },
+ {
+  "id": "recipe-first-run-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "offload": false,
+   "fused_compute": true,
+   "dequant_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 1.296,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/first-run/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 1.445,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/first-run/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 3.032,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/first-run/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 2.317,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4090/first-run/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-first-run-rtx4060-laptop",
+  "key": {
+   "model": "Qwen/Qwen2.5-0.5B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4060 Laptop GPU",
+   "path": "efficient",
+   "offload": false,
+   "fused_compute": true,
+   "dequant_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 1.296,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4060-laptop/first-run/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 1.445,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4060-laptop/first-run/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 3.13,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4060-laptop/first-run/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 1.374,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4060-laptop/first-run/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-prefer-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "offload": false,
+   "fused_compute": true,
+   "dequant_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample pairs rows longer than the row length",
+   "recipes": "prefer, support, voice"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 7.376,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/prefer/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 9.654,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/prefer/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 10.842,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/prefer/main/receipt.json#/peak_host_ram_gb"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-big-32b-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen2.5-32B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "offload": false,
+   "fused_compute": true,
+   "dequant_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.143,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-32b/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 12.707,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-32b/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 21.793,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-32b/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 8.273,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4090/big-32b/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-big-72b-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "offload": true,
+   "fused_compute": true,
+   "dequant_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 11.845,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 18.156,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 45.294,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 19.504,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-big-72b-fast-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen2.5-72B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 4,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "block_streamed",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "offload": true,
+   "fused_compute": true,
+   "dequant_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 18.278,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b-fast/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 21.672,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b-fast/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 43.039,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b-fast/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 15.768,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4090/big-72b-fast/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-moe-30b-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "offload": null,
+   "moe_compute": "fused",
+   "expert_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 8.261,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 8.892,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 22.236,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 4.607,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-moe-30b-ssd-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "fast",
+   "offload": null,
+   "moe_compute": "fused",
+   "expert_cache": 10.5
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 19.044,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-ssd/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 21.568,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-ssd/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 11.601,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-ssd/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 4.278,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-ssd/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-moe-30b-8gb-rtx4090",
+  "key": {
+   "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+   "quantization": "nf4",
+   "seq_len": 256,
+   "block_size": null,
+   "batch": 1,
+   "grad_accum": 8,
+   "lora_rank": 8,
+   "lora_dropout": 0.0,
+   "load_strategy": null,
+   "selfcheck": false,
+   "entry": "moe",
+   "gpu": "RTX 4090",
+   "path": "efficient",
+   "offload": null,
+   "moe_compute": "fused",
+   "expert_cache": null
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample chats rows longer than the row length"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 5.074,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-8gb/main/receipt.json#/peak_vram_allocated_gb"
+   },
+   "peak_vram_reserved": {
+    "value": 5.65,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-8gb/main/receipt.json#/peak_vram_reserved_gb"
+   },
+   "peak_host_ram": {
+    "value": 7.783,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-8gb/main/receipt.json#/peak_host_ram_gb"
+   },
+   "s_per_step": {
+    "value": 15.795,
+    "unit": "s",
+    "receipt": "docs/validation/recipes/rtx4090/moe-30b-8gb/certification.json#/main/s_per_step",
+    "method": "the median of updates 2..N (the run's events.jsonl)"
+   }
+  },
+  "only_its_machine": true
+ },
+ {
+  "id": "recipe-mac-prefer-m4-16gb",
+  "key": {
+   "model": "Qwen/Qwen2.5-7B-Instruct",
+   "quantization": "nf4",
+   "seq_len": 512,
+   "block_size": 1,
+   "batch": 1,
+   "grad_accum": 1,
+   "lora_rank": 16,
+   "lora_dropout": 0.0,
+   "load_strategy": "metal_ssd",
+   "selfcheck": false,
+   "entry": "dense",
+   "gpu": "Apple M4 10-core GPU 16GB"
+  },
+  "host": {
+   "harness": "scripts/certify/run_recipe.py (poros train, the recipe as shipped)",
+   "dataset": "sample rows longer than the row length",
+   "recipes": "mac-prefer, mac-support, mac-voice"
+  },
+  "fields": {
+   "peak_vram_allocated": {
+    "value": 6.191,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/m4-16gb/mac-prefer/main/receipt.json#/peak_vram_allocated_gb",
+    "method": "16 steps"
+   },
+   "gpu_visible": {
+    "value": 5.262,
+    "unit": "GiB",
+    "receipt": "docs/validation/recipes/m4-16gb/mac-prefer/main/events.jsonl#/data/vram_reserved_mb",
+    "method": "16 steps"
+   }
+  },
+  "only_its_machine": true
+ }
+]

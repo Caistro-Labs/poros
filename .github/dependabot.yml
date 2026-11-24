@@ -1,0 +1,31 @@
+version: 2
+updates:
+  # Pinned action SHAs, including the composite action, move together in one PR.
+  - package-ecosystem: github-actions
+    directories:
+      - "/"
+      - "/.github/actions/*"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # Security updates only. torch and transformers move by hand, after the compat
+  # canary shows a new release works.
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: torch
+      - dependency-name: transformers
+    groups:
+      python-security:
+        applies-to: security-updates
+        patterns: ["*"]

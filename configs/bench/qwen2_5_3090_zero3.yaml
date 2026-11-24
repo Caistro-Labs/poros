@@ -1,0 +1,66 @@
+# Poros Bench: the paper's same-card RTX 3090 table (tab:multi_hw) plus the
+# DeepSpeed ZeRO-3 offload arm, rerun on one host so every row has a committed
+# receipt and s/step compares within one machine.
+#
+# Run:  poros bench run configs/bench/qwen2_5_3090_zero3.yaml
+#       poros bench run configs/bench/qwen2_5_3090_zero3_bf16.yaml
+# -------------------------------------------------------------------
+spec_id: qwen2_5_3090_zero3
+
+hardware:
+  gpu_name: "NVIDIA GeForce RTX 3090"
+  vram_gb: 24.0
+  pcie_gen: 4
+  # WSL2 only (the runner refuses WSL2 without it, since allocations past the
+  # card spill to host RAM there instead of failing). Each cell caps torch at
+  # min(this, free VRAM at start - 0.5 GiB) and records the cap it applied.
+  # vram_cap_gb: 24
+
+models:
+  - model_id: "Qwen/Qwen2.5-7B"
+    display_name: "Qwen2.5-7B"
+    param_count_b: 7.6
+  - model_id: "Qwen/Qwen2.5-32B"
+    display_name: "Qwen2.5-32B"
+    param_count_b: 32.5
+
+methods:
+  - poros
+  - unsloth
+  - peft
+  - accelerate_offload
+  - deepspeed_zero3
+
+precisions:
+  - nf4
+
+training:
+  steps: 200
+  seq_len: 512
+  batch_size: 1
+  gradient_accumulation_steps: 1   # the paper's s/step unit for this table
+  dataset: "synthetic"
+  seed: 42
+  n_passes: 3   # s/step = median of 3 fresh-process passes; VRAM = worst pass
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.0
+
+poros:
+  block_size: 4
+  enable_prefetch: true
+
+accelerate_offload:   # the paper's stated protocol for this row
+  gpu_max_memory_gb: 12
+  gradient_checkpointing: true
+
+zero3:
+  offload_device: cpu
+
+reporting:
+  output_dir: "./bench_output/qwen2_5_3090_zero3"
+  html: true
+  markdown: true
+  emit_json: true

@@ -1,0 +1,117 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poros-train"
+version = "1.0.0"
+description = "Fine-tune models bigger than your GPU: Poros streams the frozen 4-bit base through the GPU instead of holding it there."
+readme = "README.md"
+authors = [{ name = "Jeffrey Tigres", email = "contact@caistrolabs.com" }]
+maintainers = [{ name = "Caistro Labs", email = "contact@caistrolabs.com" }]
+requires-python = ">=3.11"
+license = "Apache-2.0"
+keywords = ["qlora", "lora", "fine-tuning", "transformers", "gpu-memory"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    # the oldest typer the CLI tests pass on with click 8.5: 0.12-0.15.4 crash --help (0.15.4 also
+    # caps click below 8.2), 0.16 crashes a usage error, 0.27 prints {config} in the usage line;
+    # bounded above: a typer minor no test ran has broken --help three times
+    "typer>=0.29.1,<0.30",
+    "rich>=13.7",
+    "pydantic>=2.10",  # older ones warn on stderr for every model_* field (protected namespace)
+    "pyyaml>=6.0",
+    "huggingface-hub>=0.25",
+    "jinja2>=3.1",
+    # Off a Mac: the range the release gates ran, so a fresh install resolves the stack they
+    # passed on (torch 2.14.1+cu130 with triton 3.8.0, transformers 5.22.2, peft 0.20.0,
+    # bitsandbytes 0.50.2; accelerate 1.15, safetensors 0.8 and datasets 5.1 with them). The
+    # floors are the oldest CI's version matrix runs. A newer minor of any of them is admitted
+    # once the gates have passed on it, and its bound moves then.
+    "torch>=2.10,<2.15; sys_platform != 'darwin'",
+    "transformers>=5.20,<5.23; sys_platform != 'darwin'",
+    "datasets>=4,<5.2; sys_platform != 'darwin'",
+    "peft>=0.19,<0.21; sys_platform != 'darwin'",
+    "accelerate>=0.34,<1.16; sys_platform != 'darwin'",
+    "bitsandbytes>=0.43,<0.51; sys_platform != 'darwin'",
+    "safetensors>=0.4,<0.9; sys_platform != 'darwin'",
+    # A Mac trains on one exact stack: the one its gates run on.
+    "torch==2.15.0; sys_platform == 'darwin'",
+    "transformers==5.20.2; sys_platform == 'darwin'",
+    "peft==0.20.0; sys_platform == 'darwin'",
+    "accelerate==1.15.0; sys_platform == 'darwin'",
+    "safetensors==0.8.0; sys_platform == 'darwin'",
+    "datasets==5.1.0; sys_platform == 'darwin'",
+]
+
+[project.optional-dependencies]
+bench = ["matplotlib>=3.8", "jinja2>=3.1"]
+# dev includes the bench reporting deps (jinja2, matplotlib) so the full test
+# suite -- including the HTML report tests -- runs green on a clean `[dev]` CI.
+# jsonschema: tests/cli/test_agent_schemas.py holds every result to its published schema.
+dev = ["pytest>=8.0", "ruff", "jinja2>=3.1", "matplotlib>=3.8", "jsonschema>=4.18"]
+
+[project.scripts]
+poros = "poros.cli.main:cli"
+
+[project.urls]
+Homepage = "https://github.com/Caistro-Labs/poros"
+Repository = "https://github.com/Caistro-Labs/poros"
+Issues = "https://github.com/Caistro-Labs/poros/issues"
+Documentation = "https://caistrolabs.com/docs/"
+
+[tool.setuptools.packages.find]
+include = ["poros*"]
+# poros/docs links to ../docs: its top-level *.md ship as package data (poros docs reads them),
+# never the receipts and scripts under docs/validation as importable packages.
+exclude = ["poros.docs*"]
+
+[tool.setuptools.package-data]
+"poros.report" = ["assets/*.css"]
+# docs: a link to ../docs; agent_docs/AGENTS.md: a link to ../../AGENTS.md (the agent docs
+# ship too; a folder of its own, as agents.md and AGENTS.md are one name on a Mac's disk)
+"poros" = ["py.typed", "catalog.toml", "agents.md", "agent_docs/AGENTS.md", "docs/*.md"]
+"poros.plan" = ["cells.json", "config_facts.json", "shapes.json"]
+# the recipes Caistro Labs certified, generated from receipts (scripts/certify/generate.py)
+"poros.recipes" = ["certified.json"]
+"poros.cli.ui.logos" = ["*.svg", "LICENSE"]
+"poros.sss" = ["_gather.c"]
+# pinned-kernel records the grouped-expert path reads at run time (PIN_DIR)
+"poros.moe" = ["grouped_pins/*.json"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+# Receipts are kept exactly as they ran (docs/validation), and the paper's sources are the
+# paper's: `ruff check .` lints the code, not them.
+extend-exclude = ["docs/validation", "paper"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.ruff.lint.isort]
+# first-party wherever ruff runs (a tests-only copy, another working directory): import order
+# does not depend on whether a poros/ directory sits beside the file
+known-first-party = ["poros", "tests", "scripts"]
+
+[tool.ruff.lint.per-file-ignores]
+# These modules emit inline HTML/SVG and markdown-table rows whose lines are
+# inherently long; wrapping them would hurt readability of the templates.
+"poros/report/html.py" = ["E501"]
+"poros/report/leaderboard.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "gpu: requires a CUDA device and torch (skipped on CPU CI). Run with -m gpu.",
+    "cuda_host: a CUDA host's route (skipped on a Mac, which takes its own; tests/conftest.py).",
+]

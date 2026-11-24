@@ -1,0 +1,43 @@
+# Qwen2.5-32B, NF4 QLoRA, streamed a block at a time.
+#
+# Usage:
+#   poros train examples/qwen2_5_32b_16gb.yaml
+#
+# Or from Python:
+#   from poros import PorosTrainer
+#   trainer = PorosTrainer.from_pretrained(
+#       "Qwen/Qwen2.5-32B",
+#       quantization="nf4",
+#       block_size=4,
+#   )
+#   trainer.train("OpenAssistant/oasst1", steps=200, seq_len=512)
+#   trainer.save("./poros_output/qwen2_5_32b_16gb")
+
+model_name_or_path: "Qwen/Qwen2.5-32B"
+dataset: "OpenAssistant/oasst1"   # Apache-2.0; or "synthetic" for a license-free smoke test
+quantization: nf4
+torch_dtype: bfloat16
+
+# Layers per streamed block
+block_size: 4
+enable_prefetch: true
+
+# LoRA
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+
+# Training
+num_epochs: 1
+per_device_batch_size: 1
+gradient_accumulation_steps: 8
+max_seq_length: 512
+learning_rate: 2.0e-5
+lr_scheduler: cosine
+warmup_steps: 100
+seed: 42
+
+# Output
+output_dir: ./poros_output/qwen2_5_32b_16gb
+save_steps: 500
+logging_steps: 10

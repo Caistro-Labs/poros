@@ -1,0 +1,35 @@
+name: Cancel closed PR runs
+
+# When a PR closes, cancel its queued and running pull_request runs so they stop
+# holding runners. Fork PRs get a read-only token, so for them this only reports.
+on:
+  pull_request:
+    types: [closed]
+
+permissions: {}
+
+concurrency:
+  group: cancel-closed-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  cancel:
+    name: Cancel runs
+    runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
+    timeout-minutes: 5
+    permissions:
+      actions: write # to cancel runs
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_REF: ${{ github.head_ref }}
+          SELF: ${{ github.workflow }}
+        run: |
+          gh run list --repo "$REPO" --branch "$HEAD_REF" --event pull_request --limit 100 \
+            --json databaseId,status,workflowName \
+            --jq '.[] | select(.status == "queued" or .status == "in_progress" or .status == "waiting" or .status == "pending")
+                       | select(.workflowName != env.SELF) | .databaseId' |
+          while read -r id; do
+            gh run cancel "$id" --repo "$REPO" || echo "could not cancel run $id"
+          done

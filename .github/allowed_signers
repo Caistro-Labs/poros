@@ -1,0 +1,8 @@
+# Keys allowed to sign release tags, read from main by .github/workflows/release.yml.
+# One line per key:  <email> namespaces="git" <key type> <public key>
+# The e-mail is a label, not a check: it stays the project's public address, and the line
+# carries no key comment (a comment such as name@host would publish a machine's name).
+#   Mac Secure Enclave key: ecdsa-sha2-nistp256 AAAA...
+#   YubiKey:                an sk-ssh-ed25519 key, AAAA...
+# Releases refuse while the line below is the placeholder (scripts/release.py check-signers).
+contact@caistrolabs.com namespaces="git" ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDsDFxJtAXvfWgsAJWNTlZyE6GaYkTUNdCgshvXkf51YMPSHCB22qQIdIwDg0dilGwdQ5Yxr2LPZGXsmjr+Y9Co=

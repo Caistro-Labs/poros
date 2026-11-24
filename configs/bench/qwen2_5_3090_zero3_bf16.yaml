@@ -1,0 +1,56 @@
+# Poros Bench: the DeepSpeed ZeRO-3 offload arm with a bf16 base, the path
+# DeepSpeed supports for a frozen base. Companion to qwen2_5_3090_zero3.yaml
+# (same host, same settings).
+#
+# Run:  poros bench run configs/bench/qwen2_5_3090_zero3.yaml
+#       poros bench run configs/bench/qwen2_5_3090_zero3_bf16.yaml
+# -------------------------------------------------------------------
+spec_id: qwen2_5_3090_zero3_bf16
+
+hardware:
+  gpu_name: "NVIDIA GeForce RTX 3090"
+  vram_gb: 24.0
+  pcie_gen: 4
+  # vram_cap_gb: 24   # WSL2 only; see qwen2_5_3090_zero3.yaml
+
+models:
+  - model_id: "Qwen/Qwen2.5-7B"
+    display_name: "Qwen2.5-7B"
+    param_count_b: 7.6
+  # Pins ~65 GB of host RAM. With less, drop it and run the NVMe arm (protocol).
+  - model_id: "Qwen/Qwen2.5-32B"
+    display_name: "Qwen2.5-32B"
+    param_count_b: 32.5
+
+methods:
+  - deepspeed_zero3
+
+precisions:
+  - bf16
+
+training:
+  steps: 200
+  seq_len: 512
+  batch_size: 1
+  gradient_accumulation_steps: 1   # the paper's s/step unit for this table
+  dataset: "synthetic"
+  seed: 42
+  n_passes: 1
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.0
+
+poros:
+  block_size: 4
+  enable_prefetch: true
+
+zero3:
+  offload_device: cpu
+
+reporting:
+  output_dir: "./bench_output/qwen2_5_3090_zero3_bf16"
+  html: true
+  markdown: true
+  emit_json: true

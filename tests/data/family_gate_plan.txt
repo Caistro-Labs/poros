@@ -1,0 +1,337 @@
+family_gate: tree TREE -> TMP/out
+start DATE
+--- qwen2 (Qwen/Qwen2.5-0.5B @ 060db649 snapshot 0) DATE
+PASS  qwen2:fetch                        
+FAIL  qwen2:check                        rc=0 model_type= status= (logs/check_qwen2.txt)
+PLAN run qwen2_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen2_seq path=sequential offload=none fused=True reason=none
+PLAN run qwen2_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen2_eff path=efficient offload=none fused=True reason=none
+PLAN run qwen2_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen2_fast path=fast offload=none fused=True reason=none
+PLAN run qwen2_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen2_res path=fast offload=none fused=True reason=none
+PLAN run qwen2_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen2_rep path=fast offload=none fused=True reason=none
+FAIL  qwen2:paths                         | 
+FAIL  qwen2:repeat                       fast run-to-run differs or did not run (cmp/qwen2_fast__qwen2_rep.txt)
+PASS  qwen2:ran                          every run: the path asked ran, no offload_reason, fused=True reason=none
+PLAN run qwen2_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false 
+PLAN run qwen2_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null 
+PLAN run qwen2_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  qwen2:refcheck                     rc_ok=1 
+FAIL  qwen2:parity                       rc=0 all_equal=  (logs/qwen2_parity.txt)
+PLAN run qwen2_resA lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast save_steps=4 
+FAIL  qwen2:resume                       run A rc=0 or no checkpoint-4 (logs/qwen2_resA.txt)
+--- qwen3 (Qwen/Qwen3-0.6B @ c1899de2 snapshot 0) DATE
+PASS  qwen3:fetch                        
+FAIL  qwen3:check                        rc=0 model_type= status= (logs/check_qwen3.txt)
+PLAN run qwen3_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen3_seq path=sequential offload=none fused=True reason=none
+PLAN run qwen3_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen3_eff path=efficient offload=none fused=True reason=none
+PLAN run qwen3_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_fast path=fast offload=none fused=True reason=none
+PLAN run qwen3_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen3_res path=fast offload=none fused=True reason=none
+PLAN run qwen3_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_rep path=fast offload=none fused=True reason=none
+FAIL  qwen3:paths                         | 
+FAIL  qwen3:repeat                       fast run-to-run differs or did not run (cmp/qwen3_fast__qwen3_rep.txt)
+PASS  qwen3:ran                          every run: the path asked ran, no offload_reason, fused=True reason=none
+PLAN run qwen3_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false 
+PLAN run qwen3_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null 
+PLAN run qwen3_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  qwen3:refcheck                     rc_ok=1 
+FAIL  qwen3:parity                       rc=0 all_equal=  (logs/qwen3_parity.txt)
+--- qwen3_5 (Qwen/Qwen3.5-0.8B @ 2fc06364 snapshot 0) DATE
+PASS  qwen3_5:fetch                      
+FAIL  qwen3_5:check                      rc=0 model_type= status= (logs/check_qwen3_5.txt)
+PLAN run qwen3_5_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen3_5_seq path=sequential offload=none fused=True reason=none
+PLAN run qwen3_5_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen3_5_eff path=efficient offload=none fused=True reason=none
+PLAN run qwen3_5_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_5_fast path=fast offload=none fused=True reason=none
+PLAN run qwen3_5_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen3_5_res path=fast offload=none fused=True reason=none
+PLAN run qwen3_5_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_5_rep path=fast offload=none fused=True reason=none
+FAIL  qwen3_5:paths                       | 
+FAIL  qwen3_5:repeat                     fast run-to-run differs or did not run (cmp/qwen3_5_fast__qwen3_5_rep.txt)
+PASS  qwen3_5:ran                        every run: the path asked ran, no offload_reason, fused=True reason=none
+PLAN run qwen3_5_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false 
+PLAN run qwen3_5_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null 
+PLAN run qwen3_5_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  qwen3_5:refcheck                   rc_ok=1 
+FAIL  qwen3_5:parity                     rc=0 all_equal=  (logs/qwen3_5_parity.txt)
+--- qwen3_8 (Qwen/Qwen3.8-27B @ 37561816 trunc 8) DATE
+PASS  qwen3_8:fetch                      
+FAIL  qwen3_8:check                      rc=0 model_type= status= (logs/check_qwen3_8.txt)
+PLAN run qwen3_8_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen3_8_seq path=sequential offload=none fused=True reason=none
+PLAN run qwen3_8_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen3_8_eff path=efficient offload=none fused=True reason=none
+PLAN run qwen3_8_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_8_fast path=fast offload=none fused=True reason=none
+PLAN run qwen3_8_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen3_8_res path=fast offload=none fused=True reason=none
+PLAN run qwen3_8_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_8_rep path=fast offload=none fused=True reason=none
+FAIL  qwen3_8:paths                       | 
+FAIL  qwen3_8:repeat                     fast run-to-run differs or did not run (cmp/qwen3_8_fast__qwen3_8_rep.txt)
+PASS  qwen3_8:ran                        every run: the path asked ran, no offload_reason, fused=True reason=none
+PLAN run qwen3_8_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false 
+PLAN run qwen3_8_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null 
+PLAN run qwen3_8_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  qwen3_8:refcheck                   rc_ok=1 
+FAIL  qwen3_8:parity                     rc=0 all_equal=  (logs/qwen3_8_parity.txt)
+--- gemma3_text (unsloth/gemma-3-270m @ edcf1fe3 snapshot 0) DATE
+PASS  gemma3_text:fetch                  
+FAIL  gemma3_text:check                  rc=0 model_type= status= (logs/check_gemma3_text.txt)
+PLAN run gemma3_text_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect gemma3_text_seq path=sequential offload=none fused=True reason=none
+PLAN run gemma3_text_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect gemma3_text_eff path=efficient offload=none fused=True reason=none
+PLAN run gemma3_text_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma3_text_fast path=fast offload=none fused=True reason=none
+PLAN run gemma3_text_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect gemma3_text_res path=fast offload=none fused=True reason=none
+PLAN run gemma3_text_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma3_text_rep path=fast offload=none fused=True reason=none
+FAIL  gemma3_text:paths                   | 
+FAIL  gemma3_text:repeat                 fast run-to-run differs or did not run (cmp/gemma3_text_fast__gemma3_text_rep.txt)
+PASS  gemma3_text:ran                    every run: the path asked ran, no offload_reason, fused=True reason=none
+PLAN run gemma3_text_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false 
+PLAN run gemma3_text_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null 
+PLAN run gemma3_text_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  gemma3_text:refcheck               rc_ok=1 
+FAIL  gemma3_text:parity                 rc=0 all_equal=  (logs/gemma3_text_parity.txt)
+--- gemma3 (unsloth/gemma-3-4b-it @ bf46152c trunc 6) DATE
+PASS  gemma3:fetch                       
+FAIL  gemma3:check                       rc=0 model_type= status= (logs/check_gemma3.txt)
+PLAN run gemma3_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect gemma3_seq path=sequential offload=none fused=True reason=none
+PLAN run gemma3_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect gemma3_eff path=efficient offload=none fused=True reason=none
+PLAN run gemma3_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma3_fast path=fast offload=none fused=True reason=none
+PLAN run gemma3_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect gemma3_res path=fast offload=none fused=True reason=none
+PLAN run gemma3_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma3_rep path=fast offload=none fused=True reason=none
+FAIL  gemma3:paths                        | 
+FAIL  gemma3:repeat                      fast run-to-run differs or did not run (cmp/gemma3_fast__gemma3_rep.txt)
+PASS  gemma3:ran                         every run: the path asked ran, no offload_reason, fused=True reason=none
+FAIL  gemma3:parity                      rc=0 all_equal=  (logs/gemma3_parity.txt)
+--- gemma4 (google/gemma-4-31B @ 5bbc2fb1 trunc 6) DATE
+PASS  gemma4:fetch                       
+FAIL  gemma4:check                       rc=0 model_type= status= (logs/check_gemma4.txt)
+PLAN run gemma4_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect gemma4_seq path=sequential offload=none fused=True reason=none
+PLAN run gemma4_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect gemma4_eff path=efficient offload=none fused=True reason=none
+PLAN run gemma4_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma4_fast path=fast offload=none fused=True reason=none
+PLAN run gemma4_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect gemma4_res path=fast offload=none fused=True reason=none
+PLAN run gemma4_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma4_rep path=fast offload=none fused=True reason=none
+FAIL  gemma4:paths                        | 
+FAIL  gemma4:repeat                      fast run-to-run differs or did not run (cmp/gemma4_fast__gemma4_rep.txt)
+PASS  gemma4:ran                         every run: the path asked ran, no offload_reason, fused=True reason=none
+FAIL  gemma4:parity                      rc=0 all_equal=  (logs/gemma4_parity.txt)
+--- gemma4_text (google/gemma-4-31B @ 5bbc2fb1 text 6) DATE
+PASS  gemma4_text:fetch                  
+FAIL  gemma4_text:check                  rc=0 model_type= status= (logs/check_gemma4_text.txt)
+PLAN run gemma4_text_seq lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect gemma4_text_seq path=sequential offload=none fused=True reason=none
+PLAN run gemma4_text_eff lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect gemma4_text_eff path=efficient offload=none fused=True reason=none
+PLAN run gemma4_text_fast lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma4_text_fast path=fast offload=none fused=True reason=none
+PLAN run gemma4_text_res lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect gemma4_text_res path=fast offload=none fused=True reason=none
+PLAN run gemma4_text_rep lora_dropout=0.05 block_size=4 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma4_text_rep path=fast offload=none fused=True reason=none
+FAIL  gemma4_text:paths                   | 
+FAIL  gemma4_text:repeat                 fast run-to-run differs or did not run (cmp/gemma4_text_fast__gemma4_text_rep.txt)
+PASS  gemma4_text:ran                    every run: the path asked ran, no offload_reason, fused=True reason=none
+PLAN run gemma4_text_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false 
+PLAN run gemma4_text_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null 
+PLAN run gemma4_text_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast block_size=4 seed=42 lora_target_modules=null fused_compute=false per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  gemma4_text:refcheck               rc_ok=1 
+FAIL  gemma4_text:parity                 rc=0 all_equal=  (logs/gemma4_text_parity.txt)
+--- qwen3_moe (Qwen/Qwen3-30B-A3B @ ad44e777 trunc 4) DATE
+PASS  qwen3_moe:fetch                    
+FAIL  qwen3_moe:check                    rc=0 model_type= status= (logs/check_qwen3_moe.txt)
+PLAN run qwen3_moe_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen3_moe_seq path=sequential offload=none moe=fused reason=none cache=sequential
+PLAN run qwen3_moe_eff lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen3_moe_eff path=efficient offload=none moe=fused reason=none cache=efficient
+PLAN run qwen3_moe_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_moe_fast path=fast offload=none moe=fused reason=none cache=sized
+PLAN run qwen3_moe_res lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen3_moe_res path=fast offload=none moe=fused reason=none
+PLAN run qwen3_moe_rep lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_moe_rep path=fast offload=none moe=fused reason=none cache=sized
+FAIL  qwen3_moe:paths                     | 
+FAIL  qwen3_moe:repeat                   fast run-to-run differs or did not run (cmp/qwen3_moe_fast__qwen3_moe_rep.txt)
+PASS  qwen3_moe:ran                      every run: the path asked ran, no offload_reason, moe=fused reason=none, expert cache one layer on seq+eff, sized on fast
+PLAN run qwen3_moe_mref_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential moe_expert_compute=reference 
+PLAN run qwen3_moe_mref_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast moe_expert_compute=reference 
+PLAN compare qwen3_moe_mref_seq qwen3_moe_mref_fast
+PLAN expect qwen3_moe_mref_fast path=fast moe=reference reason=none
+PASS  qwen3_moe:moe-ref                  reference experts seq==fast digest 
+PLAN run qwen3_moe_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference 
+PLAN run qwen3_moe_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null 
+PLAN run qwen3_moe_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  qwen3_moe:refcheck                 rc_ok=1 
+FAIL  qwen3_moe:moe-gate                 rc=0 parity= PLAN gpu timeout -k 30 1200 true TREE/scripts/moe_absolute_gate.py --model MODELS/Qwen_Qwen3-30B-A3B__trunc4 --loader streamed --lora-dropout 0.05 --seq-len 64 
+--- olmoe (allenai/OLMoE-1B-7B-0924 @ 6d84c485 trunc 4) DATE
+PASS  olmoe:fetch                        
+FAIL  olmoe:check                        rc=0 model_type= status= (logs/check_olmoe.txt)
+PLAN run olmoe_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect olmoe_seq path=sequential offload=none moe=fused reason=none cache=sequential
+PLAN run olmoe_eff lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect olmoe_eff path=efficient offload=none moe=fused reason=none cache=efficient
+PLAN run olmoe_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect olmoe_fast path=fast offload=none moe=fused reason=none cache=sized
+PLAN run olmoe_res lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect olmoe_res path=fast offload=none moe=fused reason=none
+PLAN run olmoe_rep lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect olmoe_rep path=fast offload=none moe=fused reason=none cache=sized
+FAIL  olmoe:paths                         | 
+FAIL  olmoe:repeat                       fast run-to-run differs or did not run (cmp/olmoe_fast__olmoe_rep.txt)
+PASS  olmoe:ran                          every run: the path asked ran, no offload_reason, moe=fused reason=none, expert cache one layer on seq+eff, sized on fast
+PLAN run olmoe_mref_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential moe_expert_compute=reference 
+PLAN run olmoe_mref_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast moe_expert_compute=reference 
+PLAN compare olmoe_mref_seq olmoe_mref_fast
+PLAN expect olmoe_mref_fast path=fast moe=reference reason=none
+PASS  olmoe:moe-ref                      reference experts seq==fast digest 
+PLAN run olmoe_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference 
+PLAN run olmoe_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null 
+PLAN run olmoe_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  olmoe:refcheck                     rc_ok=1 
+FAIL  olmoe:moe-gate                     rc=0 parity= PLAN gpu timeout -k 30 1200 true TREE/scripts/moe_absolute_gate.py --model MODELS/allenai_OLMoE-1B-7B-0924__trunc4 --loader streamed --lora-dropout 0.05 --seq-l
+PLAN run olmoe_resA lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast save_steps=4 
+FAIL  olmoe:resume                       run A rc=0 or no checkpoint-4 (logs/olmoe_resA.txt)
+--- qwen2_moe (Qwen/Qwen1.5-MoE-A2.7B @ 1a758c50 trunc 4) DATE
+PASS  qwen2_moe:fetch                    
+FAIL  qwen2_moe:check                    rc=0 model_type= status= (logs/check_qwen2_moe.txt)
+PLAN run qwen2_moe_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen2_moe_seq path=sequential offload=none moe=fused reason=none cache=sequential
+PLAN run qwen2_moe_eff lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen2_moe_eff path=efficient offload=none moe=fused reason=none cache=efficient
+PLAN run qwen2_moe_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen2_moe_fast path=fast offload=none moe=fused reason=none cache=sized
+PLAN run qwen2_moe_res lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen2_moe_res path=fast offload=none moe=fused reason=none
+PLAN run qwen2_moe_rep lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen2_moe_rep path=fast offload=none moe=fused reason=none cache=sized
+FAIL  qwen2_moe:paths                     | 
+FAIL  qwen2_moe:repeat                   fast run-to-run differs or did not run (cmp/qwen2_moe_fast__qwen2_moe_rep.txt)
+PASS  qwen2_moe:ran                      every run: the path asked ran, no offload_reason, moe=fused reason=none, expert cache one layer on seq+eff, sized on fast
+PLAN run qwen2_moe_mref_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential moe_expert_compute=reference 
+PLAN run qwen2_moe_mref_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast moe_expert_compute=reference 
+PLAN compare qwen2_moe_mref_seq qwen2_moe_mref_fast
+PLAN expect qwen2_moe_mref_fast path=fast moe=reference reason=none
+PASS  qwen2_moe:moe-ref                  reference experts seq==fast digest 
+PLAN run qwen2_moe_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference 
+PLAN run qwen2_moe_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null 
+PLAN run qwen2_moe_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  qwen2_moe:refcheck                 rc_ok=1 
+FAIL  qwen2_moe:moe-gate                 rc=0 parity= PLAN gpu timeout -k 30 1200 true TREE/scripts/moe_absolute_gate.py --model MODELS/Qwen_Qwen1.5-MoE-A2.7B__trunc4 --loader streamed --lora-dropout 0.05 --seq-len
+--- deepseek_v2 (deepseek-ai/DeepSeek-V2-Lite @ 604d5664 trunc 4) DATE
+PASS  deepseek_v2:fetch                  
+FAIL  deepseek_v2:check                  rc=0 model_type= status= (logs/check_deepseek_v2.txt)
+PLAN run deepseek_v2_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect deepseek_v2_seq path=sequential offload=none moe=fused reason=none cache=sequential
+PLAN run deepseek_v2_eff lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect deepseek_v2_eff path=efficient offload=none moe=fused reason=none cache=efficient
+PLAN run deepseek_v2_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect deepseek_v2_fast path=fast offload=none moe=fused reason=none cache=sized
+PLAN run deepseek_v2_res lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect deepseek_v2_res path=fast offload=none moe=fused reason=none
+PLAN run deepseek_v2_rep lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect deepseek_v2_rep path=fast offload=none moe=fused reason=none cache=sized
+FAIL  deepseek_v2:paths                   | 
+FAIL  deepseek_v2:repeat                 fast run-to-run differs or did not run (cmp/deepseek_v2_fast__deepseek_v2_rep.txt)
+PASS  deepseek_v2:ran                    every run: the path asked ran, no offload_reason, moe=fused reason=none, expert cache one layer on seq+eff, sized on fast
+PLAN run deepseek_v2_mref_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential moe_expert_compute=reference 
+PLAN run deepseek_v2_mref_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast moe_expert_compute=reference 
+PLAN compare deepseek_v2_mref_seq deepseek_v2_mref_fast
+PLAN expect deepseek_v2_mref_fast path=fast moe=reference reason=none
+PASS  deepseek_v2:moe-ref                reference experts seq==fast digest 
+PLAN run deepseek_v2_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference 
+PLAN run deepseek_v2_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null 
+PLAN run deepseek_v2_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  deepseek_v2:refcheck               rc_ok=1 
+FAIL  deepseek_v2:moe-gate               rc=0 parity= PLAN gpu timeout -k 30 1200 true TREE/scripts/moe_absolute_gate.py --model MODELS/deepseek-ai_DeepSeek-V2-Lite__trunc4 --loader streamed --lora-dropout 0.05 --s
+--- qwen3_5_moe (Qwen/Qwen3.6-35B-A3B @ 345d467b trunc 4) DATE
+PASS  qwen3_5_moe:fetch                  
+FAIL  qwen3_5_moe:check                  rc=0 model_type= status= (logs/check_qwen3_5_moe.txt)
+PLAN run qwen3_5_moe_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen3_5_moe_seq path=sequential offload=none moe=fused reason=none cache=sequential
+PLAN run qwen3_5_moe_eff lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen3_5_moe_eff path=efficient offload=none moe=fused reason=none cache=efficient
+PLAN run qwen3_5_moe_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_5_moe_fast path=fast offload=none moe=fused reason=none cache=sized
+PLAN run qwen3_5_moe_res lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen3_5_moe_res path=fast offload=none moe=fused reason=none
+PLAN run qwen3_5_moe_rep lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_5_moe_rep path=fast offload=none moe=fused reason=none cache=sized
+FAIL  qwen3_5_moe:paths                   | 
+FAIL  qwen3_5_moe:repeat                 fast run-to-run differs or did not run (cmp/qwen3_5_moe_fast__qwen3_5_moe_rep.txt)
+PASS  qwen3_5_moe:ran                    every run: the path asked ran, no offload_reason, moe=fused reason=none, expert cache one layer on seq+eff, sized on fast
+PLAN run qwen3_5_moe_mref_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential moe_expert_compute=reference 
+PLAN run qwen3_5_moe_mref_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast moe_expert_compute=reference 
+PLAN compare qwen3_5_moe_mref_seq qwen3_5_moe_mref_fast
+PLAN expect qwen3_5_moe_mref_fast path=fast moe=reference reason=none
+PASS  qwen3_5_moe:moe-ref                reference experts seq==fast digest 
+PLAN run qwen3_5_moe_rc_ref1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference 
+PLAN run qwen3_5_moe_rc_fused1 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null 
+PLAN run qwen3_5_moe_rc_ref2 lora_dropout=0.05 learning_rate=1e-4 max_steps=100 eval_split=0.0 path=fast seed=42 lora_target_modules=null moe_expert_compute=reference per_device_batch_size=2 gradient_accumulation_steps=4 
+FAIL  qwen3_5_moe:refcheck               rc_ok=1 
+FAIL  qwen3_5_moe:moe-gate               rc=0 parity= PLAN gpu timeout -k 30 1200 true TREE/scripts/moe_absolute_gate.py --model MODELS/Qwen_Qwen3.6-35B-A3B__trunc4 --loader streamed --lora-dropout 0.05 --seq-len 6
+--- qwen3_5_moe_text (Qwen/Qwen3.6-35B-A3B @ 345d467b text 4) DATE
+PASS  qwen3_5_moe_text:fetch             
+FAIL  qwen3_5_moe_text:check             rc=0 model_type= status= (logs/check_qwen3_5_moe_text.txt)
+PLAN run qwen3_5_moe_text_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect qwen3_5_moe_text_seq path=sequential offload=none moe=fused reason=none cache=sequential
+PLAN run qwen3_5_moe_text_eff lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect qwen3_5_moe_text_eff path=efficient offload=none moe=fused reason=none cache=efficient
+PLAN run qwen3_5_moe_text_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_5_moe_text_fast path=fast offload=none moe=fused reason=none cache=sized
+PLAN run qwen3_5_moe_text_res lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect qwen3_5_moe_text_res path=fast offload=none moe=fused reason=none
+PLAN run qwen3_5_moe_text_rep lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect qwen3_5_moe_text_rep path=fast offload=none moe=fused reason=none cache=sized
+FAIL  qwen3_5_moe_text:paths              | 
+FAIL  qwen3_5_moe_text:repeat            fast run-to-run differs or did not run (cmp/qwen3_5_moe_text_fast__qwen3_5_moe_text_rep.txt)
+PASS  qwen3_5_moe_text:ran               every run: the path asked ran, no offload_reason, moe=fused reason=none, expert cache one layer on seq+eff, sized on fast
+PLAN run qwen3_5_moe_text_mref_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential moe_expert_compute=reference 
+PLAN run qwen3_5_moe_text_mref_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast moe_expert_compute=reference 
+PLAN compare qwen3_5_moe_text_mref_seq qwen3_5_moe_text_mref_fast
+PLAN expect qwen3_5_moe_text_mref_fast path=fast moe=reference reason=none
+PASS  qwen3_5_moe_text:moe-ref           reference experts seq==fast digest 
+--- gemma4_moe (google/gemma-4-26B-A4B-it @ 4d7ae498 trunc 6) DATE
+PASS  gemma4_moe:fetch                   
+FAIL  gemma4_moe:check                   rc=0 model_type= status= (logs/check_gemma4_moe.txt)
+PLAN run gemma4_moe_seq lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=sequential 
+PLAN expect gemma4_moe_seq path=sequential offload=none moe=reference reason~SiLU cache=sequential
+PLAN run gemma4_moe_eff lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=efficient 
+PLAN expect gemma4_moe_eff path=efficient offload=none moe=reference reason~SiLU cache=efficient
+PLAN run gemma4_moe_fast lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma4_moe_fast path=fast offload=none moe=reference reason~SiLU cache=sized
+PLAN run gemma4_moe_res lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast resident_blocks=999 
+PLAN expect gemma4_moe_res path=fast offload=none moe=reference reason~SiLU
+PLAN run gemma4_moe_rep lora_dropout=0.05 per_device_batch_size=2 gradient_accumulation_steps=4 max_steps=8 seed=42 lora_target_modules=null path=fast 
+PLAN expect gemma4_moe_rep path=fast offload=none moe=reference reason~SiLU cache=sized
+FAIL  gemma4_moe:paths                    | 
+FAIL  gemma4_moe:repeat                  fast run-to-run differs or did not run (cmp/gemma4_moe_fast__gemma4_moe_rep.txt)
+PASS  gemma4_moe:ran                     every run: the path asked ran, no offload_reason, moe=reference reason~SiLU, expert cache one layer on seq+eff, sized on fast
+SKIP  gemma4_moe:refcheck                the default is the reference experts here (fused cannot run them: )
+FAIL  gemma4_moe:moe-gate                rc=0 parity= PLAN gpu timeout -k 30 1200 true TREE/scripts/moe_absolute_gate.py --model MODELS/google_gemma-4-26B-A4B-it__trunc6 --loader streamed --lora-dropout 0.05 --seq-
+end DATE
+FAILS=72

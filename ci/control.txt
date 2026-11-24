@@ -1,0 +1,10 @@
+# Pins for the compat "control" leg (.github/workflows/compat.yml): the Linux training stack
+# the release was gated on (the top of each range in pyproject.toml). Move a pin only after
+# the canary leg shows the new version works, and move pyproject.toml's range with it.
+torch==2.14.1
+transformers==5.22.2
+peft==0.20.0
+accelerate==1.15.0
+datasets==5.1.0
+safetensors==0.8.0
+bitsandbytes==0.50.2

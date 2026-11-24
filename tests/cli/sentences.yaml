@@ -1,0 +1,81 @@
+# Every documented command and what it must parse to.
+# grammar: the parse (verb, its action, the subject, key=value fields, flags).
+# model:   for commands naming a model, the catalog id it names.
+# The session takes the same line with a leading /: `/train Qwen2.5-72B`.
+# Docs (docs/cli.md) and tests both read this file.
+
+- say: train Qwen2.5-7B-Instruct --data notes.jsonl
+  grammar: {verb: train, subject: [Qwen2.5-7B-Instruct], flags: {--data: notes.jsonl}}
+  model: Qwen/Qwen2.5-7B-Instruct
+
+- say: train --from last --data prefs.jsonl
+  grammar: {verb: train, flags: {--from: last, --data: prefs.jsonl}}
+
+- say: train Qwen2.5-7B-Instruct --data prefs.jsonl --recipe dpo dpo_beta=0.2
+  grammar: {verb: train, subject: [Qwen2.5-7B-Instruct], clauses: {dpo_beta: "0.2"}, flags: {--data: prefs.jsonl, --recipe: dpo}}
+  model: Qwen/Qwen2.5-7B-Instruct
+
+- say: train Qwen2.5-7B-Instruct --data ./data/ --steps 300 --seq-len 1024 --rank 32 --name notes-v1
+  grammar:
+    verb: train
+    subject: [Qwen2.5-7B-Instruct]
+    flags: {--data: ./data/, --steps: "300", --seq-len: "1024", --rank: "32", --name: notes-v1}
+
+- say: train Qwen2.5-7B --data synthetic learning_rate=1e-4 --yes
+  grammar:
+    verb: train
+    subject: [Qwen2.5-7B]
+    clauses: {learning_rate: "1e-4"}
+    flags: {--data: synthetic, --yes: true}
+
+- say: train DeepSeek-V2-Lite --data OpenAssistant/oasst1
+  grammar: {verb: train, subject: [DeepSeek-V2-Lite], flags: {--data: OpenAssistant/oasst1}}
+  model: deepseek-ai/DeepSeek-V2-Lite
+
+- say: train olmoe-1b-7b-0924 --data notes.jsonl --detach
+  grammar: {verb: train, subject: [olmoe-1b-7b-0924], flags: {--data: notes.jsonl, --detach: true}}
+  model: allenai/OLMoE-1B-7B-0924
+
+- say: machine
+  grammar: {verb: machine}
+
+- say: models
+  grammar: {verb: models}
+
+- say: models get Qwen2.5-7B-Instruct
+  grammar: {verb: models, action: get, subject: [Qwen2.5-7B-Instruct]}
+  model: Qwen/Qwen2.5-7B-Instruct
+
+- say: runs
+  grammar: {verb: runs}
+
+- say: runs 7f3a
+  grammar: {verb: runs, subject: [7f3a]}
+
+- say: runs stop 7f3a
+  grammar: {verb: runs, action: stop, subject: [7f3a]}
+
+- say: runs continue last
+  grammar: {verb: runs, action: continue, subject: [last]}
+
+- say: runs continue last --more 200
+  grammar: {verb: runs, action: continue, subject: [last], flags: {--more: "200"}}
+
+- say: runs report last
+  grammar: {verb: runs, action: report, subject: [last]}
+
+- say: data tickets.csv --convert
+  grammar: {verb: data, subject: [tickets.csv], flags: {--convert: true}}
+
+- say: eval last --rows 20 --data more.jsonl
+  grammar: {verb: eval, subject: [last], flags: {--rows: "20", --data: more.jsonl}}
+
+- say: export last --format merged --output ./merged
+  grammar: {verb: export, subject: [last], flags: {--format: merged, --output: ./merged}}
+
+- say: prove Qwen2.5-0.5B --steps 20
+  grammar: {verb: prove, subject: [Qwen2.5-0.5B], flags: {--steps: "20"}}
+  model: Qwen/Qwen2.5-0.5B
+
+- say: qwen 7b
+  grammar: {subject: [qwen, 7b]}

@@ -1,0 +1,150 @@
+name: Tests
+
+# The CPU lanes: the light install without torch on each supported Python, the training stack
+# on Linux at the floor and top of its range, tests/metal on Apple Silicon, and the wheel
+# smoke. No GPU runs here. No paths filter: `Check` is a required status check, and a
+# workflow that a filter skips never reports one.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  PYPI_NAME: poros-train
+
+concurrency:
+  group: tests-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  light:
+    # The light install, as a user gets it: the package with --no-deps, then its base packages
+    # (the dependencies without a platform marker) and the dev extra's, read from pyproject.toml.
+    # ML tests skip themselves; -ra shows why, so an empty run is visible.
+    name: Torch-free (${{ matrix.python }})
+    runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install Poros light (no torch)
+        run: |
+          python -m pip install --no-deps -e .
+          python - > light.txt <<'PY'
+          import tomllib
+          project = tomllib.load(open("pyproject.toml", "rb"))["project"]
+          print("\n".join([d for d in project["dependencies"] if ";" not in d]
+                          + project["optional-dependencies"]["dev"]))
+          PY
+          python -m pip install -r light.txt
+          python -c "import importlib.util, sys; sys.exit(importlib.util.find_spec('torch') is not None)"
+      - run: pytest -v -ra -m "not gpu"
+
+  linux:
+    # The training stack off a Mac, at its floor and at the top it was gated on, plus what the
+    # range resolves today (with the newest TRL). CPU only: the real blockwise engine on tiny
+    # models. Each cell's pins go into the same pip call as the package, so the resolver keeps
+    # them or fails: a cell never tests a release it did not name.
+    name: Linux torch (${{ matrix.cell }})
+    runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { cell: floor, torch: "==2.10.0", transformers: "==5.20.2" }
+          - { cell: top, torch: "==2.14.1", transformers: "==5.22.2" }
+          - { cell: today, torch: ">=2.10,<2.15", transformers: ">=5.20,<5.23", trl: "trl" }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install pinned torch (CPU wheel), then Poros with the pinned transformers
+        env:
+          TORCH: ${{ matrix.torch }}
+          TRANSFORMERS: ${{ matrix.transformers }}
+          TRL: ${{ matrix.trl }}
+        run: |
+          python -m pip install "torch$TORCH" --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e ".[dev]" "torch$TORCH" "transformers$TRANSFORMERS" ${TRL:+"$TRL"}
+      - name: The cell runs the releases it names
+        env:
+          TORCH: ${{ matrix.torch }}
+          TRANSFORMERS: ${{ matrix.transformers }}
+        run: |
+          python - <<'PY'
+          import os, torch, transformers
+          from packaging.specifiers import SpecifierSet
+          for name, mod in (("torch", torch), ("transformers", transformers)):
+              spec, have = os.environ[name.upper()], mod.__version__.split("+")[0]
+              assert have in SpecifierSet(spec), f"{name} {have} is not {spec}"
+              print(name, have)
+          PY
+      - run: pytest -v -ra -m "not gpu"
+
+  mac:
+    # Apple Silicon, on the Mac's exact stack from pyproject.toml.
+    name: Apple Silicon
+    runs-on: ${{ vars.MAC_RUNNER || 'macos-15' }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-poros
+      - run: pytest -v -ra -m "not gpu" tests/metal
+
+  wheel:
+    # Build the wheel the way PyPI gets it, install it in a clean venv, and run it from
+    # outside the checkout.
+    name: Wheel
+    runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Build and verify
+        run: |
+          python -m pip install --quiet build twine
+          SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)" python -m build
+          version="$(python scripts/release.py version)"
+          python scripts/release.py verify-dist dist --expected "$version" --name "$PYPI_NAME"
+          python -m twine check --strict dist/*
+          bash scripts/smoke_wheel.sh dist "$version"
+
+  check:
+    # The one required status check from this workflow.
+    name: Check
+    if: always()
+    needs: [light, linux, mac, wheel]
+    runs-on: ${{ vars.LINUX_RUNNER || 'ubuntu-24.04' }}
+    timeout-minutes: 2
+    steps:
+      - env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          for r in $RESULTS; do
+            [[ "$r" == "success" ]] || { echo "::error::A required job finished as: $r"; exit 1; }
+          done

@@ -1,0 +1,115 @@
+name: Release
+
+# `./build.sh publish` signs and pushes a tag vMAJOR.MINOR.PATCH. This workflow then:
+#   1. checks that a key in .github/allowed_signers (read from main) signed the tag, that
+#      the tag is on main, and that it equals the version in pyproject.toml;
+#   2. builds, verifies, and smoke-tests the wheel in a clean venv;
+#   3. waits for an approval on the `pypi` environment, then uploads with Trusted
+#      Publishing, so no PyPI token exists anywhere;
+#   4. creates the GitHub release from the same files.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+env:
+  PYPI_NAME: poros-train
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Verify and build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify the tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          fail() { echo "::error::$*"; exit 1; }
+
+          [[ "$TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || fail "$TAG is not vMAJOR.MINOR.PATCH."
+
+          # Keep the annotated tag object, so its signature can be checked.
+          git fetch --force origin "refs/tags/$TAG:refs/tags/$TAG"
+          commit="$(git rev-parse "$TAG^{commit}")"
+
+          git show origin/main:.github/allowed_signers > "$RUNNER_TEMP/allowed_signers"
+          python scripts/release.py check-signers "$RUNNER_TEMP/allowed_signers" || fail "main's .github/allowed_signers holds no real key."
+          git config gpg.format ssh
+          git config gpg.ssh.allowedSignersFile "$RUNNER_TEMP/allowed_signers"
+          git verify-tag "$TAG" || fail "$TAG is not signed by a key in .github/allowed_signers."
+
+          git merge-base --is-ancestor "$commit" origin/main || fail "$TAG is not on main."
+
+          [[ "$(git rev-parse HEAD)" == "$commit" ]] || fail "The checkout is not $TAG's commit."
+          version="$(python scripts/release.py version)" || fail "The version files disagree."
+          [[ "$TAG" == "v$version" ]] || fail "Tag $TAG does not match the version file ($version)."
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Build, verify, smoke-test
+        run: |
+          python -m pip install --quiet build twine
+          SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)" python -m build
+          python scripts/release.py verify-dist dist --expected "$VERSION" --name "$PYPI_NAME"
+          python -m twine check --strict dist/*
+          bash scripts/smoke_wheel.sh dist "$VERSION"
+          sha256sum dist/* | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment:
+      name: pypi
+      url: https://pypi.org/p/${{ env.PYPI_NAME }}
+    permissions:
+      id-token: write # Trusted Publishing: PyPI trusts this job's OIDC token
+    steps:
+      # No checkout. This job holds the PyPI credential, so it runs nothing from the repo.
+      # It only uploads the files the build job made.
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist/
+      # Trusted Publishing; also uploads signed attestations.
+      - uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+
+  github-release:
+    name: GitHub release
+    needs: publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write # to create the GitHub release
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist/
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes --title "$TAG"

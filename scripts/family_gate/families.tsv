@@ -1,0 +1,23 @@
+# key	entry	repo	revision	mode	layers	tier	expect	notes
+# One row per registry model_type the gate covers, and one per model gated at its own shapes (key: its family).
+# mode: snapshot (whole repo) | trunc (first LAYERS decoder layers, real weights, the repo's own format) |
+# text (trunc, then the text backbone alone as its CausalLM).
+# tier: full (probe, 4 paths bitwise, run-to-run, refcheck; MoE also reference experts and the
+# streamed-vs-resident gate) | bitwise (probe, 4 paths bitwise, run-to-run).
+# expect: the run's resolved compute, besides path=<asked> offload=none on every run (expect.py SPEC items).
+qwen2	dense	Qwen/Qwen2.5-0.5B	060db6499f32faf8b98477b0a26969ef7d8b9987	snapshot	0	full	fused=True reason=none	whole model
+qwen3	dense	Qwen/Qwen3-0.6B	c1899de289a04d12100db370d81485cdf75e47ca	snapshot	0	full	fused=True reason=none	whole model
+qwen3_5	dense	Qwen/Qwen3.5-0.8B	2fc06364715b967f1860aea9cf38778875588b17	snapshot	0	full	fused=True reason=none	config.json qwen3_5 (wrapper); loads as qwen3_5_text
+qwen3_8	dense	Qwen/Qwen3.8-27B	37561816e66b5b9153b1b64c10968c18c1e6f4a0	trunc	8	full	fused=True reason=none	Qwen3.8-27B, qwen3_5 at 27B's shapes: wrapper, 8 of 64 layers (6 linear-attention, 2 full)
+gemma3_text	dense	unsloth/gemma-3-270m	edcf1fe394ee1168e7c5538afd104cfb1f7947e6	snapshot	0	full	fused=True reason=none	ungated copy of google/gemma-3-270m
+gemma3	dense	unsloth/gemma-3-4b-it	bf46152c47f5dd20b896357cb51abc4c03b8ee8c	trunc	6	bitwise	fused=True reason=none	multimodal wrapper, vision tower kept, 6 of 34 text layers
+gemma4	dense	google/gemma-4-31B	5bbc2fb1c1b2c611d06e3d9f23c170ba21659d89	trunc	6	bitwise	fused=True reason=none	multimodal wrapper, towers kept, 6 of 60 layers
+gemma4_text	dense	google/gemma-4-31B	5bbc2fb1c1b2c611d06e3d9f23c170ba21659d89	text	6	full	fused=True reason=none	6 of 60 layers, as docs/validation/fused
+qwen3_moe	moe	Qwen/Qwen3-30B-A3B	ad44e777bcd18fa416d9da3bd8f70d33ebb85d39	trunc	4	full	moe=fused reason=none	4 of 48 layers
+olmoe	moe	allenai/OLMoE-1B-7B-0924	6d84c48581ece794365f2b8e9cfb043c68ade9c5	trunc	4	full	moe=fused reason=none	4 of 16 layers
+qwen2_moe	moe	Qwen/Qwen1.5-MoE-A2.7B	1a758c50ecb6350748b9ce0a99d2352fd9fc11c9	trunc	4	full	moe=fused reason=none	4 of 24 layers, shared expert
+deepseek_v2	moe	deepseek-ai/DeepSeek-V2-Lite	604d5664dddd88a0433dbae533b7fe9472482de0	trunc	4	full	moe=fused reason=none	4 of 27 layers (layer 0 dense)
+qwen3_5_moe	moe	Qwen/Qwen3.6-35B-A3B	345d467b117d1fd5eda9b879a5988de9ae5f47a7	trunc	4	full	moe=fused reason=none	wrapper, 4 of 40 layers (3 linear-attention, 1 full)
+qwen3_5_moe_text	moe	Qwen/Qwen3.6-35B-A3B	345d467b117d1fd5eda9b879a5988de9ae5f47a7	text	4	bitwise	moe=fused reason=none	text backbone of the row above
+gemma4_moe	moe	google/gemma-4-26B-A4B-it	4d7ae4984b7db7de8f8457170b3f1a419ee76d52	trunc	6	full	moe=reference reason~SiLU	wrapper, 6 of 30 layers; GELU-tanh experts: the reference compute, said
+inkling2_loop	moe	thinkingmachines/Inkling-2-Mini	7a67ae2314b44ef05c87fd1d4d311c58aaeb18f6	snapshot	0	full	moe=reference reason~SiLU	whole model; a looped decoder (layers 6-17 run three times): sequential only, its block-major paths refused; softcapped SwiGLU experts: the reference compute, said

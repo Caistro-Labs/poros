@@ -1,0 +1,90 @@
+Poros
+Copyright 2026 Caistro Labs. Licensed under the Apache License, Version 2.0 (LICENSE).
+
+Third-party notices
+===================
+
+Parts of Poros are derived from the following works, under their licenses.
+
+bitsandbytes (MIT License)
+--------------------------
+https://github.com/bitsandbytes-foundation/bitsandbytes
+
+poros/moe/quant.py reimplements, in PyTorch, the NF4 quantization format of
+bitsandbytes 0.50.0 (quantize_4bit, the 4-bit and blockwise dequantize compute,
+and the CPU kernel's quantize_cpu_impl and build_quantize_lut for the 8-bit
+double quantization), so that its bytes match bitsandbytes'. poros/moe/kernels.py
+decodes that format on the GPU.
+
+    MIT License
+
+    Copyright (c) Facebook, Inc. and its affiliates.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+transformers (Apache License 2.0)
+---------------------------------
+https://github.com/huggingface/transformers
+Copyright The HuggingFace Inc. team and the authors of its model code.
+
+Modified from transformers' code, under the Apache License, Version 2.0 (the
+same license as Poros, LICENSE):
+
+- poros/core/fused/__init__.py, _layer_forward: transformers' Qwen2DecoderLayer
+  and Qwen2Attention forward, restructured to run the fused adapter kernels.
+- poros/moe/modules.py, the reference expert compute (_experts_compute): the math
+  of transformers' Qwen3MoeExperts.forward (and its sibling families'), batched
+  over groups of experts.
+- docs/validation/moe/4090/scripts (refcheck_hooks.py, prec64.py), in the benchmark
+  logs' repository (github.com/Caistro-Labs/poros-benchmarks): transformers'
+  Qwen3MoeExperts loop, as the stock arm of a check and in fp64.
+- poros/moe/inkling2/ (modeling.py, config.py, and the expert formats and checkpoint
+  names in codec.py): the Inkling 2 Mini implementation of transformers 5.24.0
+  (models/inkling2_loop/, and the Inkling 2 entries of conversion_mapping.py and
+  core_model_loading.py), Copyright 2026 the HuggingFace Team, rewritten as a decoder
+  run by visits.
+
+LobeHub icons (MIT License)
+---------------------------
+
+poros/cli/ui/logos/*.svg are LobeHub's monochrome model and brand icons, drawn
+by `poros models` in Poros' own colors. Their license ships beside them
+(poros/cli/ui/logos/LICENSE):
+
+    MIT License
+
+    Copyright (c) 2023 LobeHub
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.

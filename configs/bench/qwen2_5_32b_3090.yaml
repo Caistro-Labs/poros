@@ -1,0 +1,56 @@
+# Poros Bench: Qwen2.5-32B on RTX 3090
+#
+# 32B NF4 QLoRA on a 24 GB card.  Poros fits at ~11.1 GB;
+# resident QLoRA needs ~42.8 GB (more than a 3090 holds).  Benchmark compares
+# Poros, resident, Unsloth, PEFT, and Accelerate device-map offload baselines under
+# identical conditions.
+#
+# Run:  poros bench run configs/bench/qwen2_5_32b_3090.yaml
+# -------------------------------------------------------------------
+spec_id: qwen2_5_32b_3090
+
+hardware:
+  gpu_name: "NVIDIA GeForce RTX 3090"
+  vram_gb: 24.0
+  pcie_gen: 4
+
+models:
+  - model_id: "Qwen/Qwen2.5-32B"
+    display_name: "Qwen2.5-32B"
+    param_count_b: 32.5
+
+methods:
+  - poros
+  - resident
+  - unsloth
+  - peft
+  - accelerate_offload
+
+precisions:
+  - nf4
+
+training:
+  steps: 200
+  seq_len: 512
+  batch_size: 1
+  # 8 = the pipeline default (one recorded step spans all 8 micro-batches).
+  # The paper's same-card table was measured at gradient_accumulation_steps: 1
+  # -- set 1 here to reproduce its s/step numbers.
+  gradient_accumulation_steps: 8
+  dataset: "synthetic"
+  seed: 42
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.0   # paper parity protocol: dropout=0.0 (was 0.05, the inherited QLoRA default)
+
+poros:
+  block_size: 4
+  enable_prefetch: true
+
+reporting:
+  output_dir: "./bench_output/qwen2_5_32b_3090"
+  html: true
+  markdown: true
+  emit_json: true
