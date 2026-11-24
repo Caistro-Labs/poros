@@ -30,12 +30,13 @@ The head-to-head runs, Poros and Unsloth on the same RTX 4090. Lower is better i
 **Key takeaways (Poros median vs. Unsloth's best run)**
 
 - **Qwen2.5-72B:** Poros `efficient` is **1.1x faster** in **1.5x less VRAM** than Unsloth 2026.11.4 (Unsloth uses 6% less peak host RAM and 1.8x less while training).
-- **Qwen3-30B-A3B:** Poros `efficient` is **1.9x faster** in **2.1x less VRAM** than Unsloth 2026.11.10 (Poros uses more host RAM: 19.9 GiB against about 11 GiB for Unsloth's own process).
+- **Qwen3-30B-A3B:** Poros `efficient` is **1.2x faster** against Unsloth 2026.11.4's figures (November 18, not one session) and **1.9x faster** against Unsloth 2026.11.10 in the same session, in **2.1x less VRAM** against either (Poros uses more host RAM: 19.9 GiB against about 11 GiB for Unsloth's own process).
 
 ### Notes on the comparison
 
 - **Versions and dates.** The Qwen3-30B-A3B rows ran on November 24, 2026, with Poros at its release commit and Unsloth 2026.11.10, the newest on PyPI that day. The Qwen2.5-72B rows ran on November 18, 2026, with Unsloth 2026.11.4.
 - **Unsloth's two versions.** Unsloth 2026.11.10 was slower than 2026.11.4 on the same harness and rows (8.8 s against 5.8 s at its best, 53% longer; the logs do not show why). Against 2026.11.4's figures Poros is 1.2x faster; the two were not measured in one session.
+- **Deterministic mode.** Both tools ran with deterministic algorithms on in every run on both dates. That may slow Unsloth. No run without it was measured.
 - **Host RAM.** Poros keeps the whole 4-bit base in host RAM (19.9 GiB on the 30B) and uses more of it than a tool that keeps part of the model on the GPU. Unsloth's figure is summed over its process tree, which reached 35 processes with 2026.11.10 (22.9 GiB); its main process peaked at 10.8 GiB, and 2026.11.4 peaked at 18.1 GiB with two or three processes. There is no host-RAM ratio on the 30B; every 72B run peaked with two processes.
 - **What the VRAM ratio is set against.** Unsloth's automatic offload keeps layers on the GPU while there is room: on the 30B, 28 of 48 decoder layers and the embedding went to host RAM "so 13.32 GiB stays free for training".
 - **All layers offloaded.** With all 48 layers and the embedding in host RAM (November 18, Unsloth 2026.11.4, the same harness), Unsloth reserved 13.9 GiB at 9.5 s an update, the median of three runs.
