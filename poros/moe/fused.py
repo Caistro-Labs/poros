@@ -31,6 +31,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from dataclasses import dataclass
 
+import numpy as np
 import torch
 from torch.autograd.function import once_differentiable
 
@@ -179,10 +180,9 @@ class Plan:
     def build(cls, top_k_index: torch.Tensor, num_experts: int,
               segments: Sequence[int] | None = None, counts: torch.Tensor | None = None) -> Plan:
         """The plan of a call routed by ``top_k_index`` [tokens, top_k]. It waits on the GPU for
-        one thing, the row counts per (expert, segment) that size the launches (on CUDA three
-        host syncs in a row: ``bincount`` reads its input's min and max, then the counts come
-        back); the rest is queued. ``counts``: those counts of exactly these routes and segments,
-        as a plan of them found them (``Plan.counts``) -- then nothing waits on the GPU."""
+        one thing, the row counts per (expert, segment) used to size the launches. CUDA
+        reads the ends of the sorted runs back once. With ``counts`` from the forward visit
+        even that transfer is unnecessary."""
         from poros.moe import kernels
 
         tokens, top_k = top_k_index.shape
@@ -194,30 +194,46 @@ class Plan:
             raise ValueError(f"segments {list(segments)} do not add up to {tokens} tokens")
         if rows >= 2**31:  # the kernels index rows in int32
             raise ValueError(f"{rows} routed rows: the expert kernels take fewer than 2**31")
+        if counts is not None:
+            counts = counts.resolve_neg()
         if counts is not None and (counts.device.type != "cpu" or counts.dtype != torch.int64
                                    or counts.shape != (num_experts * nseg,)
-                                   or int(counts.sum()) != rows):
+                                   or counts.numpy().min(initial=0) < 0
+                                   or counts.numpy().sum() != rows):
             raise ValueError(f"counts are not {num_experts * nseg} host int64 row counts adding "
                              f"up to these routes' {rows} rows")
-        with torch.no_grad():
-            order = flat.argsort(stable=True)  # expert-major, token order within (segment order)
+        if segments is not None and any(n < 0 for n in segments):
+            raise ValueError("segment lengths must be non-negative")
+        if dev.type == "cuda":
+            from poros.moe.route_kernel import route_rows
+
+            if flat.dtype not in (torch.int64, torch.int32, torch.int16, torch.int8, torch.uint8):
+                raise ValueError("expert ids must be integers")
+            with torch.cuda.device(dev), torch.no_grad():
+                sorted_ids, order = flat.sort(stable=True)
+                dest, row_tok, row_seg, measured = route_rows(
+                    sorted_ids, order, top_k, num_experts, segments, count=counts is None)
+                if counts is None:
+                    counts = measured
+        else:
+            order = flat.argsort(stable=True)
             row_seg = None
+            key = flat
             if nseg > 1:
                 seg_of_row = _segment_of_rows(segments, top_k, rows, dev)
                 key = flat * nseg + seg_of_row
                 row_seg = seg_of_row[order]
-            else:
-                key = flat
             if counts is None:
-                counts = torch.bincount(key, minlength=num_experts * nseg).cpu()  # the host syncs
-                if counts.numel() != num_experts * nseg:  # bincount runs to the largest key
+                counts = torch.bincount(key, minlength=num_experts * nseg).cpu()
+                if counts.numel() != num_experts * nseg:
                     raise ValueError(f"an expert id at or above num_experts={num_experts}")
+            dest, row_tok = order.to(torch.int32), (order // top_k).to(torch.int32)
         hit, w_tile, host, nt, ng = _plan_tables(counts, num_experts, nseg, kernels.GEMM_BM)
         if dev.type == "cuda":
             host = try_pin(host)  # pinned where the machine pins: the copy does not wait
         parts = host.to(dev, non_blocking=True).split([nt, nt, nt, nt, ng, ng, ng, ng])
         return cls(tokens=tokens, top_k=top_k, rows=rows, hit=hit,
-                   row_tok=(order // top_k).to(torch.int32), dest=order.to(torch.int32),
+                   row_tok=row_tok, dest=dest,
                    t_r0=parts[0], t_r1=parts[1], t_w=parts[2], t_e=parts[3],
                    g_r0=parts[4], g_r1=parts[5], g_e=parts[6].long(), g_seg=parts[7].long(),
                    segments=nseg, row_seg=row_seg, w_tile=w_tile, counts=counts)
@@ -251,22 +267,25 @@ def _plan_tables(per: torch.Tensor, num_experts: int, nseg: int,
     ``[start_e, start_e + n_e)``; its tiles cut them every ``bm`` rows from ``start_e`` (an expert
     with no rows has none), and its (expert, segment) groups are its segments' runs with rows, in
     segment order. Whole-array ops on the host."""
-    g_end = per.cumsum(0)
-    g_start = g_end - per  # each (expert, segment) run's first sorted row
-    start = g_start.reshape(num_experts, nseg)[:, 0]  # each expert's first sorted row
-    n = per.reshape(num_experts, nseg).sum(1)  # its rows
-    tiles = (n + bm - 1) // bm  # its row tiles (none without rows)
-    t_first = tiles.cumsum(0) - tiles  # its first tile
-    nt = int(tiles.sum())
-    t_e = torch.arange(num_experts).repeat_interleave(tiles)  # each tile's expert
-    t_r0 = start[t_e] + (torch.arange(nt) - t_first[t_e]) * bm
-    t_r1 = torch.minimum(t_r0 + bm, (start + n)[t_e])
-    hit_mask = n > 0
-    t_w = (hit_mask.cumsum(0) - 1)[t_e]  # the tile's expert among the hit ones
-    g = per.nonzero().squeeze(1)  # the runs with rows, expert-major
-    host = torch.cat([t_r0, t_r1, t_w, t_e, g_start[g], g_end[g], g // nseg, g % nseg])
-    hit = hit_mask.nonzero().squeeze(1)
-    return hit.tolist(), [*t_first[hit].tolist(), nt], host.to(torch.int32), nt, g.numel()
+    # Small host vectors on the launch thread. NumPy avoids dispatching dozens of ATen
+    # operations (including parallel repeat_interleave) for every forward and backward visit.
+    counts = per.numpy()
+    g_end = counts.cumsum()
+    g_start = g_end - counts
+    start = g_start.reshape(num_experts, nseg)[:, 0]
+    n = counts.reshape(num_experts, nseg).sum(axis=1)
+    tiles = (n + bm - 1) // bm
+    t_first = tiles.cumsum() - tiles
+    hit = np.flatnonzero(tiles)
+    t_w = np.repeat(np.arange(hit.size), tiles[hit])
+    t_e = hit[t_w]
+    nt = t_e.size
+    t_r0 = start[t_e] + (np.arange(nt) - t_first[t_e]) * bm
+    t_r1 = np.minimum(t_r0 + bm, (start + n)[t_e])
+    g = np.flatnonzero(counts)
+    host = np.concatenate((t_r0, t_r1, t_w, t_e, g_start[g], g_end[g], g // nseg, g % nseg),
+                          dtype=np.int32, casting="unsafe")  # Plan.build bounds rows to int32
+    return hit.tolist(), [*t_first[hit].tolist(), nt], torch.from_numpy(host), nt, g.size
 
 
 def _rank_pad(r: int) -> int:
@@ -354,6 +373,31 @@ def dropout_p(block) -> float:
     return p if p and drop.training else 0.0
 
 
+def _dropout_rows(plan: Plan):
+    """For each segment, the ascending sorted-row indices for its RNG draws.
+
+    A nonempty (expert, segment) group is a contiguous run in both orders. Only its
+    starting address changes. Within a segment the experts are still in ascending order.
+    """
+    counts = plan.counts.numpy().reshape(-1, plan.segments)
+    lengths = counts.T.ravel()
+    dst = lengths.cumsum() - lengths  # starts in segment-major order
+    if plan.g_r0.is_cuda:
+        from poros.moe.route_kernel import transpose_runs
+
+        # Plan's device groups are expert-major, with empty groups omitted. Only one
+        # int32 per such group crosses PCIe. No row positions come back to the host.
+        offsets = dst.reshape(counts.T.shape).T[counts != 0].astype(np.int32)
+        device = plan.g_r0.device
+        with torch.cuda.device(device):
+            starts = try_pin(torch.from_numpy(offsets)).to(device, non_blocking=True)
+            order = transpose_runs(plan.g_r0, plan.g_r1, starts, plan.rows)
+    else:
+        src = (counts.cumsum() - counts.ravel()).reshape(counts.shape).T.ravel()
+        order = torch.from_numpy(np.arange(plan.rows) + np.repeat(src - dst, lengths))
+    return order.split(counts.sum(axis=0).tolist())
+
+
 class Masks:
     """A call's LoRA dropout masks, in sorted-row order: ``x`` [rows, H] for the gate/up adapter's
     input, ``h`` [rows, I] for the down adapter's. A segment draws its own, ``x`` then ``h``, from
@@ -379,12 +423,12 @@ class Masks:
         self.h = torch.empty(plan.rows, i, dtype=torch.bool, device=device)
         cuda = [device.index if device.index is not None else torch.cuda.current_device()] \
             if device.type == "cuda" else []
+        segment_rows = _dropout_rows(plan) if plan.row_seg is not None else None
         with torch.random.fork_rng(devices=cuda):
             for g, state in enumerate(states):
                 _set_rng_state(device, state)
-                rows = ((plan.row_seg == g).nonzero().squeeze(1) if plan.row_seg is not None
-                        else slice(None))
-                n = plan.rows if plan.row_seg is None else rows.numel()
+                rows = segment_rows[g] if segment_rows is not None else slice(None)
+                n = rows.numel() if segment_rows is not None else plan.rows
                 self.x[rows] = torch.empty(n, h, dtype=torch.bool, device=device).bernoulli_(1 - p)
                 self.h[rows] = torch.empty(n, i, dtype=torch.bool, device=device).bernoulli_(1 - p)
                 self.after.append(_rng_state(device))

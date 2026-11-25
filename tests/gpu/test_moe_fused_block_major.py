@@ -123,11 +123,12 @@ def test_one_by_eight_expert_grads_own_their_memory(checkpoint, tmp_path):
     assert owned and all(owned)
 
 
-def test_batched_backward_visits_do_not_wait_on_the_gpu(checkpoint, tmp_path, monkeypatch):
+@pytest.mark.parametrize("dropout", [0.0, 0.1])
+def test_batched_backward_visits_do_not_wait_on_the_gpu(checkpoint, tmp_path, monkeypatch,
+                                                       dropout):
     """A batched backward visit that plans on its forward visit's row counts queues all of its
     work without one host sync (torch's sync debug mode raises on any), and a batched forward
-    visit syncs only for its plan's row counts (CUDA bincount reads its input's min and max, then
-    the counts come back) -- so the host runs ahead of the GPU through a layer's expert compute."""
+    visit syncs only to read the ends of the sorted runs, including when drawing dropout masks."""
     import warnings
 
     from poros.moe import batching
@@ -158,9 +159,8 @@ def test_batched_backward_visits_do_not_wait_on_the_gpu(checkpoint, tmp_path, mo
 
     monkeypatch.setattr(batching.BatchState, "backward", backward)
     monkeypatch.setattr(batching.ForwardVisit, "finish", finish)
-    # without LoRA dropout: each micro-batch's masks are drawn into its own rows, which a
-    # nonzero over the plan's row segments finds (a host sync of the masks, not of the plan)
-    _run(checkpoint, tmp_path, (16, 11, 16, 7, 13, 16, 9, 16), path="efficient", lora_dropout=0.0)
+    _run(checkpoint, tmp_path, (16, 11, 16, 7, 13, 16, 9, 16), path="efficient",
+         lora_dropout=dropout)
     batch = _run.batch
     assert sum(checked) == batch.visits["counts_reused"] > 0  # each such visit ran sync-free
-    assert forward_syncs and max(forward_syncs) <= 3
+    assert forward_syncs and max(forward_syncs) <= 1

@@ -282,7 +282,8 @@ def test_known_counts_must_count_these_rows(bm):
     idx = torch.tensor([[0, 1], [2, 3], [1, 2]])
     counts = Plan.build(idx, 4, segments=[1, 2]).counts
     for bad in (counts[:-1], torch.cat([counts, counts[:1]]), counts.to(torch.int32),
-                counts + 1, (counts - 1).clamp(min=0)):
+                counts + 1, (counts - 1).clamp(min=0),
+                torch.tensor([-1, 7, 0, 0, 0, 0, 0, 0])):
         with pytest.raises(ValueError, match="host int64 row counts"):
             Plan.build(idx, 4, segments=[1, 2], counts=bad)
     with pytest.raises(ValueError, match="host int64 row counts"):
@@ -321,3 +322,32 @@ def test_backward_takes_the_forward_counts_of_its_own_routes():
         batching._keep_counts(block, entries, plan)
         assert batching._take_counts(block, other) is None  # equal values are not enough
         assert block._fwd_counts is None
+
+
+@pytest.mark.parametrize("device", DEVICES)
+def test_dropout_runs_preserve_each_draw_and_rng_state(bm, device):
+    from poros.moe.fused import Masks
+    from poros.moe.modules import _rng_state, _same_rng, _set_rng_state
+
+    dev = torch.device(device)
+    gen = torch.Generator().manual_seed(9)
+    for segments in ([0, 3, 0, 130], [129, 129], [0, 0]):
+        idx = _routing(gen, sum(segments), 3, 16, used=8).to(dev)
+        plan = Plan.build(idx, 16, segments)
+        with torch.random.fork_rng(devices=[torch.cuda.current_device()] if idx.is_cuda else []):
+            states, after = [], []
+            x = torch.empty(plan.rows, 9, dtype=torch.bool, device=dev)
+            h = torch.empty(plan.rows, 5, dtype=torch.bool, device=dev)
+            before = _rng_state(dev)
+            for g in range(len(segments)):
+                states.append(_rng_state(dev))
+                rows = (plan.row_seg == g).nonzero().flatten()
+                n = rows.numel()
+                x[rows] = torch.empty(n, 9, dtype=torch.bool, device=dev).bernoulli_(0.75)
+                h[rows] = torch.empty(n, 5, dtype=torch.bool, device=dev).bernoulli_(0.75)
+                after.append(_rng_state(dev))
+            _set_rng_state(dev, before)
+            masks = Masks(plan, 0.25, 9, 5, dev, states)
+            assert torch.equal(x, masks.x) and torch.equal(h, masks.h)
+            assert all(_same_rng(a, b) for a, b in zip(after, masks.after, strict=True))
+            assert _same_rng(_rng_state(dev), before)
